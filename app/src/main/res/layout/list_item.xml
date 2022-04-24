@@ -31,39 +31,42 @@
                 android:id="@+id/date_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:text="@{date}"
-                android:textSize="18sp"
                 android:padding="20dp"
+                android:text="@{date}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="23 tháng 4 năm 2022"/>
+                tools:text="23 tháng 4 năm 2022" />
 
             <ImageView
                 android:id="@+id/image_state_at_list"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:importantForAccessibility="no"
                 android:layout_marginTop="8dp"
-                app:imageUri="@{stateAbbr}"
+                android:importantForAccessibility="no"
                 app:contextImg="@{context}"
-                app:layout_constraintStart_toEndOf="@id/date_item"
-                android:layout_marginStart="30dp"
-                app:layout_constraintEnd_toStartOf="@id/temperature_item"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:imageUri="@{stateAbbr}"
+                app:layout_constraintEnd_toStartOf="@+id/temperature_item"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/date_item"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/temperature_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:text="@{temperature}"
-                android:textSize="18sp"
                 android:padding="20dp"
+                android:text="@{temperature}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/image_state_at_list"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="23/37"/>
+                tools:text="23/37" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -34,11 +34,27 @@
             android:importantForAccessibility="no"
             app:contextImg="@{context}"
             app:imageUri="@{viewModel.todayWeather.stateAbbr}"
-            app:layout_constraintEnd_toStartOf="@+id/weather_state"
+            app:layout_constraintEnd_toStartOf="@+id/current_temp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date" />
+            app:layout_constraintTop_toBottomOf="@id/date"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{@string/temperature(String.valueOf(viewModel.todayWeather.theTemp))}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintBottom_toBottomOf="@id/image_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/image_state"
+            app:layout_constraintTop_toTopOf="@id/image_state"
+            tools:text="24.5°C" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/weather_state"
@@ -49,11 +65,9 @@
             android:text="@{viewModel.todayWeather.stateName}"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            app:layout_constraintBottom_toBottomOf="@id/image_state"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/image_state"
-            app:layout_constraintTop_toTopOf="@id/image_state"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_state"
             tools:text="Bão có sấm sét và mưa lớn" />
 
         <View
@@ -65,20 +79,20 @@
             android:layout_marginEnd="8dp"
             android:background="?attr/dividerHorizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_state" />
+            app:layout_constraintTop_toBottomOf="@id/weather_state" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="7dp"
             android:clipToPadding="false"
+            android:padding="7dp"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/divider_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:listData="@{viewModel.allWeather}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     <string name="app_name">WeatherKotlin</string>
     <string name="label_fragment_list_dates">Thời tiết Hà Nội</string>
     <string name="label_fragment_detail">Thời tiết chi tiết</string>
-    <string name="temperature">%1$s &#176;C</string>
+    <string name="temperature">%1$s&#176;C</string>
     <string name="humidity">%1$d</string>
     <string name="air_pressure">%1$s millibar</string>
     <string name="visibility">%1$s dặm</string>
