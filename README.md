@@ -5,7 +5,7 @@
 1. Lấy thông tin thời tiết từ API của MetaWeather `https://www.metaweather.com/api/`
 
 ## Sử dụng phối hợp các thư viện và các chức năng sau
-1. Data Binding & View Binding
+1. Data Binding & ViewBinding
 2. Navigation component
 3. ViewModel & Live Data
 4. Retrofit & Moshi

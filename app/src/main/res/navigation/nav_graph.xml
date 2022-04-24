@@ -3,25 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentListDates">
+    app:startDestination="@+id/home_graph">
 
-    <fragment
-        android:id="@+id/fragmentListDates"
-        android:name="com.example.weatherkotlin.fragments.FragmentListDates"
-        android:label="@string/label_fragment_list_dates"
-        tools:layout="@layout/fragment_list_dates">
-        <action
-            android:id="@+id/action_fragmentListDates_to_fragmentDetail"
-            app:destination="@id/fragmentDetail" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentDetail"
-        android:name="com.example.weatherkotlin.fragments.FragmentDetail"
-        android:label="@string/label_fragment_detail"
-        tools:layout="@layout/fragment_detail"/>
-    <fragment
-        android:id="@+id/fragmentDiary"
-        android:name="com.example.weatherkotlin.fragments.FragmentDiary"
-        android:label="fragment_diary"
-        tools:layout="@layout/fragment_diary" />
+    <include app:graph="@navigation/home_graph"/>
+    <include app:graph="@navigation/diary_graph"/>
 </navigation>
