@@ -4,8 +4,8 @@
 ## Các chức năng đã cài đặt
 1. Lấy và hiển thị thông tin thời tiết từ API của MetaWeather `https://www.metaweather.com/api/`
 
-## Sử dụng phối hợp các thư viện và các chức năng sau
-1. Data Binding & ViewBinding
+## Sử dụng phối hợp các thư viện và chức năng sau
+1. DataBinding & ViewBinding
 2. Navigation component & BottomNavigationView
 3. ViewModel & LiveData
 4. Retrofit & Moshi

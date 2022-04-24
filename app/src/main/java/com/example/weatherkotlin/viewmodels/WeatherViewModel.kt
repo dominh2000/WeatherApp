@@ -1,6 +1,5 @@
 package com.example.weatherkotlin.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,10 +11,9 @@ import kotlinx.coroutines.launch
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.roundToInt
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
-private val weatherStates = mapOf<String, String>(
+private val weatherStates = mapOf(
     "sn" to "Tuyết rơi",
     "sl" to "Mưa tuyết",
     "h" to "Mưa đá",
@@ -52,7 +50,8 @@ class WeatherViewModel : ViewModel() {
             try {
                 _response.value = WeatherApi.retrofitServices.getWeatherByLocation()
                 _allWeather.value = _response.value!!.totalWeather
-                _todayWeather.value = convertTodayWeather(_allWeather.value!!.get(0))
+                convertAllWeather()
+                _todayWeather.value = _allWeather.value!!.get(0)
                 _status.value = WeatherApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = WeatherApiStatus.ERROR
@@ -64,11 +63,15 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun onWeatherItemClicked(weather: TotalWeather) {
-        _oneWeather.value = convertWeather(weather)
+        _oneWeather.value = weather
     }
 
-    private fun convertTodayWeather(weather: TotalWeather): TotalWeather {
-        return convertWeather(weather)
+    private fun convertAllWeather() {
+        val newAllWeather = mutableListOf<TotalWeather>()
+        for (weather in _allWeather.value!!) {
+            newAllWeather.add(convertWeather(weather))
+        }
+        _allWeather.value = newAllWeather
     }
 
     private fun convertWeather(weather: TotalWeather): TotalWeather {

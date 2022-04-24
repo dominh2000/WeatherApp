@@ -27,7 +27,7 @@ class WeatherDatesAdapter(private val onItemClicked: (TotalWeather) -> Unit) :
     class WeatherDatesViewHolder(private var binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(totalWeather: TotalWeather) {
-            binding.date = convertDate(totalWeather.date)
+            binding.date = totalWeather.date
             binding.temperature = showTemperature(totalWeather.minTemp, totalWeather.maxTemp)
             binding.stateAbbr = totalWeather.stateAbbr
             binding.executePendingBindings()
@@ -51,22 +51,7 @@ class WeatherDatesAdapter(private val onItemClicked: (TotalWeather) -> Unit) :
     }
 }
 
-private fun convertDate(date: String): String {
-    val formatter = SimpleDateFormat("E, d MMM", Locale.getDefault())
-    val tokenizer = StringTokenizer(date, "-")
-    val listParam = mutableListOf<Int>()
-    while (tokenizer.hasMoreTokens()) {
-        listParam.add(tokenizer.nextToken().toInt())
-    }
-    val calendar = GregorianCalendar(
-        listParam.elementAt(0),
-        listParam.elementAt(1) - 1,
-        listParam.elementAt(2)
-    )
-    return formatter.format(calendar.time)
-}
-
 private fun showTemperature(minTemp: Double, maxTemp: Double): String {
-    return minTemp.roundToInt().toString().plus("°C/").plus(maxTemp.roundToInt().toString())
+    return minTemp.roundToInt().toString().plus("°C / ").plus(maxTemp.roundToInt().toString())
         .plus("°C")
 }
