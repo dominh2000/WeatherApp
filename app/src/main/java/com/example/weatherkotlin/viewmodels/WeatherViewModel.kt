@@ -1,9 +1,6 @@
 package com.example.weatherkotlin.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.weatherkotlin.network.ResponseData
 import com.example.weatherkotlin.network.TotalWeather
 import com.example.weatherkotlin.network.WeatherApi
@@ -35,8 +32,9 @@ class WeatherViewModel : ViewModel() {
     private val _todayWeather = MutableLiveData<TotalWeather?>()
 
     val status: LiveData<WeatherApiStatus> = _status
-    val response: LiveData<ResponseData?> = _response
-    val allWeather: LiveData<List<TotalWeather>> = _allWeather
+    val allWeather: LiveData<List<TotalWeather>> = Transformations.map(_allWeather) {
+        convertAllWeather(it)
+    }
     val oneWeather: LiveData<TotalWeather> = _oneWeather
     val todayWeather: LiveData<TotalWeather?> = _todayWeather
 
@@ -50,8 +48,7 @@ class WeatherViewModel : ViewModel() {
             try {
                 _response.value = WeatherApi.retrofitServices.getWeatherByLocation()
                 _allWeather.value = _response.value!!.totalWeather
-                convertAllWeather()
-                _todayWeather.value = _allWeather.value!!.get(0)
+                _todayWeather.value = allWeather.value!!.get(0)
                 _status.value = WeatherApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = WeatherApiStatus.ERROR
@@ -66,12 +63,12 @@ class WeatherViewModel : ViewModel() {
         _oneWeather.value = weather
     }
 
-    private fun convertAllWeather() {
+    private fun convertAllWeather(allWeather: List<TotalWeather>): List<TotalWeather> {
         val newAllWeather = mutableListOf<TotalWeather>()
-        for (weather in _allWeather.value!!) {
+        for (weather in allWeather) {
             newAllWeather.add(convertWeather(weather))
         }
-        _allWeather.value = newAllWeather
+        return newAllWeather
     }
 
     private fun convertWeather(weather: TotalWeather): TotalWeather {

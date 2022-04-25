@@ -3,15 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/drawable/ic_connection_error.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/drawable/loading_img.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_detail2.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_diary.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_diary.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_hello.xml" value="0.2359375" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_list_dates.xml" value="0.4" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_list_dates.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_list_dates2.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/list_item.xml" value="0.536" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/list_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/menu/menu_items.xml" value="0.1" />
       </map>
     </option>

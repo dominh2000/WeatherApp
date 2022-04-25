@@ -10,16 +10,6 @@
     <string name="visibility">%1$s dặm</string>
     <string name="wind_speed">%1$s dặm/giờ</string>
     <string name="predictability">%1$d</string>
-    <string name="sn">Tuyết rơi</string>
-    <string name="sl">Mưa tuyết</string>
-    <string name="h">Mưa đá</string>
-    <string name="t">Bão có sấm sét và mưa lớn</string>
-    <string name="hr">Mưa lớn</string>
-    <string name="lr">Mưa nhỏ</string>
-    <string name="s">Mưa rào</string>
-    <string name="hc">Nhiều mây</string>
-    <string name="lc">Có mây</string>
-    <string name="c">Trời quang</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

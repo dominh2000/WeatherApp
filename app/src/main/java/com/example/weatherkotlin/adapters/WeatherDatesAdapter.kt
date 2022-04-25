@@ -27,8 +27,8 @@ class WeatherDatesAdapter(private val onItemClicked: (TotalWeather) -> Unit) :
     class WeatherDatesViewHolder(private var binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(totalWeather: TotalWeather) {
-            binding.date = totalWeather.date
-            binding.temperature = showTemperature(totalWeather.minTemp, totalWeather.maxTemp)
+            binding.dateItem.text = totalWeather.date
+            binding.temperatureItem.text = showTemperature(totalWeather.minTemp, totalWeather.maxTemp)
             binding.stateAbbr = totalWeather.stateAbbr
             binding.executePendingBindings()
         }

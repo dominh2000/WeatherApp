@@ -5,12 +5,6 @@
 
     <data>
         <variable
-            name="date"
-            type="String" />
-        <variable
-            name="temperature"
-            type="String" />
-        <variable
             name="stateAbbr"
             type="String" />
     </data>
@@ -32,7 +26,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:text="@{date}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:text="@{temperature}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textSize="18sp"
                 android:textStyle="bold"

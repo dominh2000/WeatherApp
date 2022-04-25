@@ -95,6 +95,17 @@
             app:layout_constraintTop_toTopOf="@id/divider_horizontal"
             app:listData="@{viewModel.allWeather}" />
 
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:apiStatus="@{viewModel.status}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:importantForAccessibility="no"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
