@@ -7,6 +7,7 @@ import com.example.weatherkotlin.domain.LocationInfo
 import com.example.weatherkotlin.domain.WeatherOneDay
 import com.example.weatherkotlin.repository.WeatherRepository
 import kotlinx.coroutines.launch
+import okio.IOException
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
@@ -34,11 +35,12 @@ class WeatherViewModel(app: Application) : ViewModel() {
                 weatherRepository.refreshWeather()
                 _status.value =
                     WeatherApiStatus.DONE // Phải đặt ở ngay sau khi refresh xong nếu không sẽ không bao giờ chạy được đến sau collect
-                weatherRepository.weatherByLocation.collect {
-                    _todayWeather.value = it.weatherSixDays.get(0)
-                }
-            } catch (error: Exception) {
+            } catch (networkError: IOException) {
                 _status.value = WeatherApiStatus.ERROR
+            }
+            // Luôn collect ngay cả khi có lỗi mạng
+            weatherRepository.weatherByLocation.collect {
+                _todayWeather.value = it.weatherSixDays.get(0)
             }
         }
     }

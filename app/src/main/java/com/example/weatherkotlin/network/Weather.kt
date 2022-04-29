@@ -69,7 +69,13 @@ fun ResponseData.asDatabaseModel(): DatabaseLocationInfo {
 }
 
 fun List<TotalWeather>.asDatabaseModel(response: ResponseData): List<DatabaseWeatherOneDay> {
-    return this.map {
+    val newListWithOrderedId = mutableListOf<TotalWeather>()
+
+    // Sửa lại toàn bộ ID của danh sách để thêm vào DB đúng thứ tự
+    for (it in this) {
+        newListWithOrderedId.add(it.copy(id = this.indexOf(it).toLong() + 1))
+    }
+    return newListWithOrderedId.map {
         DatabaseWeatherOneDay(
             it.id,
             response.woeId,

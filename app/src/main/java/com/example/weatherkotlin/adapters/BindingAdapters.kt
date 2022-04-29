@@ -11,8 +11,9 @@ import coil.decode.SvgDecoder
 import coil.load
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.domain.WeatherOneDay
-import com.example.weatherkotlin.network.TotalWeather
 import com.example.weatherkotlin.viewmodels.WeatherApiStatus
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 
 @BindingAdapter("listData")
 fun bindRecyclerViewData(recyclerView: RecyclerView, data: List<WeatherOneDay>?) {
@@ -36,8 +37,8 @@ fun bindWeatherStateImage(imageView: ImageView, imgUri: String?, context: Contex
     }
 }
 
-@BindingAdapter("apiStatus")
-fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?) {
+@BindingAdapter("apiStatus", "contextImg")
+fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, context: Context?) {
     when (apiStatus) {
         WeatherApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
@@ -47,8 +48,8 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?) {
             statusImageView.visibility = View.GONE
         }
         else -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
+            statusImageView.visibility = View.GONE
+            Snackbar.make(context!!, statusImageView, "Không có kết nối Internet!", LENGTH_SHORT).show()
         }
     }
 }
