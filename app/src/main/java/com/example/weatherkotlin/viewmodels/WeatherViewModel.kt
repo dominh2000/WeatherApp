@@ -17,12 +17,11 @@ class WeatherViewModel(app: Application) : ViewModel() {
 
     private val _status = MutableLiveData<WeatherApiStatus>()
     private val _oneWeather = MutableLiveData<WeatherOneDay>()
-    private val _todayWeather = MutableLiveData<WeatherOneDay>()
 
     val status: LiveData<WeatherApiStatus> = _status
     val allWeather: LiveData<LocationInfo> = weatherRepository.weatherByLocation.asLiveData()
     val oneWeather: LiveData<WeatherOneDay> = _oneWeather
-    val todayWeather: LiveData<WeatherOneDay> = _todayWeather
+    val todayWeather: LiveData<WeatherOneDay> = weatherRepository.weatherToday.asLiveData()
 
     init {
         getAllWeatherInfo()
@@ -37,10 +36,6 @@ class WeatherViewModel(app: Application) : ViewModel() {
                     WeatherApiStatus.DONE // Phải đặt ở ngay sau khi refresh xong nếu không sẽ không bao giờ chạy được đến sau collect
             } catch (networkError: IOException) {
                 _status.value = WeatherApiStatus.ERROR
-            }
-            // Luôn collect ngay cả khi có lỗi mạng
-            weatherRepository.weatherByLocation.collect {
-                _todayWeather.value = it.weatherSixDays.get(0)
             }
         }
     }

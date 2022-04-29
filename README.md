@@ -2,7 +2,7 @@
 Ứng dụng tổng hợp các kiến thức cơ bản về Android
 
 ## Các chức năng đã cài đặt
-1. Lấy và hiển thị thông tin thời tiết từ API của MetaWeather `https://www.metaweather.com/api/`
+1. Lấy, cache và hiển thị thông tin thời tiết từ API của MetaWeather `https://www.metaweather.com/api/`
 
 ## Sử dụng phối hợp các thư viện và chức năng sau
 1. DataBinding & ViewBinding
@@ -13,5 +13,5 @@
 6. RecyclerView với ListAdapter
 7. Coroutines
 8. BindingAdapter
-9. Room (cho Caching) & Flow
+9. Room & Flow
 10. MVVM, Repository pattern, 3-layer: UI - Domain (model) - Data
