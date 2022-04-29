@@ -13,3 +13,5 @@
 6. RecyclerView với ListAdapter
 7. Coroutines
 8. BindingAdapter
+9. Room (cho Caching) & Flow
+10. MVVM, Repository pattern, 3-layer: UI - Domain (model) - Data

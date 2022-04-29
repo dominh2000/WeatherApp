@@ -1,5 +1,7 @@
 package com.example.weatherkotlin.network
 
+import com.example.weatherkotlin.database.DatabaseLocationInfo
+import com.example.weatherkotlin.database.DatabaseWeatherOneDay
 import com.squareup.moshi.Json
 
 data class ResponseData(
@@ -7,7 +9,7 @@ data class ResponseData(
     @Json(name = "time") val currentTime: String,
     @Json(name = "sun_rise") val sunRise: String,
     @Json(name = "sun_set") val sunSet: String,
-    @Json(name = "timezone_name") val timezone: String,
+    @Json(name = "timezone_name") val timeZoneName: String,
     @Json(name = "parent") val parent: Parent,
     @Json(name = "sources") val sources: List<Source>,
     @Json(name = "title") val title: String,
@@ -48,3 +50,43 @@ data class Source(
     @Json(name = "url") val url: String,
     @Json(name = "crawl_rate") val crawlRate: Int,
 )
+
+// Extension functions
+fun ResponseData.asDatabaseModel(): DatabaseLocationInfo {
+    return this.let {
+        DatabaseLocationInfo(
+            it.woeId,
+            it.currentTime,
+            it.sunRise,
+            it.sunSet,
+            it.timeZoneName,
+            it.title,
+            it.locationType,
+            it.lattLong,
+            it.timeZone
+        )
+    }
+}
+
+fun List<TotalWeather>.asDatabaseModel(response: ResponseData): List<DatabaseWeatherOneDay> {
+    return this.map {
+        DatabaseWeatherOneDay(
+            it.id,
+            response.woeId,
+            it.stateName,
+            it.stateAbbr,
+            it.windDirectionCompass,
+            it.timeStampCreated,
+            it.date,
+            it.minTemp,
+            it.maxTemp,
+            it.theTemp,
+            it.windSpeed,
+            it.windDirection,
+            it.airPressure,
+            it.humidity,
+            it.visibility,
+            it.predictability
+        )
+    }
+}

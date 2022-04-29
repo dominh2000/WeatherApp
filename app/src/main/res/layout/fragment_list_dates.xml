@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@{@string/temperature(String.valueOf(viewModel.todayWeather.theTemp))}"
+            android:text="@{@string/temperature(viewModel.todayWeather.theTemp)}"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintBottom_toBottomOf="@id/image_state"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/divider_horizontal"
-            app:listData="@{viewModel.allWeather}" />
+            app:listData="@{viewModel.allWeather.weatherSixDays}" />
 
         <ImageView
             android:id="@+id/status_image"

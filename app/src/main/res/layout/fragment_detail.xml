@@ -101,7 +101,7 @@
                         android:id="@+id/min_temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/temperature(String.valueOf(viewModel.oneWeather.minTemp))}"
+                        android:text="@{@string/temperature(viewModel.oneWeather.minTemp)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
                         tools:text="Nhiệt độ" />
@@ -121,7 +121,7 @@
                         android:id="@+id/max_temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/temperature(String.valueOf(viewModel.oneWeather.maxTemp))}"
+                        android:text="@{@string/temperature(viewModel.oneWeather.maxTemp)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
                         tools:text="Nhiệt độ" />
@@ -161,7 +161,7 @@
                         android:id="@+id/air_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/air_pressure(String.valueOf(viewModel.oneWeather.airPressure))}"
+                        android:text="@{@string/air_pressure(viewModel.oneWeather.airPressure)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
                         tools:text="Áp suất không khí" />
@@ -181,7 +181,7 @@
                         android:id="@+id/visibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/visibility(String.valueOf(viewModel.oneWeather.visibility))}"
+                        android:text="@{@string/visibility(viewModel.oneWeather.visibility)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
                         tools:text="Tầm nhìn xa" />
@@ -221,7 +221,7 @@
                         android:id="@+id/wind_speed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/wind_speed(String.valueOf(viewModel.oneWeather.windSpeed))}"
+                        android:text="@{@string/wind_speed(viewModel.oneWeather.windSpeed)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
                         tools:text="Tốc độ gió" />

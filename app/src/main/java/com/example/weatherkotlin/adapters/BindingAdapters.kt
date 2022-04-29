@@ -10,11 +10,12 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
 import com.example.weatherkotlin.R
+import com.example.weatherkotlin.domain.WeatherOneDay
 import com.example.weatherkotlin.network.TotalWeather
 import com.example.weatherkotlin.viewmodels.WeatherApiStatus
 
 @BindingAdapter("listData")
-fun bindRecyclerViewData(recyclerView: RecyclerView, data: List<TotalWeather>?) {
+fun bindRecyclerViewData(recyclerView: RecyclerView, data: List<WeatherOneDay>?) {
     val adapter = recyclerView.adapter as WeatherDatesAdapter
     adapter.submitList(data)
 }

@@ -1,17 +1,15 @@
 package com.example.weatherkotlin.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.weatherkotlin.R
+import com.example.weatherkotlin.ApplicationClass
 import com.example.weatherkotlin.databinding.FragmentDetailBinding
-import com.example.weatherkotlin.databinding.FragmentListDatesBinding
-import com.example.weatherkotlin.network.TotalWeather
 import com.example.weatherkotlin.viewmodels.WeatherViewModel
-import java.text.SimpleDateFormat
+import com.example.weatherkotlin.viewmodels.WeatherViewModelFactory
 import java.util.*
 
 
@@ -22,7 +20,11 @@ import java.util.*
  */
 class FragmentDetail : Fragment() {
 
-    private val viewModel: WeatherViewModel by activityViewModels()
+    private val viewModel: WeatherViewModel by activityViewModels {
+        WeatherViewModelFactory(
+            activity?.application as ApplicationClass
+        )
+    }
 
     private var _binding: FragmentDetailBinding? = null
 
