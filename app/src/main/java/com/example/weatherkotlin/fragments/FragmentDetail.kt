@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.weatherkotlin.ApplicationClass
+import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.databinding.FragmentDetailBinding
 import com.example.weatherkotlin.viewmodels.WeatherViewModel
 import com.example.weatherkotlin.viewmodels.WeatherViewModelFactory
@@ -22,7 +22,7 @@ class FragmentDetail : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels {
         WeatherViewModelFactory(
-            activity?.application as ApplicationClass
+            activity?.application as BaseApplication
         )
     }
 

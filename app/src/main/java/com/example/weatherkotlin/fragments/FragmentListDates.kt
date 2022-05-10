@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.weatherkotlin.ApplicationClass
+import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.adapters.WeatherDatesAdapter
 import com.example.weatherkotlin.databinding.FragmentListDatesBinding
 import com.example.weatherkotlin.viewmodels.WeatherViewModel
@@ -17,7 +17,7 @@ class FragmentListDates : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels {
         WeatherViewModelFactory(
-            (activity?.application as ApplicationClass)
+            (activity?.application as BaseApplication)
         )
     }
 
