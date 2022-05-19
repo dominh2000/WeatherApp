@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/to_do_graph"
+    app:startDestination="@id/fragmentToDoStart">
+
+    <fragment
+        android:id="@+id/fragmentToDoStart"
+        android:name="com.example.weatherkotlin.fragments.FragmentToDoStart"
+        android:label="@string/label_fragment_to_do_start"
+        tools:layout="@layout/fragment_to_do_start" >
+        <action
+            android:id="@+id/action_fragmentToDoStart_to_fragmentListToDo"
+            app:destination="@id/fragmentListToDo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentListToDo"
+        android:name="com.example.weatherkotlin.fragments.FragmentListToDo"
+        android:label="@string/label_fragment_list_to_do"
+        tools:layout="@layout/fragment_list_to_do" >
+        <action
+            android:id="@+id/action_fragmentListToDo_to_fragmentAddToDo"
+            app:destination="@id/fragmentAddToDo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fragmentListToDo_to_fragmentToDoStart"
+            app:destination="@id/fragmentToDoStart"
+            app:popUpTo="@id/fragmentToDoStart"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentListToDo_to_fragmentUpdateDeleteToDo"
+            app:destination="@id/fragmentUpdateDeleteToDo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddToDo"
+        android:name="com.example.weatherkotlin.fragments.FragmentAddToDo"
+        android:label="@string/label_fragment_add_to_do"
+        tools:layout="@layout/fragment_add_to_do">
+        <action
+            android:id="@+id/action_fragmentAddToDo_to_fragmentListToDo"
+            app:destination="@id/fragmentListToDo"
+            app:popUpTo="@id/fragmentListToDo"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentUpdateDeleteToDo"
+        android:name="com.example.weatherkotlin.fragments.FragmentUpdateDeleteToDo"
+        android:label="@string/label_fragment_update_delete_to_do"
+        tools:layout="@layout/fragment_update_delete_to_do">
+        <action
+            android:id="@+id/action_fragmentUpdateDeleteToDo_to_fragmentListToDo"
+            app:destination="@id/fragmentListToDo"
+            app:popUpTo="@id/fragmentListToDo"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

@@ -85,17 +85,30 @@
                 android:stretchColumns="*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_horizontal">
+                app:layout_constraintTop_toBottomOf="@id/divider_horizontal"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="middle">
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nhiệt độ thấp nhất"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Nhiệt độ thấp nhất" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/min_temp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhiệt độ thấp nhất"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Nhiệt độ thấp nhất" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/min_temperature"
@@ -104,18 +117,29 @@
                         android:text="@{@string/temperature(viewModel.oneWeather.minTemp)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Nhiệt độ" />
+                        tools:text="13,3 C" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nhiệt độ cao nhất"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Nhiệt độ cao nhất" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/max_temp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhiệt độ cao nhất"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Nhiệt độ cao nhất" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/max_temperature"
@@ -124,18 +148,28 @@
                         android:text="@{@string/temperature(viewModel.oneWeather.maxTemp)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Nhiệt độ" />
+                        tools:text="24,4 C" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/humidity"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Độ ẩm"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Độ ẩm" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Độ ẩm"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Độ ẩm" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/humidity"
@@ -144,18 +178,29 @@
                         android:text="@{@string/humidity(viewModel.oneWeather.humidity) + '%'}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Độ ẩm" />
+                        tools:text="74%" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Áp suất không khí"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Áp suất không khí" />
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/air_pressure"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Áp suất không khí"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Áp suất không khí" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/air_pressure"
@@ -164,18 +209,29 @@
                         android:text="@{@string/air_pressure(viewModel.oneWeather.airPressure)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Áp suất không khí" />
+                        tools:text="1010,0 millibar" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/visibility"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tầm nhìn xa"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Tầm nhìn xa" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tầm nhìn xa"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Tầm nhìn xa" />
+                    </LinearLayout>
+
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/visibility"
@@ -184,18 +240,28 @@
                         android:text="@{@string/visibility(viewModel.oneWeather.visibility)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Tầm nhìn xa" />
+                        tools:text="13,6 dặm" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/wind_direction"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hướng gió"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Hướng gió" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hướng gió"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Hướng gió" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/wind_direction"
@@ -204,18 +270,28 @@
                         android:text="@{viewModel.oneWeather.windDirectionCompass}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Hướng gió" />
+                        tools:text="SSE" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/wind_speed"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tốc độ gió"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Tốc độ gió" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tốc độ gió"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Tốc độ gió" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/wind_speed"
@@ -224,18 +300,28 @@
                         android:text="@{@string/wind_speed(viewModel.oneWeather.windSpeed)}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textStyle="bold"
-                        tools:text="Tốc độ gió" />
+                        tools:text="4,9 dặm/giờ" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/percent"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tỷ lệ chính xác"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textStyle="bold"
-                        tools:text="Tỷ lệ chính xác" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tỷ lệ chính xác"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center"
+                            tools:text="Tỷ lệ chính xác" />
+                    </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/predictability"

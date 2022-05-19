@@ -1,0 +1,73 @@
+package com.example.weatherkotlin.fragments
+
+import android.os.Bundle
+import android.view.*
+import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherkotlin.BaseApplication
+import com.example.weatherkotlin.R
+import com.example.weatherkotlin.adapters.ToDoListAdapter
+import com.example.weatherkotlin.databinding.FragmentListToDoBinding
+import com.example.weatherkotlin.util.launchLogoutAlertDialog
+import com.example.weatherkotlin.viewmodels.ToDoViewModel
+import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
+
+class FragmentListToDo : Fragment() {
+
+    private val viewModel: ToDoViewModel by activityViewModels {
+        ToDoViewModelFactory(
+            activity?.application as BaseApplication
+        )
+    }
+
+    private var _binding: FragmentListToDoBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        _binding = FragmentListToDoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.buttonAdd.setOnClickListener {
+            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentAddToDo()
+            findNavController().navigate(action)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
+        }
+
+        val adapter = ToDoListAdapter {
+            viewModel.onTaskClicked(it)
+            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentUpdateDeleteToDo()
+            findNavController().navigate(action)
+        }
+
+        binding.recyclerViewToDoList.adapter = adapter
+        binding.recyclerViewToDoList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        viewModel.toDoList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.to_do_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.logout) {
+            launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
+            true
+        } else super.onOptionsItemSelected(item)
+    }
+
+}

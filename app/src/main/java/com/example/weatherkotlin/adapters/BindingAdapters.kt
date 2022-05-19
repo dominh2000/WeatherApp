@@ -49,7 +49,7 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, cont
         }
         else -> {
             statusImageView.visibility = View.GONE
-            Snackbar.make(context!!, statusImageView, "Không có kết nối Internet!", LENGTH_SHORT).show()
+            Snackbar.make(context!!, statusImageView, "Không có kết nối Internet hoặc máy chủ lỗi!", LENGTH_SHORT).show()
         }
     }
 }

@@ -6,9 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.weatherkotlin.util.launchLogoutAlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +24,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return when (navController.currentDestination?.id) {
+            R.id.fragmentListToDo -> {
+                // Bắt buộc phải gọi nav_host_fragment ở đây, nếu gọi fragment khác sẽ bị NPE
+                launchLogoutAlertDialog(this, findViewById(R.id.nav_host_fragment), navController)
+                true
+            }
+            else -> navController.navigateUp() || super.onSupportNavigateUp()
+        }
     }
 }

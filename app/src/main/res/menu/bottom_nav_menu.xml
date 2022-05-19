@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_home"
         android:title="Trang chủ" />
     <item
-        android:id="@+id/diary_graph"
-        android:icon="@drawable/ic_diary"
-        android:title="Nhật ký" />
+        android:id="@+id/to_do_graph"
+        android:icon="@drawable/ic_to_do"
+        android:title="Nhắc việc" />
 </menu>

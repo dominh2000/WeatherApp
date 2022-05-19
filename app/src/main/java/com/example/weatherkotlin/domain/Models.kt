@@ -1,5 +1,7 @@
 package com.example.weatherkotlin.domain
 
+import com.example.weatherkotlin.database.DatabaseTask
+
 data class LocationInfo(
     val woeId: Int,
     val weatherSixDays: List<WeatherOneDay>,
@@ -30,3 +32,27 @@ data class WeatherOneDay(
     val visibility: Double,
     val predictability: Int
 )
+
+data class Task(
+    val id: Int = 0,
+    val name: String,
+    val description: String,
+    val priority: Int,
+    val deadlineDate: String,
+    val deadlineHour: String,
+    val completed: Boolean
+)
+
+fun Task.asDatabaseModel(): DatabaseTask {
+    return this.let {
+        DatabaseTask(
+            it.id,
+            it.name,
+            it.description,
+            it.priority,
+            it.deadlineDate,
+            it.deadlineHour,
+            it.completed
+        )
+    }
+}

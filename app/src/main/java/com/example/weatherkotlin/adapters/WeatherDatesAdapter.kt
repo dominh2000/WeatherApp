@@ -25,10 +25,12 @@ class WeatherDatesAdapter(private val onItemClicked: (WeatherOneDay) -> Unit) :
     class WeatherDatesViewHolder(private var binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(weatherOneDay: WeatherOneDay) {
-            binding.dateItem.text = weatherOneDay.date
-            binding.temperatureItem.text = showTemperature(weatherOneDay.minTemp, weatherOneDay.maxTemp)
-            binding.stateAbbr = weatherOneDay.stateAbbr
-            binding.executePendingBindings()
+            binding.apply {
+                dateItem.text = weatherOneDay.date
+                temperatureItem.text = showTemperature(weatherOneDay.minTemp, weatherOneDay.maxTemp)
+                stateAbbr = weatherOneDay.stateAbbr
+                executePendingBindings()
+            }
         }
     }
 

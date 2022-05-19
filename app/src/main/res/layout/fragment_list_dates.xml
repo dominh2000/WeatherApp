@@ -15,15 +15,28 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.allWeather.title}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hà Nội" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{viewModel.todayWeather.date}"
             android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline3"
+            android:textAppearance="?attr/textAppearanceHeadline4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location"
+            android:layout_marginTop="8dp"
             tools:text="23 tháng 4 năm 2022" />
 
         <ImageView

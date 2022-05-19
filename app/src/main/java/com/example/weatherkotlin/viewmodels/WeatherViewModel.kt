@@ -2,18 +2,18 @@ package com.example.weatherkotlin.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.database.ApplicationRoomDatabase.Companion.getDatabase
 import com.example.weatherkotlin.domain.LocationInfo
 import com.example.weatherkotlin.domain.WeatherOneDay
 import com.example.weatherkotlin.repository.WeatherRepository
 import kotlinx.coroutines.launch
-import okio.IOException
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
-class WeatherViewModel(app: Application) : ViewModel() {
+class WeatherViewModel(app: BaseApplication) : ViewModel() {
 
-    private val weatherRepository = WeatherRepository(getDatabase(app))
+    private val weatherRepository = WeatherRepository(app.databaseApplication)
 
     private val _status = MutableLiveData<WeatherApiStatus>()
     private val _oneWeather = MutableLiveData<WeatherOneDay>()
@@ -34,7 +34,7 @@ class WeatherViewModel(app: Application) : ViewModel() {
                 weatherRepository.refreshWeather()
                 _status.value =
                     WeatherApiStatus.DONE // Phải đặt ở ngay sau khi refresh xong nếu không sẽ không bao giờ chạy được đến sau collect
-            } catch (networkError: IOException) {
+            } catch (error: Exception) {
                 _status.value = WeatherApiStatus.ERROR
             }
         }
@@ -45,7 +45,7 @@ class WeatherViewModel(app: Application) : ViewModel() {
     }
 }
 
-class WeatherViewModelFactory(val app: Application) : ViewModelProvider.Factory {
+class WeatherViewModelFactory(val app: BaseApplication) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WeatherViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

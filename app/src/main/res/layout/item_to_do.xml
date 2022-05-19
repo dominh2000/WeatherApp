@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Tên nhắc việc" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_name"
+                tools:text="Chủ nhật, 22 tháng 3, 2022 - 19:05" />
+
+            <ImageView
+                android:id="@+id/image_state_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/item_name"
+                app:layout_constraintEnd_toStartOf="@id/item_priority"
+                app:layout_constraintTop_toTopOf="@id/item_name"
+                tools:srcCompat="@drawable/ic_check" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/item_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/item_name"
+                tools:text="KC - QT" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_deadline"
+                tools:text="Diva Mỹ Linh belt Bb4 thổi bay biệt thự Sóc Sơn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
