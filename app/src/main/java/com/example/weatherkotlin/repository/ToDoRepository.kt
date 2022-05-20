@@ -15,7 +15,7 @@ class ToDoRepository(private val database: ApplicationRoomDatabase) {
         emit(it.asDomainModel())
     }
 
-    suspend fun refreshToDoListAsc(): Flow<List<Task>> {
+    suspend fun refreshToDoListDsc(): Flow<List<Task>> {
         return withContext(Dispatchers.IO) {
             database.taskDao().getAllTasksDesc().transform {
                 emit(it.asDomainModel())
@@ -44,6 +44,34 @@ class ToDoRepository(private val database: ApplicationRoomDatabase) {
     suspend fun deleteToDo(task: Task) {
         withContext(Dispatchers.IO) {
             database.taskDao().deleteTask(task.asDatabaseModel())
+        }
+    }
+
+    suspend fun getToDoListByName(name: String): Flow<List<Task>> {
+        return withContext(Dispatchers.IO) {
+            database.taskDao().getTasksByName(name).transform {
+                emit(it.asDomainModel())
+            }
+        }
+    }
+
+    suspend fun getToDoListByAdvancedSearch(
+        startDate: String,
+        endDate: String,
+        priority: Int,
+        completed: Int,
+        notified: Int
+    ): Flow<List<Task>> {
+        return withContext(Dispatchers.IO) {
+            database.taskDao().getTasksByAdvancedSearch(
+                startDate,
+                endDate,
+                priority,
+                completed,
+                notified
+            ).transform {
+                emit(it.asDomainModel())
+            }
         }
     }
 

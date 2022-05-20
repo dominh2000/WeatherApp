@@ -8,6 +8,8 @@
     <string name="label_fragment_list_to_do">Danh sách nhắc việc</string>
     <string name="label_fragment_add_to_do">Thêm nhắc việc</string>
     <string name="label_fragment_update_delete_to_do">Sửa nhắc việc</string>
+    <string name="label_fragment_simple_search_to_do">Tìm kiếm theo tên</string>
+    <string name="label_fragment_advanced_search_to_do">Tìm kiếm nâng cao</string>
 
     <string name="temperature">%1$.1f&#176;C</string>
     <string name="humidity">%1$d</string>
@@ -17,6 +19,22 @@
     <string name="predictability">%1$d</string>
     <string name="to_do_start_title">Nhắc việc</string>
     <string name="to_do_start_description">Xem, thêm, sửa và xóa các nhắc việc. Bạn cũng có thể đặt thông báo cho nhắc việc. Hãy đăng nhập để sử dụng chức năng này!</string>
+    <string name="empty_search_result">Không có kết quả tìm kiếm</string>
+
+    <string-array name="priority_level">
+        <item>Khẩn cấp và Quan trọng</item>
+        <item>Không khẩn cấp và Quan trọng</item>
+        <item>Khẩn cấp và Không quan trọng</item>
+        <item>Không khẩn cấp và Không quan trọng</item>
+    </string-array>
+    <string-array name="notified_state">
+        <item>Không đặt chuông</item>
+        <item>Có đặt chuông</item>
+    </string-array>
+    <string-array name="completed_state">
+        <item>Chưa hoàn thành</item>
+        <item>Đã hoàn thành</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

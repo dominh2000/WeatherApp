@@ -17,7 +17,8 @@
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/drawable/loading_img.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_add_to_do.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_add_update_delete_to_do.xml" value="0.4" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_add_update_delete_to_do.xml" value="0.3616504854368932" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_advanced_search_to_do.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_detail.xml" value="0.15675675675675677" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_detail2.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_diary.xml" value="0.264" />
@@ -28,10 +29,12 @@
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_list_to_do.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_locate.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_search_location.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_simple_search_to_do.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_to_do_start.xml" value="0.4" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_update_delete_to_do.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/item_to_do.xml" value="0.4" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/list_item.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/spinner_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/menu/main_menu.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/menu/menu_items.xml" value="0.1" />
@@ -44,5 +47,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.FragmentAdvancedSearchToDo">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_advanced_search_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hãy chọn đủ tất cả các trường sau để tiến hành tìm kiếm"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_choose_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_advanced_search_fragment"
+            android:text="Khoảng thời gian"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Từ ngày"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_choose_date" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/start_date"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/button_select_start_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_select_start_date"
+            app:layout_constraintTop_toTopOf="@id/button_select_start_date"
+            tools:text="Thứ tư, 18 tháng 5, 2022" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Đến ngày"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_select_start_date" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/end_date"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/button_select_end_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_select_end_date"
+            app:layout_constraintTop_toTopOf="@id/button_select_end_date"
+            tools:text="Thứ tư, 18 tháng 5, 2022" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_choose_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_select_end_date"
+            android:text="Mức ưu tiên"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/priority_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_choose_priority"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:spinnerMode="dialog"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_choose_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priority_spinner"
+            android:text="Đã hoàn thành?"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/completed_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_choose_completed"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:spinnerMode="dialog"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_choose_notified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/completed_spinner"
+            android:text="Chuông báo"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/notified_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_choose_notified"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:spinnerMode="dialog"/>
+
+        <Button
+            android:id="@+id/advanced_search_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Tìm kiếm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notified_spinner"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_advanced_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/advanced_search_action"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="10dp"
+            android:padding="0dp"
+            android:scrollbars="vertical"
+            android:clipToPadding="false"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_empty_search_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:text="@string/empty_search_result"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/advanced_search_action"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

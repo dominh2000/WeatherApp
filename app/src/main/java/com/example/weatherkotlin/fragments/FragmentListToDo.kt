@@ -54,6 +54,7 @@ class FragmentListToDo : Fragment() {
             findNavController().navigate(action)
         }
 
+        viewModel.getAllToDosDsc()
         binding.recyclerViewToDoList.adapter = adapter
         binding.recyclerViewToDoList.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -110,6 +111,16 @@ class FragmentListToDo : Fragment() {
             }
             R.id.set_notified -> {
                 viewModel.filterByNotified()
+                true
+            }
+            R.id.simple_search -> {
+                val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentSimpleSearchToDo()
+                findNavController().navigate(action)
+                true
+            }
+            R.id.advanced_search -> {
+                val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentAdvancedSearchToDo()
+                findNavController().navigate(action)
                 true
             }
             else -> super.onOptionsItemSelected(item)

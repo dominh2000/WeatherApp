@@ -136,6 +136,21 @@ fun calculateMillisecondsFromDate(date: String, time: String): Long {
     return calendar.timeInMillis
 }
 
+fun calculateMillisecondsForAdvancedSearch(date: String): Long {
+    val tokenizerDate = StringTokenizer(date, "-")
+    val listParamDate = mutableListOf<Int>()
+    while (tokenizerDate.hasMoreTokens()) {
+        listParamDate.add(tokenizerDate.nextToken().toInt())
+    }
+
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.YEAR, listParamDate[0])
+    calendar.set(Calendar.MONTH, listParamDate[1] - 1)
+    calendar.set(Calendar.DAY_OF_MONTH, listParamDate[2])
+
+    return calendar.timeInMillis
+}
+
 fun calculateCurrentTimeMilliseconds(): Long {
     val calendar = Calendar.getInstance()
     return calendar.timeInMillis

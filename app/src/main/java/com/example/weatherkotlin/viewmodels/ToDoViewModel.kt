@@ -5,6 +5,7 @@ import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.repository.ToDoRepository
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ToDoViewModel(app: BaseApplication) : ViewModel() {
@@ -20,12 +21,12 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     val insertedId: LiveData<Int> = _insertedId
 
     init {
-        getAllToDosAsc()
+        getAllToDosDsc()
     }
 
-    private fun getAllToDosAsc() {
+    fun getAllToDosDsc() {
         viewModelScope.launch {
-            toDoRepository.refreshToDoListAsc().collect {
+            toDoRepository.refreshToDoListDsc().collect {
                 _toDoList.value = it
             }
         }
@@ -131,6 +132,34 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
 
     fun onTaskClicked(selectedTask: Task) {
         _selectedTask.value = selectedTask
+    }
+
+    fun filterByName(name: String) {
+        viewModelScope.launch {
+            toDoRepository.getToDoListByName(name).collect {
+                _toDoList.value = it
+            }
+        }
+    }
+
+    fun filterByAdvancedSearch(
+        startDate: String,
+        endDate: String,
+        priority: Int,
+        completed: Int,
+        notified: Int
+    ) {
+        viewModelScope.launch {
+            toDoRepository.getToDoListByAdvancedSearch(
+                startDate,
+                endDate,
+                priority,
+                completed,
+                notified
+            ).collect {
+                _toDoList.value = it
+            }
+        }
     }
 
     fun filterByClosestDeadline() {

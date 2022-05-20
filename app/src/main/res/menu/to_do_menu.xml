@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/search_to_do"
+    <item android:id="@+id/simple_search"
         android:icon="@drawable/ic_search"
-        android:title="Tìm kiếm nhắc việc"
+        android:title="Tìm kiếm theo tên"
         app:showAsAction="always"/>
 
     <item android:id="@+id/filter_to_do"
@@ -13,7 +13,7 @@
         app:showAsAction="always">
         <menu>
             <item android:id="@+id/closest_deadline"
-                android:title="Hạn gần chất"/>
+                android:title="Hạn gần nhất"/>
             <item android:id="@+id/furthest_deadline"
                 android:title="Hạn xa nhất"/>
             <item android:id="@+id/by_priority_1"
@@ -35,9 +35,13 @@
         </menu>
     </item>
 
+    <item android:id="@+id/advanced_search"
+        android:title="Tìm kiếm nâng cao"
+        />
+
     <item android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
         android:title="Đăng xuất"
-        app:showAsAction="ifRoom"
+        app:showAsAction="collapseActionView"
         />
 </menu>

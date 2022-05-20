@@ -19,7 +19,23 @@ interface TaskDao {
     suspend fun deleteTask(task: DatabaseTask)
 
     @Query("SELECT * FROM task WHERE name LIKE '%' || :searchName || '%' ")
-    fun getAllTasksByName(searchName: String): Flow<List<DatabaseTask>>
+    fun getTasksByName(searchName: String): Flow<List<DatabaseTask>>
+
+    @Query(
+        "SELECT * FROM task " +
+                "WHERE deadline_date BETWEEN :startDate AND :endDate " +
+                "AND priority = :priority " +
+                "AND completed = :completed " +
+                "AND is_notified = :notified " +
+                "ORDER BY deadline_date ASC"
+    )
+    fun getTasksByAdvancedSearch(
+        startDate: String,
+        endDate: String,
+        priority: Int,
+        completed: Int,
+        notified: Int
+    ): Flow<List<DatabaseTask>>
 
     @Query("SELECT * FROM task ORDER BY deadline_date ASC")
     fun getAllTasksByClosestDeadline(): Flow<List<DatabaseTask>>
