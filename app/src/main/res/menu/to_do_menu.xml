@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item android:id="@+id/search_to_do"
         android:icon="@drawable/ic_search"
         android:title="Tìm kiếm nhắc việc"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/filter_to_do"
+        android:icon="@drawable/ic_filter"
+        android:title="Lọc"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/closest_deadline"
+                android:title="Hạn gần chất"/>
+            <item android:id="@+id/furthest_deadline"
+                android:title="Hạn xa nhất"/>
+            <item android:id="@+id/by_priority_1"
+                android:title="Khẩn cấp, quan trọng"/>
+            <item android:id="@+id/by_priority_2"
+                android:title="Không khẩn cấp, quan trọng"/>
+            <item android:id="@+id/by_priority_3"
+                android:title="Khẩn cấp, không quan trọng"/>
+            <item android:id="@+id/by_priority_4"
+                android:title="Không khẩn cấp, không quan trọng"/>
+            <item android:id="@+id/completed"
+                android:title="Hoàn thành"/>
+            <item android:id="@+id/not_completed"
+                android:title="Chưa hoàn thành"/>
+            <item android:id="@+id/set_notified"
+                android:title="Có chuông báo"/>
+            <item android:id="@+id/not_set_notified"
+                android:title="Không chuông báo"/>
+        </menu>
+    </item>
 
     <item android:id="@+id/logout"
         android:icon="@drawable/ic_logout"

@@ -13,6 +13,8 @@ import com.example.weatherkotlin.network.TotalWeather
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.textview.MaterialTextView
 import java.math.RoundingMode
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -20,7 +22,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 private const val DATE_FORMAT_PATTERN = "E, d MMM"
-private const val DATE_FORMAT_PATTERN_1 = "E, d MMM, y"
+const val DATE_FORMAT_PATTERN_1 = "yyyy-MM-dd"
 private const val DOUBLE_NUMBER_FORM = "%.2f"
 private val weatherStates = mapOf(
     "sn" to "Tuyết rơi",
@@ -105,48 +107,41 @@ fun launchLogoutAlertDialog(ctx: Context, view: View, navController: NavControll
     alertDialogBuilder.show()
 }
 
-fun configDateButton(ctx: Context, textView: TextView) {
-    val datePickerDialog = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        DatePickerDialog(ctx)
-    } else {
-        TODO("VERSION.SDK_INT < N")
+fun calculateMillisecondsFromDate(date: String, time: String): Long {
+    val tokenizerDate = StringTokenizer(date, "-")
+    val listParamDate = mutableListOf<Int>()
+    while (tokenizerDate.hasMoreTokens()) {
+        listParamDate.add(tokenizerDate.nextToken().toInt())
     }
-    datePickerDialog.setOnDateSetListener { _, i, i2, i3 ->
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, i)
-        calendar.set(Calendar.MONTH, i2)
-        calendar.set(Calendar.DAY_OF_MONTH, i3)
-        val selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
-        textView.text = selectedDate
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.YEAR, listParamDate[0])
+    calendar.set(Calendar.MONTH, listParamDate[1] - 1)
+    calendar.set(Calendar.DAY_OF_MONTH, listParamDate[2])
+
+    val tokenizerTime = StringTokenizer(time, ":")
+    val listParamTime = mutableListOf<Int>()
+    while (tokenizerTime.hasMoreTokens()) {
+        listParamTime.add(tokenizerTime.nextToken().toInt())
     }
-    datePickerDialog.show()
+    calendar.set(Calendar.HOUR_OF_DAY, listParamTime[0])
+    calendar.set(Calendar.MINUTE, listParamTime[1])
+    calendar.set(Calendar.SECOND, 0)
+
+    /* TODO: For testing
+    val calendar1 = Calendar.getInstance()
+    calendar1.timeInMillis = calendar.timeInMillis
+    val formatter = SimpleDateFormat("dd:MM:yy:HH:mm:ss", Locale.getDefault())
+    println(formatter.format(calendar1.time))
+     */
+    return calendar.timeInMillis
 }
 
-fun configTimeButton(ctx: Context, textView: TextView) {
-    val timePickerDialog = TimePickerDialog(
-        ctx,
-        { _, hourOfDay, minute ->
-            val formattedTime = when {
-                (hourOfDay < 10) -> {
-                    if (minute > 10) {
-                        "0$hourOfDay:$minute"
-                    } else {
-                        "0$hourOfDay:0$minute"
-                    }
-                }
-                else -> {
-                    if (minute > 10) {
-                        "$hourOfDay:$minute"
-                    } else {
-                        "$hourOfDay:0$minute"
-                    }
-                }
-            }
-            textView.text = formattedTime
-        },
-        Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-        Calendar.getInstance().get(Calendar.MINUTE),
-        true
-    )
-    timePickerDialog.show()
+fun calculateCurrentTimeMilliseconds(): Long {
+    val calendar = Calendar.getInstance()
+    return calendar.timeInMillis
+}
+
+fun String.convertFromPattern1ToFullDate(): String {
+    val date = SimpleDateFormat(DATE_FORMAT_PATTERN_1, Locale.getDefault()).parse(this)
+    return DateFormat.getDateInstance(DateFormat.FULL).format(date?.time)
 }

@@ -54,6 +54,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
                     android:text="@string/to_do_start_description"
                     android:textAppearance="?attr/textAppearanceBody2"/>
             </LinearLayout>

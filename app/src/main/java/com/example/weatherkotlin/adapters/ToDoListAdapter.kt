@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.domain.Task
+import com.example.weatherkotlin.util.convertFromPattern1ToFullDate
 import java.util.*
+import kotlin.coroutines.EmptyCoroutineContext.plus
 
 class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
     ListAdapter<Task, ToDoListAdapter.ToDoViewHolder>(DiffCallbackToDoItem) {
@@ -35,7 +37,7 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                         itemName.text = it
                     }
                 }
-                itemDeadline.text = itemToDo.deadlineDate.plus(" - ").plus(itemToDo.deadlineHour)
+                itemDeadline.text = itemToDo.deadlineDate.convertFromPattern1ToFullDate().plus(" - ").plus(itemToDo.deadlineHour)
                 itemPriority.text = when (itemToDo.priority) {
                     1 -> "KC - QT"
                     2 -> "KKC - QT"
@@ -48,6 +50,13 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                     } else {
                         itemDescription.text = it
                     }
+                }
+                when (itemToDo.isNotified) {
+                    true -> {
+                        imageAlarm.visibility = View.VISIBLE
+                        imageAlarm.setImageResource(R.drawable.ic_alarm_on)
+                    }
+                    else -> imageAlarm.visibility = View.GONE
                 }
                 when (itemToDo.completed) {
                     true -> {

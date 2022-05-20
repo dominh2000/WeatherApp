@@ -3,6 +3,7 @@ package com.example.weatherkotlin.work
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
@@ -41,11 +42,12 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters): Coroutin
         val pendingIntent: PendingIntent = PendingIntent
             .getActivity(applicationContext, 0, intent, 0)
 
-        val builder = NotificationCompat.Builder(applicationContext, BaseApplication.CHANNEL_ID)
+        val builder = NotificationCompat.Builder(applicationContext, BaseApplication.CHANNEL_WEATHER_ID)
             .setSmallIcon(R.drawable.ic_noti)
             .setContentTitle("Thông báo")
             .setContentText("Đã cập nhật dữ liệu từ API Thời tiết")
             .setStyle(NotificationCompat.BigTextStyle().bigText("PeriodicWorkRequest sẽ tự động cập nhật cho bạn mỗi 3 giờ!"))
+            .setColor(Color.BLUE)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

@@ -40,6 +40,7 @@ data class Task(
     val priority: Int,
     val deadlineDate: String,
     val deadlineHour: String,
+    val isNotified: Boolean,
     val completed: Boolean
 )
 
@@ -52,6 +53,7 @@ fun Task.asDatabaseModel(): DatabaseTask {
             it.priority,
             it.deadlineDate,
             it.deadlineHour,
+            it.isNotified,
             it.completed
         )
     }

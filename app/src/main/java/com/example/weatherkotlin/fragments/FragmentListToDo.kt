@@ -38,7 +38,8 @@ class FragmentListToDo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.buttonAdd.setOnClickListener {
-            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentAddToDo()
+            val action =
+                FragmentListToDoDirections.actionFragmentListToDoToFragmentAddToDo(crudType = 0)
             findNavController().navigate(action)
         }
 
@@ -48,12 +49,14 @@ class FragmentListToDo : Fragment() {
 
         val adapter = ToDoListAdapter {
             viewModel.onTaskClicked(it)
-            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentUpdateDeleteToDo()
+            val action =
+                FragmentListToDoDirections.actionFragmentListToDoToFragmentAddToDo(crudType = 1)
             findNavController().navigate(action)
         }
 
         binding.recyclerViewToDoList.adapter = adapter
-        binding.recyclerViewToDoList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.recyclerViewToDoList.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         viewModel.toDoList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -64,10 +67,53 @@ class FragmentListToDo : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.logout) {
-            launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
-            true
-        } else super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.logout -> {
+                launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
+                true
+            }
+            R.id.closest_deadline -> {
+                viewModel.filterByClosestDeadline()
+                true
+            }
+            R.id.furthest_deadline -> {
+                viewModel.filterByFurthestDeadline()
+                true
+            }
+            R.id.by_priority_1 -> {
+                viewModel.filterByPriority1()
+                true
+            }
+            R.id.by_priority_2 -> {
+                viewModel.filterByPriority2()
+                true
+            }
+            R.id.by_priority_3 -> {
+                viewModel.filterByPriority3()
+                true
+            }
+            R.id.by_priority_4 -> {
+                viewModel.filterByPriority4()
+                true
+            }
+            R.id.not_completed -> {
+                viewModel.filterByNotCompleted()
+                true
+            }
+            R.id.completed -> {
+                viewModel.filterByCompleted()
+                true
+            }
+            R.id.not_set_notified -> {
+                viewModel.filterByNotNotified()
+                true
+            }
+            R.id.set_notified -> {
+                viewModel.filterByNotified()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

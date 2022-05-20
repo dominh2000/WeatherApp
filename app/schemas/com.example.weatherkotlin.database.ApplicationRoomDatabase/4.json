@@ -1,0 +1,255 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "4e641f231fd38ebb89ce2d8cb06baab7",
+    "entities": [
+      {
+        "tableName": "weather_response",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`woe_id` INTEGER NOT NULL, `time` TEXT NOT NULL, `sun_rise` TEXT NOT NULL, `sun_set` TEXT NOT NULL, `timezone_name` TEXT NOT NULL, `title` TEXT NOT NULL, `locationType` TEXT NOT NULL, `latt_long` TEXT NOT NULL, `timezone` TEXT NOT NULL, PRIMARY KEY(`woe_id`))",
+        "fields": [
+          {
+            "fieldPath": "woeId",
+            "columnName": "woe_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentTime",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sunRise",
+            "columnName": "sun_rise",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sunSet",
+            "columnName": "sun_set",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeZoneName",
+            "columnName": "timezone_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationType",
+            "columnName": "locationType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lattLong",
+            "columnName": "latt_long",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeZone",
+            "columnName": "timezone",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "woe_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "weather_one_day",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `location_id` INTEGER NOT NULL, `state_name` TEXT NOT NULL, `state_abbr` TEXT NOT NULL, `wind_direction_compass` TEXT NOT NULL, `created_on` TEXT NOT NULL, `applicable_date` TEXT NOT NULL, `min_temp` REAL NOT NULL, `max_temp` REAL NOT NULL, `the_temp` REAL NOT NULL, `wind_speed` REAL NOT NULL, `wind_direction` REAL NOT NULL, `air_pressure` REAL NOT NULL, `humidity` INTEGER NOT NULL, `visibility` REAL NOT NULL, `predictability` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationId",
+            "columnName": "location_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stateName",
+            "columnName": "state_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stateAbbr",
+            "columnName": "state_abbr",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windDirectionCompass",
+            "columnName": "wind_direction_compass",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeStampCreated",
+            "columnName": "created_on",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "applicable_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minTemp",
+            "columnName": "min_temp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxTemp",
+            "columnName": "max_temp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "theTemp",
+            "columnName": "the_temp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windSpeed",
+            "columnName": "wind_speed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windDirection",
+            "columnName": "wind_direction",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "airPressure",
+            "columnName": "air_pressure",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "humidity",
+            "columnName": "humidity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visibility",
+            "columnName": "visibility",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "predictability",
+            "columnName": "predictability",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "task",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `priority` INTEGER NOT NULL, `deadline_date` TEXT NOT NULL, `deadline_hour` TEXT NOT NULL, `is_notified` INTEGER NOT NULL DEFAULT 0, `completed` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "priority",
+            "columnName": "priority",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deadlineDate",
+            "columnName": "deadline_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deadlineHour",
+            "columnName": "deadline_hour",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isNotified",
+            "columnName": "is_notified",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "completed",
+            "columnName": "completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4e641f231fd38ebb89ce2d8cb06baab7')"
+    ]
+  }
+}

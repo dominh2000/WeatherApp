@@ -13,6 +13,7 @@ data class DatabaseTask(
     @ColumnInfo val priority: Int,
     @ColumnInfo(name = "deadline_date") val deadlineDate: String,
     @ColumnInfo(name = "deadline_hour") val deadlineHour: String,
+    @ColumnInfo(name = "is_notified", defaultValue = "0") val isNotified: Boolean,
     @ColumnInfo val completed: Boolean
     )
 
@@ -26,6 +27,7 @@ fun List<DatabaseTask>.asDomainModel(): List<Task> {
             it.priority,
             it.deadlineDate,
             it.deadlineHour,
+            it.isNotified,
             it.completed
         )
     }
