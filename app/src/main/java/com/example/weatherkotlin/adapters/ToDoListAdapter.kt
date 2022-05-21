@@ -10,11 +10,11 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.util.convertFromPattern1ToFullDate
-import java.util.*
-import kotlin.coroutines.EmptyCoroutineContext.plus
 
 class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
     ListAdapter<Task, ToDoListAdapter.ToDoViewHolder>(DiffCallbackToDoItem) {
+
+    private var unfilteredList = listOf<Task>()
 
     companion object DiffCallbackToDoItem : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
@@ -32,12 +32,14 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
             binding.apply {
                 itemToDo.name.let {
                     if (it.length > 20) {
-                        itemName.text = it.substring(0,19).trim().plus("...")
+                        itemName.text = it.substring(0, 19).trim().plus("...")
                     } else {
                         itemName.text = it
                     }
                 }
-                itemDeadline.text = itemToDo.deadlineDate.convertFromPattern1ToFullDate().plus(" - ").plus(itemToDo.deadlineHour)
+                itemDeadline.text =
+                    itemToDo.deadlineDate.convertFromPattern1ToFullDate().plus(" - ")
+                        .plus(itemToDo.deadlineHour)
                 itemPriority.text = when (itemToDo.priority) {
                     1 -> "KC - QT"
                     2 -> "KKC - QT"
@@ -46,7 +48,7 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                 }
                 itemToDo.description.let {
                     if (it.length > 50) {
-                        itemDescription.text = it.substring(0,49).trim().plus("...")
+                        itemDescription.text = it.substring(0, 49).trim().plus("...")
                     } else {
                         itemDescription.text = it
                     }
@@ -84,5 +86,24 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
 
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun modifyList(list: List<Task>) {
+        unfilteredList = list
+        submitList(list)
+    }
+
+    fun filter(query: CharSequence?) {
+        val list = mutableListOf<Task>()
+
+        if (!query.isNullOrEmpty()) {
+            list.addAll(unfilteredList.filter {
+                it.name.lowercase().contains(query.toString().lowercase())
+            })
+        } else {
+            list.addAll(unfilteredList)
+        }
+
+        submitList(list)
     }
 }

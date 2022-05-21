@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/home_graph"
-    app:startDestination="@id/fragmentListDates">
+    app:startDestination="@id/fragmentOpenWeatherOverview">
 
     <fragment
         android:id="@+id/fragmentListDates"
@@ -34,5 +34,23 @@
         android:name="com.example.weatherkotlin.fragments.FragmentSearchLocation"
         android:label="fragment_search_location"
         tools:layout="@layout/fragment_search_location" />
+    <fragment
+        android:id="@+id/fragmentOpenWeatherOverview"
+        android:name="com.example.weatherkotlin.fragments.FragmentOpenWeatherOverview"
+        android:label="@string/label_fragment_ow_overview"
+        tools:layout="@layout/fragment_open_weather_overview" >
+        <action
+            android:id="@+id/action_fragmentOpenWeatherOverview_to_fragmentOpenWeatherItemDetails"
+            app:destination="@id/fragmentOpenWeatherItemDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOpenWeatherItemDetails"
+        android:name="com.example.weatherkotlin.fragments.FragmentOpenWeatherItemDetails"
+        android:label="@string/label_fragment_detail"
+        tools:layout="@layout/fragment_open_weather_item_details"/>
 
 </navigation>

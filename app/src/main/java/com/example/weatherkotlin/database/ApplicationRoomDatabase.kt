@@ -7,11 +7,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [DatabaseLocationInfo::class, DatabaseWeatherOneDay::class, DatabaseTask::class],
-    version = 4,
+    entities = [
+        DatabaseLocationInfo::class,
+        DatabaseWeatherOneDay::class,
+        DatabaseTask::class,
+        CityForForecastFiveDays::class,
+        CurrentWeather::class,
+        ForecastOneDay::class,
+    ],
+    version = 6,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
-        AutoMigration(from = 3, to = 4)
+        AutoMigration(from = 3, to = 4),
+        AutoMigration(from = 4, to = 5),
+        AutoMigration(from = 5, to = 6)
     ],
     exportSchema = true
 )
@@ -19,6 +28,7 @@ abstract class ApplicationRoomDatabase : RoomDatabase() {
 
     abstract fun weatherDao(): WeatherDao
     abstract fun taskDao(): TaskDao
+    abstract fun openWeatherDao(): OpenWeatherDao
 
     companion object {
         @Volatile

@@ -20,10 +20,6 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     val selectedTask: LiveData<Task> = _selectedTask
     val insertedId: LiveData<Int> = _insertedId
 
-    init {
-        getAllToDosDsc()
-    }
-
     fun getAllToDosDsc() {
         viewModelScope.launch {
             toDoRepository.refreshToDoListDsc().collect {

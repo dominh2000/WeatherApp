@@ -46,7 +46,7 @@ class FragmentSimpleSearchToDo : Fragment() {
         viewModel.getAllToDosDsc()
         binding.recyclerViewSimpleSearch.adapter = adapter
         viewModel.toDoList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.modifyList(it)
         }
         binding.textEmptySearchResult.visibility = View.GONE
 
@@ -56,16 +56,7 @@ class FragmentSimpleSearchToDo : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.filterByName(newText.trim())
-                viewModel.toDoList.observe(viewLifecycleOwner) {
-                    if (it.isEmpty()) {
-                        binding.recyclerViewSimpleSearch.visibility = View.GONE
-                        binding.textEmptySearchResult.visibility = View.VISIBLE
-                    } else {
-                        binding.textEmptySearchResult.visibility = View.GONE
-                        binding.recyclerViewSimpleSearch.visibility = View.VISIBLE
-                    }
-                }
+                (binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter).filter(newText)
                 return true
             }
         })

@@ -10,6 +10,7 @@
     <string name="label_fragment_update_delete_to_do">Sửa nhắc việc</string>
     <string name="label_fragment_simple_search_to_do">Tìm kiếm theo tên</string>
     <string name="label_fragment_advanced_search_to_do">Tìm kiếm nâng cao</string>
+    <string name="label_fragment_ow_overview">Thời tiết OpenWeather</string>
 
     <string name="temperature">%1$.1f&#176;C</string>
     <string name="humidity">%1$d</string>
@@ -17,6 +18,20 @@
     <string name="visibility">%1$.1f dặm</string>
     <string name="wind_speed">%1$.1f dặm/giờ</string>
     <string name="predictability">%1$d</string>
+
+    <string name="temperature_OW">%1$.1f&#176;C</string>
+    <string name="feels_like_OW">%1$.1f&#176;C</string>
+    <string name="updated_time">Cập nhật lúc %1$s</string>
+    <string name="humidity_OW">%1$d</string>
+    <string name="air_pressure_OW">%1$d hPa</string>
+    <string name="visibility_OW">%1$d m</string>
+    <string name="wind_speed_OW">%1$.1f m/s</string>
+    <string name="wind_degree_OW">%1$d độ</string>
+    <string name="wind_gust_OW">%1$.2f m/s</string>
+    <string name="precipitation_OW">%1$.2f</string>
+    <string name="cloud_percent_OW">%1$d</string>
+    <string name="rain_volume_3h_OW">%1$.1f mm</string>
+
     <string name="to_do_start_title">Nhắc việc</string>
     <string name="to_do_start_description">Xem, thêm, sửa và xóa các nhắc việc. Bạn cũng có thể đặt thông báo cho nhắc việc. Hãy đăng nhập để sử dụng chức năng này!</string>
     <string name="empty_search_result">Không có kết quả tìm kiếm</string>

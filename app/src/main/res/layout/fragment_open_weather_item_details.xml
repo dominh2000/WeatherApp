@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.weatherkotlin.viewmodels.OpenWeatherViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="18:00, T7, 21 Th5, 2022" />
+
+        <ImageView
+            android:id="@+id/image_state"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:importantForAccessibility="no"
+            app:contextImg="@{context}"
+            app:imageUriOW="@{viewModel.weatherItem.weatherDescription.icon}"
+            app:layout_constraintEnd_toStartOf="@+id/weather_state"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/weather_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{viewModel.weatherItem.weatherDescription.description}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toBottomOf="@id/image_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/image_state"
+            app:layout_constraintTop_toTopOf="@id/image_state"
+            tools:text="Bão có sấm sét và mưa lớn" />
+
+        <View
+            android:id="@+id/divider_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/dividerHorizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_state" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:stretchColumns="*"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_horizontal"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="middle">
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/temperature"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhiệt độ"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/temperature_OW(viewModel.weatherItem.mainForecastInfo.temp)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="13,3 C" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/feels_like"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cảm giác như"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/feels_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/feels_like_OW(viewModel.weatherItem.mainForecastInfo.feelsLike)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="24,4 C" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/humidity"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Độ ẩm"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/humidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/humidity_OW(viewModel.weatherItem.mainForecastInfo.humidity) + '%'}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="74%" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/air_pressure"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Áp suất không khí"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/air_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/air_pressure_OW(viewModel.weatherItem.mainForecastInfo.defaultPressure)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="1010 hPa" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/visibility"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tầm nhìn xa"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/visibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/visibility_OW(viewModel.weatherItem.visibility)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="10000 m" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/cloud_percent"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tỷ lệ mây"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/cloud_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/cloud_percent_OW(viewModel.weatherItem.cloudAmountPercent) + '%'}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="91%" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/wind_speed"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tốc độ gió"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/wind_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/wind_speed_OW(viewModel.weatherItem.wind.speed)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="4,9 m/s" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/wind_direction"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hướng gió"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/wind_degree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/wind_degree_OW(viewModel.weatherItem.wind.degree)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="117 độ" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/wind_gust"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gió giật"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/wind_gust"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/wind_gust_OW(viewModel.weatherItem.wind.gust)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="7,1 m/s" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/rain_volume"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lượng mưa 3h gần đây"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rain_volume_3h"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/rain_volume_3h_OW(viewModel.weatherItem.last3hRainVolume)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="2,1 mm" />
+                </TableRow>
+
+                <TableRow
+                    android:gravity="center">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/precipitation"
+                            android:layout_gravity="center"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Xác suất mưa"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/precipitation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/precipitation_OW(viewModel.weatherItem.precipitation)}"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold"
+                        tools:text="0,37" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

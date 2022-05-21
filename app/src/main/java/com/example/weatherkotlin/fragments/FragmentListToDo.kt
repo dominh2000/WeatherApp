@@ -6,6 +6,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherkotlin.BaseApplication
@@ -126,5 +127,4 @@ class FragmentListToDo : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

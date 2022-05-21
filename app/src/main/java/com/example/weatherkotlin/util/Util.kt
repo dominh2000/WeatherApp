@@ -23,6 +23,10 @@ import kotlin.math.roundToInt
 
 private const val DATE_FORMAT_PATTERN = "E, d MMM"
 const val DATE_FORMAT_PATTERN_1 = "yyyy-MM-dd"
+private const val DATE_FORMAT_PATTERN_2 = "E, d MMM, yyyy"
+private const val DATE_FORMAT_PATTERN_3 = "HH:mm, d MMM, yyyy"
+private const val DATE_FORMAT_PATTERN_4 = "HH:mm, E, d MMM, yyyy"
+private const val DATE_FORMAT_PATTERN_5 = "yyyy-MM-dd HH:mm"
 private const val DOUBLE_NUMBER_FORM = "%.2f"
 private val weatherStates = mapOf(
     "sn" to "Tuyết rơi",
@@ -35,6 +39,26 @@ private val weatherStates = mapOf(
     "hc" to "Nhiều mây",
     "lc" to "Có mây",
     "c" to "Trời quang"
+)
+val weatherIconMap = mapOf(
+    "01d" to "clearsky_day",
+    "01n" to "clearsky_night",
+    "02d" to "fair_day",
+    "02n" to "fair_night",
+    "03d" to "cloudy",
+    "03n" to "cloudy",
+    "04d" to "cloudy",
+    "04n" to "cloudy",
+    "09d" to "rainshowers_day",
+    "09n" to "rainshowers_night",
+    "10d" to "rain",
+    "10n" to "rain",
+    "11d" to "heavyrainandthunder",
+    "11n" to "heavyrainandthunder",
+    "13d" to "snow",
+    "13n" to "snow",
+    "50d" to "fog",
+    "50n" to "fog",
 )
 
 fun List<TotalWeather>.convert(): List<TotalWeather> {
@@ -159,4 +183,24 @@ fun calculateCurrentTimeMilliseconds(): Long {
 fun String.convertFromPattern1ToFullDate(): String {
     val date = SimpleDateFormat(DATE_FORMAT_PATTERN_1, Locale.getDefault()).parse(this)
     return DateFormat.getDateInstance(DateFormat.FULL).format(date?.time)
+}
+
+fun Int.convertFromDateTimeIntToPattern2(shiftInSeconds: Int): String {
+    val time = this.toLong() * 1000 + shiftInSeconds.toLong() * 1000
+    val formatter = SimpleDateFormat(DATE_FORMAT_PATTERN_2, Locale.getDefault())
+    formatter.timeZone = TimeZone.getTimeZone("UTC")
+    return formatter.format(Date(time))
+}
+
+fun Int.convertFromDateTimeIntToPattern3(shiftInSeconds: Int): String {
+    val time = this.toLong() * 1000 + shiftInSeconds.toLong() * 1000
+    val formatter = SimpleDateFormat(DATE_FORMAT_PATTERN_3, Locale.getDefault())
+    formatter.timeZone = TimeZone.getTimeZone("UTC")
+    return formatter.format(Date(time))
+}
+
+fun String.convertDateFromPattern5ToPattern4(): String {
+    val date = SimpleDateFormat(DATE_FORMAT_PATTERN_5, Locale.getDefault()).parse(this)
+    val formatter = SimpleDateFormat(DATE_FORMAT_PATTERN_4, Locale.getDefault())
+    return formatter.format(date)
 }

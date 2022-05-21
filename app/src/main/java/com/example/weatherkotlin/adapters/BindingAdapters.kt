@@ -10,11 +10,17 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
 import com.example.weatherkotlin.R
+import com.example.weatherkotlin.domain.OneDayForecast
 import com.example.weatherkotlin.domain.WeatherOneDay
+import com.example.weatherkotlin.util.weatherIconMap
+import com.example.weatherkotlin.viewmodels.OpenWeatherApiStatus
 import com.example.weatherkotlin.viewmodels.WeatherApiStatus
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 
+/*
+    For MetaWeather API
+ */
 @BindingAdapter("listData")
 fun bindRecyclerViewData(recyclerView: RecyclerView, data: List<WeatherOneDay>?) {
     val adapter = recyclerView.adapter as WeatherDatesAdapter
@@ -49,7 +55,64 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, cont
         }
         else -> {
             statusImageView.visibility = View.GONE
-            Snackbar.make(context!!, statusImageView, "Không có kết nối Internet hoặc máy chủ lỗi!", LENGTH_SHORT).show()
+            Snackbar.make(
+                context!!,
+                statusImageView,
+                "Không có kết nối Internet hoặc máy chủ lỗi!",
+                LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+/*
+    For OpenWeather API
+ */
+@BindingAdapter("listDataOW")
+fun bindRecyclerViewOWData(recyclerView: RecyclerView, data: List<OneDayForecast>?) {
+    val adapter = recyclerView.adapter as OpenWeatherDatesAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("imageUriOW", "contextImg")
+fun bindOWWeatherStateImage(imageView: ImageView, imgUri: String?, context: Context?) {
+    val baseUrl = "https://api.met.no/images/weathericons/svg/"
+    val imageLoader = ImageLoader.Builder(context!!)
+        .components {
+            add(SvgDecoder.Factory())
+        }
+        .build()
+    imgUri?.let {
+        val imageUri =
+            baseUrl.plus(weatherIconMap[it]).plus(".svg").toUri().buildUpon().scheme("https")
+                .build()
+        imageView.load(imageUri, imageLoader) {
+        }
+    }
+}
+
+@BindingAdapter("apiOWStatus", "contextImg")
+fun bindOWApiStatus(
+    statusImageView: ImageView,
+    apiStatus: OpenWeatherApiStatus?,
+    context: Context?
+) {
+    when (apiStatus) {
+        OpenWeatherApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        OpenWeatherApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+        else -> {
+            statusImageView.visibility = View.GONE
+            Snackbar.make(
+                context!!,
+                statusImageView,
+                "Lỗi kết nối. Hãy kiểm tra kết nối Internet của bạn!",
+                LENGTH_SHORT
+            ).show()
         }
     }
 }

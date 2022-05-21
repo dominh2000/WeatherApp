@@ -85,13 +85,9 @@ class FragmentAdvancedSearchToDo : Fragment() {
             }
             advancedSearchAction.setOnClickListener {
                 if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
-                    if (calculateMillisecondsForAdvancedSearch(startDate.text.toString()) <= calculateMillisecondsForAdvancedSearch(
-                            endDate.text.toString()
-                        )
+                    if (calculateMillisecondsForAdvancedSearch(startDate.text.toString())
+                        <= calculateMillisecondsForAdvancedSearch(endDate.text.toString())
                     ) {
-                        println(prioritySpinner.selectedItemId + 1)
-                        println(completedSpinner.selectedItemId)
-                        println(notifiedSpinner.selectedItemId)
                         viewModel.filterByAdvancedSearch(
                             startDate.text.toString(),
                             endDate.text.toString(),

@@ -13,6 +13,7 @@ import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.MainActivity
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.database.ApplicationRoomDatabase.Companion.getDatabase
+import com.example.weatherkotlin.repository.OpenWeatherRepository
 import com.example.weatherkotlin.repository.WeatherRepository
 
 class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters): CoroutineWorker(ctx, params) {
@@ -23,11 +24,11 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters): Coroutin
 
     override suspend fun doWork(): Result {
         val appContext = applicationContext
-        val weatherDb = getDatabase(appContext)
-        val weatherRepo = WeatherRepository(weatherDb)
+        val openWeatherDb = getDatabase(appContext)
+        val openWeatherRepo = OpenWeatherRepository(openWeatherDb)
 
         try {
-            weatherRepo.refreshWeather()
+            openWeatherRepo.refreshOpenWeather()
         } catch (e: Exception) {
             Result.retry()
         }
