@@ -25,11 +25,6 @@
         tools:layout="@layout/fragment_detail"/>
 
     <fragment
-        android:id="@+id/locate_weather"
-        android:name="com.example.weatherkotlin.fragments.FragmentLocate"
-        android:label="fragment_locate"
-        tools:layout="@layout/fragment_locate" />
-    <fragment
         android:id="@+id/search_weather"
         android:name="com.example.weatherkotlin.fragments.FragmentSearchLocation"
         android:label="fragment_search_location"

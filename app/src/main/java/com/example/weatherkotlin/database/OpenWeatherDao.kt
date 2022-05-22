@@ -10,7 +10,7 @@ interface OpenWeatherDao {
     @Query("SELECT * FROM city_for_forecast_5_days")
     fun getFullForecast5Days(): Flow<FullForecastFiveDays?>
 
-    @Query("SELECT * FROM current_weather")
+    @Query("SELECT * FROM current_weather WHERE city_id = 1")
     fun getCurrentWeather(): Flow<CurrentWeather?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -114,7 +114,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_select_deadline_date"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
@@ -137,7 +137,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_select_deadline_hour"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"

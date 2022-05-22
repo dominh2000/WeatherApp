@@ -113,7 +113,7 @@ class FragmentAdvancedSearchToDo : Fragment() {
                         ).show()
                     }
                 } else {
-                    Snackbar.make(requireContext(), root, "Hãy chọn đủ ngày", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(requireContext(), root, "Hãy chọn đủ ngày.", Snackbar.LENGTH_SHORT)
                         .show()
                 }
             }

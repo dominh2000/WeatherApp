@@ -110,7 +110,7 @@ fun bindOWApiStatus(
             Snackbar.make(
                 context!!,
                 statusImageView,
-                "Lỗi kết nối. Hãy kiểm tra kết nối Internet của bạn!",
+                "Đã xảy ra lỗi kết nối. Hãy kiểm tra kết nối Internet của bạn!",
                 LENGTH_SHORT
             ).show()
         }

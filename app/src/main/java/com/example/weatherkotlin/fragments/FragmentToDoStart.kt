@@ -58,7 +58,12 @@ class FragmentToDoStart : Fragment() {
                 findNavController().navigate(action)
             }
             else -> {
-                val msg = "Đăng nhập không thành công, lỗi ${response?.error?.errorCode}"
+                var msg = ""
+                if (response?.error == null) {
+                    msg = "Đăng nhập không thành công."
+                } else {
+                    msg = "Đăng nhập không thành công, lỗi ${response.error?.errorCode}."
+                }
                 Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT).show()
             }
         }
@@ -72,6 +77,7 @@ class FragmentToDoStart : Fragment() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
+            .setTheme(R.style.LoginTheme)
             .setLogo(R.drawable.to_do_list)
             .build()
         resultLauncher.launch(signInIntent)

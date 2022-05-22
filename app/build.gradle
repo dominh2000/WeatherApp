@@ -87,4 +87,7 @@ dependencies {
 
     // Firebase Authentication
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
+
+    // Google Play Service location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }

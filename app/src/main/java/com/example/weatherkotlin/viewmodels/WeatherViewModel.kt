@@ -36,6 +36,7 @@ class WeatherViewModel(app: BaseApplication) : ViewModel() {
                     WeatherApiStatus.DONE // Phải đặt ở ngay sau khi refresh xong nếu không sẽ không bao giờ chạy được đến sau collect
             } catch (error: Exception) {
                 _status.value = WeatherApiStatus.ERROR
+                error.printStackTrace()
             }
         }
     }

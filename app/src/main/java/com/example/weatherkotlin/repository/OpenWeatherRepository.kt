@@ -37,4 +37,17 @@ class OpenWeatherRepository(private val database: ApplicationRoomDatabase) {
             database.openWeatherDao().insertCurrentWeather(currentWeather.asDatabaseModel())
         }
     }
+
+    suspend fun getOpenWeatherByCoord(latt: Double, long: Double) {
+        withContext(Dispatchers.IO) {
+            val currentWeather =
+                OpenWeatherApi.retrofitServices.getOpenWeatherCurrentWeatherByCoord(latt, long)
+            val fiveDaysForecast =
+                OpenWeatherApi.retrofitServices.getOpenWeatherForecastByCoord(latt, long)
+            database.openWeatherDao().insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
+            database.openWeatherDao()
+                .insertForecast5Days(fiveDaysForecast.listForecast.asDatabaseModel())
+            database.openWeatherDao().insertCurrentWeather(currentWeather.asDatabaseModel())
+        }
+    }
 }

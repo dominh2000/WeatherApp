@@ -118,13 +118,6 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                         it.alarmSwitch.isChecked,
                         it.completedSwitch.isChecked
                     )
-                    Snackbar.make(
-                        requireContext(),
-                        binding.root,
-                        "Lưu thành công",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
                 } else {
                     viewModel.addNewToDoItemWithAlarm(
                         it.taskName.text.toString().trim(),
@@ -136,14 +129,14 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                         it.completedSwitch.isChecked
                     )
                     sendAlarm()
-                    Snackbar.make(
-                        requireContext(),
-                        binding.root,
-                        "Lưu và đặt chuông báo thành công",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
                 }
+                Snackbar.make(
+                    requireContext(),
+                    binding.root,
+                    "Lưu thành công.",
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
             }
             val action =
                 FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
@@ -209,7 +202,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 val action =
                     FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
                 findNavController().navigate(action)
-                Snackbar.make(requireContext(), it.root, "Lưu thành công", Snackbar.LENGTH_SHORT)
+                Snackbar.make(requireContext(), it.root, "Lưu thành công.", Snackbar.LENGTH_SHORT)
                     .show()
             } else {
                 Snackbar.make(
@@ -237,7 +230,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 Snackbar.make(
                     requireContext(),
                     binding.root,
-                    "Xóa thành công",
+                    "Xóa thành công.",
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
@@ -424,7 +417,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 Snackbar.make(
                     ctx,
                     view,
-                    "Không thể đặt chuông báo cho thời điểm trước hiện tại",
+                    "Không thể đặt chuông báo cho thời điểm trước hiện tại.",
                     Snackbar.LENGTH_SHORT
                 ).show()
                 switch.isChecked = false
@@ -434,7 +427,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
             Snackbar.make(
                 ctx,
                 view,
-                "Vui lòng chọn ngày giờ để đặt chuông báo",
+                "Vui lòng chọn ngày giờ để đặt chuông báo.",
                 Snackbar.LENGTH_SHORT
             ).show()
             switch.isChecked = false

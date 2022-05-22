@@ -116,9 +116,10 @@ data class Rain(
     @Json(name = "3h") val last3hVolume: Double
 )
 
+@JsonClass(generateAdapter = true)
 data class RainForCurrentWeather(
     @Json(name = "1h") val last1hVolume: Double,
-    @Json(name = "3h") val last3hVolume: Double,
+    @Json(name = "3h") val last3hVolume: Double? = null,
 )
 
 // Extension functions
@@ -169,7 +170,7 @@ private fun checkForNullRain(rain: Rain?): Double {
 fun OpenWeatherCurrentWeatherResponse.asDatabaseModel(): CurrentWeather {
     return this.let {
         CurrentWeather(
-            it.cityId,
+            1,
             it.weather[0].mainWeatherType,
             it.weather[0].description,
             it.weather[0].icon,

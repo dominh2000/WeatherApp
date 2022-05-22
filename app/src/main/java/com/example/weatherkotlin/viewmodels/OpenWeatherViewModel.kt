@@ -42,6 +42,19 @@ class OpenWeatherViewModel(app: BaseApplication): ViewModel() {
     fun onWeatherItemClicked(item: OneDayForecast) {
         _weatherItem.value = item
     }
+
+    fun getOpenWeatherInfoByCoord(latt: Double, long: Double) {
+        viewModelScope.launch {
+            _status.value = OpenWeatherApiStatus.LOADING
+            try {
+                openWeatherRepository.getOpenWeatherByCoord(latt, long)
+                _status.value = OpenWeatherApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = OpenWeatherApiStatus.ERROR
+                e.printStackTrace()
+            }
+        }
+    }
 }
 
 class OpenWeatherViewModelFactory(val app: BaseApplication): ViewModelProvider.Factory {

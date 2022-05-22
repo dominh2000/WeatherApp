@@ -6,17 +6,17 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.asLiveData
 import androidx.work.CoroutineWorker
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkerParameters
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.MainActivity
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.database.ApplicationRoomDatabase.Companion.getDatabase
 import com.example.weatherkotlin.repository.OpenWeatherRepository
-import com.example.weatherkotlin.repository.WeatherRepository
 
-class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters): CoroutineWorker(ctx, params) {
+class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
+    CoroutineWorker(ctx, params) {
 
     companion object {
         const val WEATHER_WORK_NAME = "RefreshWeatherDataWorker"
@@ -29,35 +29,41 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters): Coroutin
 
         try {
             openWeatherRepo.refreshOpenWeather()
+
+            val notificationId = 1000
+            val contentIntent = Intent(applicationContext, MainActivity::class.java)
+            val contentPendingIntent = PendingIntent.getActivity(
+                applicationContext,
+                0,
+                contentIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            val builder =
+                NotificationCompat.Builder(
+                    applicationContext,
+                    BaseApplication.CHANNEL_WEATHER_ID
+                )
+                    .setSmallIcon(R.drawable.ic_noti)
+                    .setContentTitle("Thời tiết")
+                    .setContentText("Đã cập nhật thông tin thời tiết")
+                    .setStyle(
+                        NotificationCompat.BigTextStyle()
+                            .bigText("Dữ liệu từ OpenWeather API sẽ được tự động cập nhật mỗi 3 giờ với WorkManager!")
+                    )
+                    .setColor(Color.GREEN)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setContentIntent(contentPendingIntent)
+                    .setAutoCancel(true)
+
+            with(NotificationManagerCompat.from(applicationContext)) {
+                notify(notificationId, builder.build())
+            }
+            return Result.success()
         } catch (e: Exception) {
-            Result.retry()
+            e.printStackTrace()
+            return Result.retry()
         }
-
-        // ID tùy chọn
-        val notificationId = 20
-
-        val intent = Intent(applicationContext, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-        val pendingIntent: PendingIntent = PendingIntent
-            .getActivity(applicationContext, 0, intent, 0)
-
-        val builder = NotificationCompat.Builder(applicationContext, BaseApplication.CHANNEL_WEATHER_ID)
-            .setSmallIcon(R.drawable.ic_noti)
-            .setContentTitle("Thông báo")
-            .setContentText("Đã cập nhật dữ liệu từ API Thời tiết")
-            .setStyle(NotificationCompat.BigTextStyle().bigText("PeriodicWorkRequest sẽ tự động cập nhật cho bạn mỗi 3 giờ!"))
-            .setColor(Color.BLUE)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(applicationContext)) {
-            notify(notificationId, builder.build())
-        }
-
-        return Result.success()
     }
 
 }
