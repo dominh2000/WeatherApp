@@ -162,7 +162,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="Đặt chuông báo"
+            android:text="Đặt thông báo"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

@@ -56,7 +56,7 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                 when (itemToDo.isNotified) {
                     true -> {
                         imageAlarm.visibility = View.VISIBLE
-                        imageAlarm.setImageResource(R.drawable.ic_alarm_on)
+                        imageAlarm.setImageResource(R.drawable.ic_noti_on)
                     }
                     else -> imageAlarm.visibility = View.GONE
                 }

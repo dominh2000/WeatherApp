@@ -29,9 +29,9 @@
             <item android:id="@+id/not_completed"
                 android:title="Chưa hoàn thành"/>
             <item android:id="@+id/set_notified"
-                android:title="Có chuông báo"/>
+                android:title="Có đặt thông báo"/>
             <item android:id="@+id/not_set_notified"
-                android:title="Không chuông báo"/>
+                android:title="Không đặt thông báo"/>
         </menu>
     </item>
 

@@ -417,7 +417,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 Snackbar.make(
                     ctx,
                     view,
-                    "Không thể đặt chuông báo cho thời điểm trước hiện tại.",
+                    "Không thể đặt thông báo cho thời điểm trước hiện tại.",
                     Snackbar.LENGTH_SHORT
                 ).show()
                 switch.isChecked = false
