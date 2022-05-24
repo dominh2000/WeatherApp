@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.weatherkotlin.MainActivity
 import com.example.weatherkotlin.R
@@ -17,11 +18,17 @@ fun NotificationManager.sendNotificationWithContentIntent(
     ctx: Context
 ) {
     val contentIntent = Intent(ctx, MainActivity::class.java)
+    // Support Android 12+ and compatible with lower versions
+    val flags = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        else -> PendingIntent.FLAG_UPDATE_CURRENT
+    }
     val contentPendingIntent = PendingIntent.getActivity(
         ctx,
         notificationId,
         contentIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT
+        flags
     )
 
     val builder = NotificationCompat.Builder(ctx, notificationChannel)

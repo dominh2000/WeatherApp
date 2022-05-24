@@ -12,16 +12,16 @@
 3. Lấy, cache và hiển thị thông tin thời tiết từ API của OpenWeather `https://openweathermap.org/api`. Tự động cập nhật và gửi thông báo mỗi 3 giờ. Xem thời tiết theo vị trí hiện tại của thiết bị.
 
 ## Các kiến thức sử dụng
-1. DataBinding & ViewBinding
-2. Navigation component với SafeArgs & BottomNavigationView
-3. ViewModel & LiveData
-4. Retrofit & Moshi
-5. Coil
-6. RecyclerView với ListAdapter
-7. Coroutines & Flow
-8. BindingAdapter
-9. Room
-10. WorkManager & Notifications
-11. FirebaseAuthentication với FirebaseUI
-12. Google Play Services Location
-13. Kiến trúc MVVM, Repository pattern, 3-layer: UI - Domain model - Data
+1. Kiến trúc MVVM, Repository pattern, 3-layer: UI - Domain model - Data
+2. DataBinding & ViewBinding
+3. Navigation component với SafeArgs & BottomNavigationView
+4. ViewModel & LiveData
+5. Retrofit & Moshi
+6. Coil
+7. RecyclerView với ListAdapter
+8. Coroutines & Flow
+9. BindingAdapter
+10. Room
+11. WorkManager & Notifications
+12. FirebaseAuthentication với FirebaseUI
+13. Google Play Services Location

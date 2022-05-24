@@ -85,8 +85,9 @@ dependencies {
     // WorkManager
     implementation "androidx.work:work-runtime-ktx:2.7.1"
 
-    // Firebase Authentication
+    // Firebase Authentication + Support Android 12+
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
+    implementation "com.google.android.gms:play-services-auth:20.2.0"
 
     // Google Play Service location
     implementation 'com.google.android.gms:play-services-location:19.0.1'

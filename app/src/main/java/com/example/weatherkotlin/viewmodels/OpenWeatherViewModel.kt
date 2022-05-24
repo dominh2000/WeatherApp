@@ -8,9 +8,9 @@ import com.example.weatherkotlin.domain.OpenWeatherForecastFiveDays
 import com.example.weatherkotlin.repository.OpenWeatherRepository
 import kotlinx.coroutines.launch
 
-enum class OpenWeatherApiStatus { LOADING, ERROR, DONE}
+enum class OpenWeatherApiStatus { LOADING, ERROR, DONE }
 
-class OpenWeatherViewModel(app: BaseApplication): ViewModel() {
+class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
 
     private val openWeatherRepository = OpenWeatherRepository(app.databaseApplication)
 
@@ -18,8 +18,10 @@ class OpenWeatherViewModel(app: BaseApplication): ViewModel() {
     private val _weatherItem = MutableLiveData<OneDayForecast>()
 
     val status: LiveData<OpenWeatherApiStatus> = _status
-    val forecast5Days: LiveData<OpenWeatherForecastFiveDays> = openWeatherRepository.fiveDaysForecast.asLiveData()
-    val currentWeather: LiveData<OpenWeatherCurrentWeather> = openWeatherRepository.currentWeather.asLiveData()
+    val forecast5Days: LiveData<OpenWeatherForecastFiveDays> =
+        openWeatherRepository.fiveDaysForecast.asLiveData()
+    val currentWeather: LiveData<OpenWeatherCurrentWeather> =
+        openWeatherRepository.currentWeather.asLiveData()
     val weatherItem: LiveData<OneDayForecast> = _weatherItem
 
     init {
@@ -55,9 +57,29 @@ class OpenWeatherViewModel(app: BaseApplication): ViewModel() {
             }
         }
     }
+
+    fun getFormattedPrecipitation(unformattedPrecipitation: String): String {
+        if (unformattedPrecipitation.length == 3) {
+            return if (unformattedPrecipitation == "1.0") {
+                "100%"
+            } else if (unformattedPrecipitation[2] != '0') {
+                unformattedPrecipitation[2].toString().plus("0%")
+            } else {
+                unformattedPrecipitation[2].toString().plus("%")
+            }
+        } else {
+            val precipitation =
+                weatherItem.value!!.precipitation.toString().substring(2, 4)
+            return if (precipitation[0] == '0') {
+                precipitation[1].toString().plus("%")
+            } else {
+                precipitation.plus("%")
+            }
+        }
+    }
 }
 
-class OpenWeatherViewModelFactory(val app: BaseApplication): ViewModelProvider.Factory {
+class OpenWeatherViewModelFactory(val app: BaseApplication) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OpenWeatherViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

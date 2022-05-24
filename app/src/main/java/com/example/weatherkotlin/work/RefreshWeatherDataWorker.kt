@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.asLiveData
@@ -32,11 +33,17 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
 
             val notificationId = 1000
             val contentIntent = Intent(applicationContext, MainActivity::class.java)
+            // Support Android 12+ and compatible with lower versions
+            val flags = when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                else -> PendingIntent.FLAG_UPDATE_CURRENT
+            }
             val contentPendingIntent = PendingIntent.getActivity(
                 applicationContext,
                 0,
                 contentIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                flags
             )
 
             val builder =

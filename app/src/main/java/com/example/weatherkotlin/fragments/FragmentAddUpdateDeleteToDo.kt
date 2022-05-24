@@ -295,11 +295,18 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
             )
         }
 
+        // Support Android 12+ and compatible with lower versions
+        val flags = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            else -> PendingIntent.FLAG_UPDATE_CURRENT
+        }
+
         return PendingIntent.getBroadcast(
             requireContext(),
             insertedId,
             notifyIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            flags
         )
     }
 
