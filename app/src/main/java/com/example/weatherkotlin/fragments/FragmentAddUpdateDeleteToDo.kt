@@ -136,6 +136,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     "Lưu thành công.",
                     Snackbar.LENGTH_SHORT
                 )
+                    .setAnchorView(R.id.bottom_nav)
                     .show()
             }
             val action =
@@ -148,7 +149,9 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 binding.root,
                 "Dữ liệu nhập vào không hợp lệ!",
                 Snackbar.LENGTH_SHORT
-            ).show()
+            )
+                .setAnchorView(R.id.bottom_nav)
+                .show()
         }
     }
 
@@ -203,6 +206,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
                 findNavController().navigate(action)
                 Snackbar.make(requireContext(), it.root, "Lưu thành công.", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(R.id.bottom_nav)
                     .show()
             } else {
                 Snackbar.make(
@@ -210,7 +214,9 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     it.root,
                     "Dữ liệu nhập vào không hợp lệ!",
                     Snackbar.LENGTH_SHORT
-                ).show()
+                )
+                    .setAnchorView(R.id.bottom_nav)
+                    .show()
             }
         }
 
@@ -232,7 +238,9 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     binding.root,
                     "Xóa thành công.",
                     Snackbar.LENGTH_SHORT
-                ).show()
+                )
+                    .setAnchorView(R.id.bottom_nav)
+                    .show()
             }
             .setNegativeButton("Không") { _, _ -> }
             .create()
@@ -426,7 +434,9 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     view,
                     "Không thể đặt thông báo cho thời điểm trước hiện tại.",
                     Snackbar.LENGTH_SHORT
-                ).show()
+                )
+                    .setAnchorView(R.id.bottom_nav)
+                    .show()
                 switch.isChecked = false
             }
         }
@@ -436,7 +446,9 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 view,
                 "Vui lòng chọn ngày giờ để đặt chuông báo.",
                 Snackbar.LENGTH_SHORT
-            ).show()
+            )
+                .setAnchorView(R.id.bottom_nav)
+                .show()
             switch.isChecked = false
         }
     }

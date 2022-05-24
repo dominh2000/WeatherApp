@@ -53,7 +53,9 @@ class FragmentToDoStart : Fragment() {
             Activity.RESULT_OK -> {
                 val msg =
                     "Người dùng ${FirebaseAuth.getInstance().currentUser?.displayName} đăng nhập thành công!"
-                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT)
+                    .setAnchorView(R.id.bottom_nav)
+                    .show()
                 val action = FragmentToDoStartDirections.actionFragmentToDoStartToFragmentListToDo()
                 findNavController().navigate(action)
             }
@@ -64,7 +66,9 @@ class FragmentToDoStart : Fragment() {
                 } else {
                     msg = "Đăng nhập không thành công, lỗi ${response.error?.errorCode}."
                 }
-                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT)
+                    .setAnchorView(R.id.bottom_nav)
+                    .show()
             }
         }
     }

@@ -124,7 +124,9 @@ fun launchLogoutAlertDialog(ctx: Context, view: View, navController: NavControll
             AuthUI.getInstance().signOut(ctx)
             val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentToDoStart()
             navController.navigate(action)
-            Snackbar.make(ctx, view, "Đăng xuất thành công!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(ctx, view, "Đăng xuất thành công!", Snackbar.LENGTH_SHORT)
+                .setAnchorView(R.id.bottom_nav)
+                .show()
         }
         .setNegativeButton("Không") { _, _ -> }
         .create()

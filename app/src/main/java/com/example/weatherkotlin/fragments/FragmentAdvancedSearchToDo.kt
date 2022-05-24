@@ -110,10 +110,18 @@ class FragmentAdvancedSearchToDo : Fragment() {
                             root,
                             "Ngày bắt đầu không được lớn hơn ngày kết thúc!",
                             Snackbar.LENGTH_SHORT
-                        ).show()
+                        )
+                            .setAnchorView(R.id.bottom_nav)
+                            .show()
                     }
                 } else {
-                    Snackbar.make(requireContext(), root, "Hãy chọn đủ ngày.", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(
+                        requireContext(),
+                        root,
+                        "Hãy chọn đủ ngày.",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .setAnchorView(R.id.bottom_nav)
                         .show()
                 }
             }

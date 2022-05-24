@@ -112,7 +112,9 @@ fun bindOWApiStatus(
                 statusImageView,
                 "Đã xảy ra lỗi kết nối. Hãy kiểm tra kết nối Internet của bạn!",
                 LENGTH_SHORT
-            ).show()
+            )
+                .setAnchorView(R.id.bottom_nav)
+                .show()
         }
     }
 }
