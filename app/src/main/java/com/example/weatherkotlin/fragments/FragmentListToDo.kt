@@ -6,7 +6,6 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherkotlin.BaseApplication
@@ -16,6 +15,7 @@ import com.example.weatherkotlin.databinding.FragmentListToDoBinding
 import com.example.weatherkotlin.util.launchLogoutAlertDialog
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class FragmentListToDo : Fragment() {
 
@@ -38,6 +38,40 @@ class FragmentListToDo : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val snackBarType = FragmentListToDoArgs.fromBundle(requireArguments()).snackBarType
+        val userDisplayName = FragmentListToDoArgs.fromBundle(requireArguments()).userDisplayName
+
+        when (snackBarType) {
+            1 -> {
+                Snackbar.make(
+                    requireContext(),
+                    binding.root,
+                    "Lưu thành công.",
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+                requireArguments().clear()
+            }
+            2 -> {
+                Snackbar.make(
+                    requireContext(),
+                    binding.root,
+                    "Xóa thành công.",
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+                requireArguments().clear()
+            }
+            3 -> {
+                val msg = "Người dùng $userDisplayName đăng nhập thành công!"
+                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT)
+                    .show()
+                requireArguments().clear()
+            }
+            else -> {
+            }
+        }
+
         binding.buttonAdd.setOnClickListener {
             val action =
                 FragmentListToDoDirections.actionFragmentListToDoToFragmentAddToDo(crudType = 0)
@@ -45,7 +79,7 @@ class FragmentListToDo : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
+            launchLogoutAlertDialog(requireContext(), findNavController())
         }
 
         val adapter = ToDoListAdapter {
@@ -71,7 +105,7 @@ class FragmentListToDo : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.logout -> {
-                launchLogoutAlertDialog(requireContext(), binding.root, findNavController())
+                launchLogoutAlertDialog(requireContext(), findNavController())
                 true
             }
             R.id.closest_deadline -> {
@@ -115,12 +149,14 @@ class FragmentListToDo : Fragment() {
                 true
             }
             R.id.simple_search -> {
-                val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentSimpleSearchToDo()
+                val action =
+                    FragmentListToDoDirections.actionFragmentListToDoToFragmentSimpleSearchToDo()
                 findNavController().navigate(action)
                 true
             }
             R.id.advanced_search -> {
-                val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentAdvancedSearchToDo()
+                val action =
+                    FragmentListToDoDirections.actionFragmentListToDoToFragmentAdvancedSearchToDo()
                 findNavController().navigate(action)
                 true
             }

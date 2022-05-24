@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.asLiveData
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.weatherkotlin.BaseApplication

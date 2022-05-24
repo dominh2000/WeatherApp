@@ -17,6 +17,10 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="logoutSnackbar"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/fragmentListToDo"
@@ -49,6 +53,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="snackBarType"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="userDisplayName"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddToDo"

@@ -1,19 +1,15 @@
 package com.example.weatherkotlin.fragments
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.FragmentToDoStartBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
  * create an instance of this fragment.
  */
 class FragmentToDoStart : Fragment() {
+
+    private val navigationArgs: FragmentToDoStartArgs by navArgs()
 
     private var _binding: FragmentToDoStartBinding? = null
     private val binding get() = _binding!!
@@ -42,6 +40,19 @@ class FragmentToDoStart : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val logoutSnackbar = navigationArgs.logoutSnackbar
+
+        if (logoutSnackbar == 1) {
+            Snackbar.make(
+                requireContext(),
+                binding.root,
+                "Đăng xuất thành công!",
+                Snackbar.LENGTH_SHORT
+            )
+                .setAnchorView(R.id.bottom_nav)
+                .show()
+        }
+
         binding.cardViewToDo.setOnClickListener {
             launchSignInFlow()
         }
@@ -51,20 +62,18 @@ class FragmentToDoStart : Fragment() {
         val response = result.idpResponse
         when (result.resultCode) {
             Activity.RESULT_OK -> {
-                val msg =
-                    "Người dùng ${FirebaseAuth.getInstance().currentUser?.displayName} đăng nhập thành công!"
-                Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT)
-                    .setAnchorView(R.id.bottom_nav)
-                    .show()
-                val action = FragmentToDoStartDirections.actionFragmentToDoStartToFragmentListToDo()
+                val action = FragmentToDoStartDirections.actionFragmentToDoStartToFragmentListToDo(
+                    snackBarType = 3,
+                    userDisplayName = FirebaseAuth.getInstance().currentUser?.displayName!!
+                )
                 findNavController().navigate(action)
             }
             else -> {
                 var msg = ""
-                if (response?.error == null) {
-                    msg = "Đăng nhập không thành công."
+                msg = if (response?.error == null) {
+                    "Đăng nhập không thành công."
                 } else {
-                    msg = "Đăng nhập không thành công, lỗi ${response.error?.errorCode}."
+                    "Đăng nhập không thành công, lỗi ${response.error?.errorCode}."
                 }
                 Snackbar.make(requireContext(), binding.root, msg, Snackbar.LENGTH_SHORT)
                     .setAnchorView(R.id.bottom_nav)

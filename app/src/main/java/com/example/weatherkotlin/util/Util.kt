@@ -1,20 +1,12 @@
 package com.example.weatherkotlin.util
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
-import android.os.Build
-import android.view.View
-import android.widget.TextView
 import androidx.navigation.NavController
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.fragments.FragmentListToDoDirections
 import com.example.weatherkotlin.network.TotalWeather
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.switchmaterial.SwitchMaterial
-import com.google.android.material.textview.MaterialTextView
 import java.math.RoundingMode
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -115,18 +107,17 @@ fun String.convertWeatherStateIntoVie(): String {
     return weatherStates.get(this)!!
 }
 
-fun launchLogoutAlertDialog(ctx: Context, view: View, navController: NavController) {
+fun launchLogoutAlertDialog(ctx: Context, navController: NavController) {
     val alertDialogBuilder = MaterialAlertDialogBuilder(ctx)
         .setIcon(R.drawable.ic_warning)
         .setTitle("Thông báo")
         .setMessage("Bạn có chắc chắc muốn đăng xuất?")
         .setPositiveButton("Có") { _, _ ->
             AuthUI.getInstance().signOut(ctx)
-            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentToDoStart()
+            val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentToDoStart(
+                logoutSnackbar = 1
+            )
             navController.navigate(action)
-            Snackbar.make(ctx, view, "Đăng xuất thành công!", Snackbar.LENGTH_SHORT)
-                .setAnchorView(R.id.bottom_nav)
-                .show()
         }
         .setNegativeButton("Không") { _, _ -> }
         .create()

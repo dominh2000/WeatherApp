@@ -130,17 +130,11 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     )
                     sendAlarm()
                 }
-                Snackbar.make(
-                    requireContext(),
-                    binding.root,
-                    "Lưu thành công.",
-                    Snackbar.LENGTH_SHORT
-                )
-                    .setAnchorView(R.id.bottom_nav)
-                    .show()
             }
             val action =
-                FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
+                FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo(
+                    snackBarType = 1
+                )
             findNavController().navigate(action)
 
         } else {
@@ -203,11 +197,10 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     it.completedSwitch.isChecked
                 )
                 val action =
-                    FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
+                    FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo(
+                        snackBarType = 1
+                    )
                 findNavController().navigate(action)
-                Snackbar.make(requireContext(), it.root, "Lưu thành công.", Snackbar.LENGTH_SHORT)
-                    .setAnchorView(R.id.bottom_nav)
-                    .show()
             } else {
                 Snackbar.make(
                     requireContext(),
@@ -231,16 +224,10 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                 cancelAlarm(viewModel.selectedTask.value!!.id)
                 viewModel.deleteToDoItem(viewModel.selectedTask.value!!)
                 val action =
-                    FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo()
+                    FragmentAddUpdateDeleteToDoDirections.actionFragmentAddToDoToFragmentListToDo(
+                        snackBarType = 2
+                    )
                 findNavController().navigate(action)
-                Snackbar.make(
-                    requireContext(),
-                    binding.root,
-                    "Xóa thành công.",
-                    Snackbar.LENGTH_SHORT
-                )
-                    .setAnchorView(R.id.bottom_nav)
-                    .show()
             }
             .setNegativeButton("Không") { _, _ -> }
             .create()
