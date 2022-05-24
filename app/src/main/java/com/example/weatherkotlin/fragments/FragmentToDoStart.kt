@@ -42,7 +42,7 @@ class FragmentToDoStart : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.linearToDo.setOnClickListener {
+        binding.cardViewToDo.setOnClickListener {
             launchSignInFlow()
         }
     }
