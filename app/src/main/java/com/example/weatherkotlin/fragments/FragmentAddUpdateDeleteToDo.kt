@@ -105,6 +105,11 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun saveNewTask() {
         if (isEntryValid()) {
             binding.let {

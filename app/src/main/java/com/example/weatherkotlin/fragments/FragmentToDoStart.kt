@@ -81,6 +81,11 @@ class FragmentToDoStart : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun launchSignInFlow() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),

@@ -129,6 +129,11 @@ class FragmentAdvancedSearchToDo : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun configDateButton(ctx: Context, textView: TextView) {
         val datePickerDialog = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             DatePickerDialog(ctx)

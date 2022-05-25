@@ -41,4 +41,9 @@ class FragmentOpenWeatherItemDetails : Fragment() {
                 it.getFormattedPrecipitation(it.weatherItem.value!!.precipitation.toString())
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
