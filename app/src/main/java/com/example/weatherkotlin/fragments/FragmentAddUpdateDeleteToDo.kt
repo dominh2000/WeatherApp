@@ -21,7 +21,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.FragmentAddUpdateDeleteToDoBinding
-import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.receiver.AlarmReceiver
 import com.example.weatherkotlin.util.*
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
@@ -92,7 +91,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
         } else {
             (requireActivity() as AppCompatActivity).supportActionBar?.title =
                 resources.getString(R.string.label_fragment_update_delete_to_do)
-            applyBindingsToSelectedTask(viewModel.selectedTask.value!!)
+            applyBindingsToSelectedTask()
             binding.apply {
                 saveAction.setOnClickListener {
                     updateTask()
@@ -341,20 +340,22 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
         }
     }
 
-    private fun applyBindingsToSelectedTask(task: Task) {
+    private fun applyBindingsToSelectedTask() {
         binding.apply {
-            taskName.setText(task.name)
-            taskDescription.setText(task.description)
-            when (task.priority) {
-                1 -> priorityUrgentImportant.isChecked = true
-                2 -> priorityNotUrgentImportant.isChecked = true
-                3 -> priorityUrgentNotImportant.isChecked = true
-                else -> priorityNotUrgentNotImportant.isChecked = true
+            viewModel.selectedTask.value!!.let {
+                taskName.setText(it.name)
+                taskDescription.setText(it.description)
+                when (it.priority) {
+                    1 -> priorityUrgentImportant.isChecked = true
+                    2 -> priorityNotUrgentImportant.isChecked = true
+                    3 -> priorityUrgentNotImportant.isChecked = true
+                    else -> priorityNotUrgentNotImportant.isChecked = true
+                }
+                deadlineDate.text = it.deadlineDate
+                deadlineHour.text = it.deadlineHour
+                alarmSwitch.isChecked = it.isNotified
+                completedSwitch.isChecked = it.completed
             }
-            deadlineDate.text = task.deadlineDate
-            deadlineHour.text = task.deadlineHour
-            alarmSwitch.isChecked = task.isNotified
-            completedSwitch.isChecked = task.completed
         }
     }
 
