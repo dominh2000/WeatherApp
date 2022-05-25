@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
  */
 class FragmentToDoStart : Fragment() {
 
-    private val navigationArgs: FragmentToDoStartArgs by navArgs()
-
     private var _binding: FragmentToDoStartBinding? = null
     private val binding get() = _binding!!
     private val resultLauncher = registerForActivityResult(
@@ -40,7 +38,7 @@ class FragmentToDoStart : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val logoutSnackbar = navigationArgs.logoutSnackbar
+        val logoutSnackbar = FragmentToDoStartArgs.fromBundle(requireArguments()).logoutSnackbar
 
         if (logoutSnackbar == 1) {
             Snackbar.make(
@@ -51,6 +49,7 @@ class FragmentToDoStart : Fragment() {
             )
                 .setAnchorView(R.id.bottom_nav)
                 .show()
+            requireArguments().clear()
         }
 
         binding.cardViewToDo.setOnClickListener {
