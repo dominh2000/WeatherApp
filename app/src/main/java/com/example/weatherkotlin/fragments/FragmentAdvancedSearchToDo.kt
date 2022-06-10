@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.adapters.ToDoListAdapter
+import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAdvancedSearchToDoBinding
-import com.example.weatherkotlin.util.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.util.calculateMillisecondsForAdvancedSearch
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory

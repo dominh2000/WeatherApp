@@ -122,35 +122,35 @@ class FragmentListToDo : Fragment() {
                 true
             }
             R.id.by_priority_1 -> {
-                viewModel.filterByPriority1()
+                viewModel.filterByPriority(1)
                 true
             }
             R.id.by_priority_2 -> {
-                viewModel.filterByPriority2()
+                viewModel.filterByPriority(2)
                 true
             }
             R.id.by_priority_3 -> {
-                viewModel.filterByPriority3()
+                viewModel.filterByPriority(3)
                 true
             }
             R.id.by_priority_4 -> {
-                viewModel.filterByPriority4()
+                viewModel.filterByPriority(4)
                 true
             }
             R.id.not_completed -> {
-                viewModel.filterByNotCompleted()
+                viewModel.filterByCompleteState(0)
                 true
             }
             R.id.completed -> {
-                viewModel.filterByCompleted()
+                viewModel.filterByCompleteState(1)
                 true
             }
             R.id.not_set_notified -> {
-                viewModel.filterByNotNotified()
+                viewModel.filterByNotificationState(0)
                 true
             }
             R.id.set_notified -> {
-                viewModel.filterByNotified()
+                viewModel.filterByNotificationState(1)
                 true
             }
             R.id.simple_search -> {

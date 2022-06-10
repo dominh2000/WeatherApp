@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
-class BaseApplication: Application() {
+class BaseApplication : Application() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
@@ -29,19 +29,36 @@ class BaseApplication: Application() {
 
     private fun delayedInit() {
         applicationScope.launch {
-            createNotificationChannelWithImportanceHigh(CHANNEL_WEATHER_ID, "Thời tiết", "Thông báo cập nhật thời tiết")
-            createNotificationChannelWithImportanceHigh(CHANNEL_TASK_ID, "Nhắc việc", "Nhắc các công việc đã đặt chuông báo")
+            createNotificationChannelWithImportanceHigh(
+                CHANNEL_WEATHER_ID,
+                "Thời tiết",
+                "Thông báo cập nhật thời tiết"
+            )
+            createNotificationChannelWithImportanceHigh(
+                CHANNEL_TASK_ID,
+                "Nhắc việc",
+                "Nhắc các công việc đã đặt chuông báo"
+            )
             refreshWeatherData()
         }
     }
 
-    private fun createNotificationChannelWithImportanceHigh(channelId: String, channelName: String, channelDescription: String) {
+    private fun createNotificationChannelWithImportanceHigh(
+        channelId: String,
+        channelName: String,
+        channelDescription: String
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH).apply {
+            val channel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
                 description = channelDescription
             }
 
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -56,9 +73,10 @@ class BaseApplication: Application() {
             .setRequiresBatteryNotLow(true)
             .build()
 
-        val weatherWorkRequest = PeriodicWorkRequestBuilder<RefreshWeatherDataWorker>(3, TimeUnit.HOURS)
-            .setConstraints(constraints)
-            .build()
+        val weatherWorkRequest =
+            PeriodicWorkRequestBuilder<RefreshWeatherDataWorker>(3, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build()
 
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             RefreshWeatherDataWorker.WEATHER_WORK_NAME,

@@ -34,11 +34,14 @@ class FragmentOpenWeatherItemDetails : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.date.text =
-            viewModel.weatherItem.value!!.dateTimeText.convertDateFromPattern5ToPattern4()
-        viewModel.let {
-            binding.precipitation.text =
-                it.getFormattedPrecipitation(it.weatherItem.value!!.precipitation.toString())
+        viewModel.let { weatherVM ->
+            binding.apply {
+                weatherVM.weatherItem.observe(viewLifecycleOwner) {
+                    date.text = it.dateTimeText.convertDateFromPattern5ToPattern4()
+                    precipitation.text =
+                        weatherVM.getFormattedPrecipitation(it.precipitation.toString())
+                }
+            }
         }
     }
 

@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
-import com.example.weatherkotlin.util.sendNotificationWithContentIntent
+import com.example.weatherkotlin.util.sendNotificationWithDeepLink
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -23,7 +23,7 @@ class AlarmReceiver : BroadcastReceiver() {
             NotificationManager::class.java
         ) as NotificationManager
 
-        notificationManager.sendNotificationWithContentIntent(
+        notificationManager.sendNotificationWithDeepLink(
             notificationId,
             notificationChannel!!,
             messageTitle!!,

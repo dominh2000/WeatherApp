@@ -22,7 +22,7 @@ data class CurrentWeather(
     @ColumnInfo(name = "default_pressure") val defaultPressure: Int,
     @ColumnInfo(name = "humidity") val humidity: Int,
     @ColumnInfo(name = "visibility") val visibility: Int,
-    @ColumnInfo(name = "wind_spped") val windSpeed: Double,
+    @ColumnInfo(name = "wind_speed") val windSpeed: Double,
     @ColumnInfo(name = "wind_degree") val windDegree: Int,
     @ColumnInfo(name = "wind_gust") val windGust: Double,
     @ColumnInfo(name = "cloud_percent") val cloudAmountPercent: Int,
@@ -44,7 +44,7 @@ data class ForecastOneDay(
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "icon") val icon: String,
     @ColumnInfo(name = "cloud_percent") val cloudAmountPercent: Int,
-    @ColumnInfo(name = "wind_spped") val windSpeed: Double,
+    @ColumnInfo(name = "wind_speed") val windSpeed: Double,
     @ColumnInfo(name = "wind_degree") val windDegree: Int,
     @ColumnInfo(name = "wind_gust") val windGust: Double,
     @ColumnInfo(name = "visibility") val visibility: Int,
@@ -105,35 +105,6 @@ fun CurrentWeather.asDomainModel(): OpenWeatherCurrentWeather{
 
 fun List<ForecastOneDay>.asDomainModel(): List<OneDayForecast>{
     return this.map {
-        OneDayForecast(
-            it.id,
-            ForecastInfo(
-                it.temp,
-                it.feelsLike,
-                it.defaultPressure,
-                it.humidity
-            ),
-            WeatherState(
-                it.mainWeatherType,
-                it.description,
-                it.icon
-            ),
-            it.cloudAmountPercent,
-            WindInfo(
-                it.windSpeed,
-                it.windDegree,
-                it.windGust
-            ),
-            it.visibility,
-            it.precipitation,
-            it.last3hRainVolume,
-            it.dateTimeText
-        )
-    }
-}
-
-fun ForecastOneDay.asDomainModel(): OneDayForecast{
-    return this.let {
         OneDayForecast(
             it.id,
             ForecastInfo(

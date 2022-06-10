@@ -1,4 +1,4 @@
-package com.example.weatherkotlin.network
+/**/package com.example.weatherkotlin.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

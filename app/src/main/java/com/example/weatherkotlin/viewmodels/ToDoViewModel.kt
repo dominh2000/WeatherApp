@@ -5,7 +5,6 @@ import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.repository.ToDoRepository
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ToDoViewModel(app: BaseApplication) : ViewModel() {
@@ -23,7 +22,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     fun getAllToDosDsc() {
         viewModelScope.launch {
             toDoRepository.refreshToDoListDsc().collect {
-                _toDoList.value = it
+                _toDoList.postValue(it)
             }
         }
     }
@@ -107,7 +106,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
         )
         viewModelScope.launch {
             val insertId = insertToDoWithAlarm(newTask).toInt()
-            _insertedId.value = insertId
+            _insertedId.postValue(insertId)
         }
     }
 
@@ -133,7 +132,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     fun filterByName(name: String) {
         viewModelScope.launch {
             toDoRepository.getToDoListByName(name).collect {
-                _toDoList.value = it
+                _toDoList.postValue(it)
             }
         }
     }
@@ -153,7 +152,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
                 completed,
                 notified
             ).collect {
-                _toDoList.value = it
+                _toDoList.postValue(it)
             }
         }
     }
@@ -161,7 +160,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     fun filterByClosestDeadline() {
         viewModelScope.launch {
             toDoRepository.getToDoListByClosestDeadline().collect {
-                _toDoList.value = it
+                _toDoList.postValue(it)
             }
         }
     }
@@ -169,71 +168,31 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
     fun filterByFurthestDeadline() {
         viewModelScope.launch {
             toDoRepository.getToDoListByFurthestDeadline().collect {
-                _toDoList.value = it
+                _toDoList.postValue(it)
             }
         }
     }
 
-    fun filterByPriority1() {
+    fun filterByPriority(priority: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByPriority1().collect {
-                _toDoList.value = it
+            toDoRepository.getToDoListByPriority(priority).collect {
+                _toDoList.postValue(it)
             }
         }
     }
 
-    fun filterByPriority2() {
+    fun filterByCompleteState(completeState: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByPriority2().collect {
-                _toDoList.value = it
+            toDoRepository.getToDoListByCompleteState(completeState).collect {
+                _toDoList.postValue(it)
             }
         }
     }
 
-    fun filterByPriority3() {
+    fun filterByNotificationState(notificationState: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByPriority3().collect {
-                _toDoList.value = it
-            }
-        }
-    }
-
-    fun filterByPriority4() {
-        viewModelScope.launch {
-            toDoRepository.getToDoListByPriority4().collect {
-                _toDoList.value = it
-            }
-        }
-    }
-
-    fun filterByNotCompleted() {
-        viewModelScope.launch {
-            toDoRepository.getToDoListNotCompleted().collect {
-                _toDoList.value = it
-            }
-        }
-    }
-
-    fun filterByCompleted() {
-        viewModelScope.launch {
-            toDoRepository.getToDoListCompleted().collect {
-                _toDoList.value = it
-            }
-        }
-    }
-
-    fun filterByNotified() {
-        viewModelScope.launch {
-            toDoRepository.getToDoListNotified().collect {
-                _toDoList.value = it
-            }
-        }
-    }
-
-    fun filterByNotNotified() {
-        viewModelScope.launch {
-            toDoRepository.getToDoListNotNotified().collect {
-                _toDoList.value = it
+            toDoRepository.getToDoListByNotificationState(notificationState).collect {
+                _toDoList.postValue(it)
             }
         }
     }

@@ -33,7 +33,7 @@ class WeatherViewModel(app: BaseApplication) : ViewModel() {
             try {
                 weatherRepository.refreshWeather()
                 _status.value =
-                    WeatherApiStatus.DONE // Phải đặt ở ngay sau khi refresh xong nếu không sẽ không bao giờ chạy được đến sau collect
+                    WeatherApiStatus.DONE
             } catch (error: Exception) {
                 _status.value = WeatherApiStatus.ERROR
                 error.printStackTrace()

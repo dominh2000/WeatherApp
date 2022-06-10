@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
+import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAddUpdateDeleteToDoBinding
 import com.example.weatherkotlin.receiver.AlarmReceiver
 import com.example.weatherkotlin.util.*
@@ -342,7 +343,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
 
     private fun applyBindingsToSelectedTask() {
         binding.apply {
-            viewModel.selectedTask.value!!.let {
+            viewModel.selectedTask.observe(viewLifecycleOwner) {
                 taskName.setText(it.name)
                 taskDescription.setText(it.description)
                 when (it.priority) {

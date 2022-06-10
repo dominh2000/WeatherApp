@@ -1,7 +1,7 @@
 <resources>
     <!-- Use special HTML characters instead of ° -->
     <!-- Cannot use % in string resources!-->
-    <string name="app_name">WeatherKotlin</string>
+    <string name="app_name">Weather and Reminder</string>
     <string name="label_fragment_list_dates">Thời tiết</string>
     <string name="label_fragment_detail">Thời tiết chi tiết</string>
     <string name="label_fragment_to_do_start">Nhắc việc</string>

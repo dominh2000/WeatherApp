@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.weatherkotlin.databinding.FragmentSearchLocationBinding
 
-class FragmentSearchLocation: Fragment() {
+class FragmentSearchLocation : Fragment() {
 
     private var _binding: FragmentSearchLocationBinding? = null
 

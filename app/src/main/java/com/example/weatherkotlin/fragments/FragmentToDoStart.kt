@@ -67,8 +67,7 @@ class FragmentToDoStart : Fragment() {
                 findNavController().navigate(action)
             }
             else -> {
-                var msg = ""
-                msg = if (response?.error == null) {
+                val msg = if (response?.error == null) {
                     "Đăng nhập không thành công."
                 } else {
                     "Đăng nhập không thành công, lỗi ${response.error?.errorCode}."

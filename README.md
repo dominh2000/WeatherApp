@@ -14,7 +14,7 @@
 ## Các kiến thức sử dụng
 1. Kiến trúc MVVM, Repository pattern, 3-layer: UI - Domain model - Data
 2. DataBinding & ViewBinding
-3. Navigation component với SafeArgs & BottomNavigationView
+3. Navigation component với SafeArgs, DeepLink & BottomNavigationView
 4. ViewModel & LiveData
 5. Retrofit & Moshi
 6. Coil

@@ -10,9 +10,9 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
 import com.example.weatherkotlin.R
+import com.example.weatherkotlin.const.weatherIconMap
 import com.example.weatherkotlin.domain.OneDayForecast
 import com.example.weatherkotlin.domain.WeatherOneDay
-import com.example.weatherkotlin.util.weatherIconMap
 import com.example.weatherkotlin.viewmodels.OpenWeatherApiStatus
 import com.example.weatherkotlin.viewmodels.WeatherApiStatus
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT

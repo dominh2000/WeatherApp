@@ -43,27 +43,12 @@ interface TaskDao {
     @Query("SELECT * FROM task ORDER BY deadline_date DESC")
     fun getAllTasksByFurthestDeadline(): Flow<List<DatabaseTask>>
 
-    @Query("SELECT * FROM task WHERE priority = 1")
-    fun getAllTasksByPriority1(): Flow<List<DatabaseTask>>
+    @Query("SELECT * FROM task WHERE priority = :priorityLevel")
+    fun getAllTasksByPriority(priorityLevel: Int): Flow<List<DatabaseTask>>
 
-    @Query("SELECT * FROM task WHERE priority = 2")
-    fun getAllTasksByPriority2(): Flow<List<DatabaseTask>>
+    @Query("SELECT * FROM task WHERE completed = :completeState")
+    fun getAllTasksByCompleteState(completeState: Int): Flow<List<DatabaseTask>>
 
-    @Query("SELECT * FROM task WHERE priority = 3")
-    fun getAllTasksByPriority3(): Flow<List<DatabaseTask>>
-
-    @Query("SELECT * FROM task WHERE priority = 4")
-    fun getAllTasksByPriority4(): Flow<List<DatabaseTask>>
-
-    @Query("SELECT * FROM task WHERE completed = 0")
-    fun getAllTasksNotCompleted(): Flow<List<DatabaseTask>>
-
-    @Query("SELECT * FROM task WHERE completed = 1")
-    fun getAllTasksCompleted(): Flow<List<DatabaseTask>>
-
-    @Query("SELECT * FROM task WHERE is_notified = 0")
-    fun getAllTasksNotNotified(): Flow<List<DatabaseTask>>
-
-    @Query("SELECT * FROM task WHERE is_notified = 1")
-    fun getAllTasksNotified(): Flow<List<DatabaseTask>>
+    @Query("SELECT * FROM task WHERE is_notified = :notificationState")
+    fun getAllTasksByNotificationState(notificationState: Int): Flow<List<DatabaseTask>>
 }

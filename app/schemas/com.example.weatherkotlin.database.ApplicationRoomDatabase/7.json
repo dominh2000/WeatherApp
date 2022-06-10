@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 6,
-    "identityHash": "79a8b356fc7d84b195d6d21edb953516",
+    "version": 7,
+    "identityHash": "7a370819a2d28dd6df3a4eae6c8eff4f",
     "entities": [
       {
         "tableName": "weather_response",
@@ -273,7 +273,7 @@
       },
       {
         "tableName": "current_weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`city_id` INTEGER NOT NULL, `weather_type` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` TEXT NOT NULL, `temp` REAL NOT NULL, `feels_like` REAL NOT NULL, `default_pressure` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `visibility` INTEGER NOT NULL, `wind_spped` REAL NOT NULL, `wind_degree` INTEGER NOT NULL, `wind_gust` REAL NOT NULL, `cloud_percent` INTEGER NOT NULL, `date_time_int` INTEGER NOT NULL, `time_zone` INTEGER NOT NULL DEFAULT 0, `country` TEXT NOT NULL, `city_name` TEXT NOT NULL, PRIMARY KEY(`city_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`city_id` INTEGER NOT NULL, `weather_type` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` TEXT NOT NULL, `temp` REAL NOT NULL, `feels_like` REAL NOT NULL, `default_pressure` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `visibility` INTEGER NOT NULL, `wind_speed` REAL NOT NULL, `wind_degree` INTEGER NOT NULL, `wind_gust` REAL NOT NULL, `cloud_percent` INTEGER NOT NULL, `date_time_int` INTEGER NOT NULL, `time_zone` INTEGER NOT NULL DEFAULT 0, `country` TEXT NOT NULL, `city_name` TEXT NOT NULL, PRIMARY KEY(`city_id`))",
         "fields": [
           {
             "fieldPath": "cityId",
@@ -331,7 +331,7 @@
           },
           {
             "fieldPath": "windSpeed",
-            "columnName": "wind_spped",
+            "columnName": "wind_speed",
             "affinity": "REAL",
             "notNull": true
           },
@@ -508,7 +508,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79a8b356fc7d84b195d6d21edb953516')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7a370819a2d28dd6df3a4eae6c8eff4f')"
     ]
   }
 }

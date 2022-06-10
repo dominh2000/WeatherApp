@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.adapters.ToDoListAdapter
 import com.example.weatherkotlin.databinding.FragmentSimpleSearchToDoBinding
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FragmentSimpleSearchToDo : Fragment() {
 
@@ -50,16 +54,24 @@ class FragmentSimpleSearchToDo : Fragment() {
         }
         binding.textEmptySearchResult.visibility = View.GONE
 
-        binding.searchByName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
+        /**
+         * Filter with a coroutine and bound to Lifecycle of LifecycleOwner
+         */
+        lifecycleScope.launch {
+            // Switch the Dispatcher to Default to perform filtering
+            withContext(Dispatchers.Default) {
+                binding.searchByName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String): Boolean {
+                        return false
+                    }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                (binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter).filter(newText)
-                return true
+                    override fun onQueryTextChange(newText: String): Boolean {
+                        (binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter).filter(newText)
+                        return true
+                    }
+                })
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

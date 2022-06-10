@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return when (navController.currentDestination?.id) {
             R.id.fragmentListToDo -> {
-                // Bắt buộc phải gọi nav_host_fragment ở đây, nếu gọi fragment khác sẽ bị NPE
                 launchLogoutAlertDialog(this, navController)
                 true
             }
