@@ -13,11 +13,6 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentDiary.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentToDoStart : Fragment() {
 
     private var _binding: FragmentToDoStartBinding? = null

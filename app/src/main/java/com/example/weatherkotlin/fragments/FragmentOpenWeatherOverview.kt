@@ -20,11 +20,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlin.math.roundToInt
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentOpenWeatherOverview.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentOpenWeatherOverview : Fragment() {
 
     private val LOCATION_PERMISSION_REQ_CODE = 1000

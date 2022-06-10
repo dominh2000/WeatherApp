@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.withContext
 
-class WeatherRepository(private val database: ApplicationRoomDatabase) {
+class MetaWeatherRepository(private val database: ApplicationRoomDatabase) {
 
     val weatherByLocation: Flow<LocationInfo> =
         database.weatherDao().getFullWeatherSixDays().transform {

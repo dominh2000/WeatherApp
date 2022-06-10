@@ -10,14 +10,7 @@ import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.databinding.FragmentDetailBinding
 import com.example.weatherkotlin.viewmodels.WeatherViewModel
 import com.example.weatherkotlin.viewmodels.WeatherViewModelFactory
-import java.util.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentDetail.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentDetail : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels {

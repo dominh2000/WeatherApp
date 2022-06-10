@@ -1,19 +1,17 @@
 package com.example.weatherkotlin.viewmodels
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.weatherkotlin.BaseApplication
-import com.example.weatherkotlin.database.ApplicationRoomDatabase.Companion.getDatabase
 import com.example.weatherkotlin.domain.LocationInfo
 import com.example.weatherkotlin.domain.WeatherOneDay
-import com.example.weatherkotlin.repository.WeatherRepository
+import com.example.weatherkotlin.repository.MetaWeatherRepository
 import kotlinx.coroutines.launch
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
 class WeatherViewModel(app: BaseApplication) : ViewModel() {
 
-    private val weatherRepository = WeatherRepository(app.databaseApplication)
+    private val weatherRepository = MetaWeatherRepository(app.databaseApplication)
 
     private val _status = MutableLiveData<WeatherApiStatus>()
     private val _oneWeather = MutableLiveData<WeatherOneDay>()

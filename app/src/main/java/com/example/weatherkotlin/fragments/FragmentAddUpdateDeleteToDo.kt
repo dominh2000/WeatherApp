@@ -33,11 +33,6 @@ import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentAddUpdateDeleteToDo.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentAddUpdateDeleteToDo : Fragment() {
 
     private val navigationArgs: FragmentAddUpdateDeleteToDoArgs by navArgs()
