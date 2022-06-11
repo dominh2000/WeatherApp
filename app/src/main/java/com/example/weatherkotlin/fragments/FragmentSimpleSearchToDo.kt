@@ -54,28 +54,34 @@ class FragmentSimpleSearchToDo : Fragment() {
         }
         binding.textEmptySearchResult.visibility = View.GONE
 
-        /**
-         * Filter with a coroutine and bound to Lifecycle of LifecycleOwner
-         */
-        lifecycleScope.launch {
-            // Switch the Dispatcher to Default to perform filtering
-            withContext(Dispatchers.Default) {
-                binding.searchByName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String): Boolean {
-                        return false
-                    }
-
-                    override fun onQueryTextChange(newText: String): Boolean {
-                        (binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter).filter(newText)
-                        return true
-                    }
-                })
+        binding.searchByName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
             }
-        }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                doFiltering(newText, binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter)
+                return true
+            }
+        })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Run the filter blocking call inside a coroutine which is bound to Lifecycle of LifecycleOwner
+     */
+    fun doFiltering(text: String, adapter: ToDoListAdapter) {
+        lifecycleScope.launch {
+            // Switch the Dispatcher to Default to perform filtering
+            // Only blocks the Default thread, NOT the Main thread
+            withContext(Dispatchers.Default) {
+                // Blocking call
+                adapter.filter(text)
+            }
+        }
     }
 }
