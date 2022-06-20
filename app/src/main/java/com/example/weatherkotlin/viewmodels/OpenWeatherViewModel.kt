@@ -6,6 +6,7 @@ import com.example.weatherkotlin.domain.OneDayForecast
 import com.example.weatherkotlin.domain.OpenWeatherCurrentWeather
 import com.example.weatherkotlin.domain.OpenWeatherForecastFiveDays
 import com.example.weatherkotlin.repository.OpenWeatherRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 enum class OpenWeatherApiStatus { LOADING, ERROR, DONE }
@@ -29,15 +30,8 @@ class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
     }
 
     fun getOpenWeatherInfo() {
-        viewModelScope.launch {
-            _status.value = OpenWeatherApiStatus.LOADING
-            try {
-                openWeatherRepository.refreshOpenWeather()
-                _status.value = OpenWeatherApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = OpenWeatherApiStatus.ERROR
-                e.printStackTrace()
-            }
+        launchDataLoad {
+            openWeatherRepository.refreshOpenWeather()
         }
     }
 
@@ -46,15 +40,8 @@ class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
     }
 
     fun getOpenWeatherInfoByCoord(latt: Double, long: Double) {
-        viewModelScope.launch {
-            _status.value = OpenWeatherApiStatus.LOADING
-            try {
-                openWeatherRepository.getOpenWeatherByCoord(latt, long)
-                _status.value = OpenWeatherApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = OpenWeatherApiStatus.ERROR
-                e.printStackTrace()
-            }
+        launchDataLoad {
+            openWeatherRepository.getOpenWeatherByCoord(latt, long)
         }
     }
 
@@ -74,6 +61,22 @@ class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
                 precipitation[1].toString().plus("%")
             } else {
                 precipitation.plus("%")
+            }
+        }
+    }
+
+    /**
+     * General dataload function to abstract the common operations when loading data from network
+     */
+    private fun launchDataLoad(block: suspend () -> Unit): Job {
+        return viewModelScope.launch {
+            _status.value = OpenWeatherApiStatus.LOADING
+            try {
+                block()
+                _status.value = OpenWeatherApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = OpenWeatherApiStatus.ERROR
+                e.printStackTrace()
             }
         }
     }

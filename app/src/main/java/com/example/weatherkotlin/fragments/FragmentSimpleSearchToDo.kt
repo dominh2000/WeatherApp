@@ -60,7 +60,13 @@ class FragmentSimpleSearchToDo : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                doFiltering(newText, binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter)
+                // Start a coroutine in Dispatchers.Main, bound to the Lifecycle of LifecycleOwner
+                lifecycleScope.launch {
+                    doFiltering(
+                        newText,
+                        binding.recyclerViewSimpleSearch.adapter as ToDoListAdapter
+                    )
+                }
                 return true
             }
         })
@@ -72,16 +78,14 @@ class FragmentSimpleSearchToDo : Fragment() {
     }
 
     /**
-     * Run the filter blocking call inside a coroutine which is bound to Lifecycle of LifecycleOwner
+     * Main-safe suspend fun to be called from Dispatchers.Main
      */
-    fun doFiltering(text: String, adapter: ToDoListAdapter) {
-        lifecycleScope.launch {
-            // Switch the Dispatcher to Default to perform filtering
-            // Only blocks the Default thread, NOT the Main thread
-            withContext(Dispatchers.Default) {
-                // Blocking call
-                adapter.filter(text)
-            }
+    suspend fun doFiltering(text: String, adapter: ToDoListAdapter) {
+        // Switch from Dispatchers.Main to Dispatchers.Default to perform filtering
+        // Only blocks the Default threads, NOT the Main thread
+        withContext(Dispatchers.Default) {
+            // Blocking call
+            adapter.filter(text)
         }
     }
 }
