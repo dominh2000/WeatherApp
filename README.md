@@ -22,6 +22,7 @@
 8. Coroutines & Flow
 9. BindingAdapter
 10. Room
-11. WorkManager & Notifications
-12. FirebaseAuthentication với FirebaseUI
-13. Google Play Services Location
+11. Preferences DataStore
+12. WorkManager & Notifications
+13. FirebaseAuthentication với FirebaseUI
+14. Google Play Services Location

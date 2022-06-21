@@ -53,7 +53,7 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, cont
         WeatherApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
-        else -> {
+        WeatherApiStatus.ERROR -> {
             statusImageView.visibility = View.GONE
             Snackbar.make(
                 context!!,
@@ -62,6 +62,7 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, cont
                 LENGTH_SHORT
             ).show()
         }
+        else -> { }
     }
 }
 
@@ -105,7 +106,7 @@ fun bindOWApiStatus(
         OpenWeatherApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
-        else -> {
+        OpenWeatherApiStatus.ERROR -> {
             statusImageView.visibility = View.GONE
             Snackbar.make(
                 context!!,
@@ -116,5 +117,6 @@ fun bindOWApiStatus(
                 .setAnchorView(R.id.bottom_nav)
                 .show()
         }
+        else -> { }
     }
 }

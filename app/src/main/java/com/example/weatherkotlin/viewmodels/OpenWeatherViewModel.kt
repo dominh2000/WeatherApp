@@ -24,10 +24,6 @@ class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
         openWeatherRepository.currentWeather.asLiveData()
     val weatherItem: LiveData<OneDayForecast> = _weatherItem
 
-    init {
-        getOpenWeatherInfo()
-    }
-
     fun getOpenWeatherInfo() {
         launchDataLoad {
             openWeatherRepository.refreshOpenWeather()

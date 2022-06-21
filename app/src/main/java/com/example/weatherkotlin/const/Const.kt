@@ -7,6 +7,8 @@ const val DATE_FORMAT_PATTERN_3 = "HH:mm, d MMM, yyyy"
 const val DATE_FORMAT_PATTERN_4 = "HH:mm, E, d MMM, yyyy"
 const val DATE_FORMAT_PATTERN_5 = "yyyy-MM-dd HH:mm"
 const val DOUBLE_NUMBER_FORM = "%.2f"
+const val WEATHER_LOCATION_PREFERENCES = "weather_location_preferences"
+
 val weatherStates = mapOf(
     "sn" to "Tuyết rơi",
     "sl" to "Mưa tuyết",

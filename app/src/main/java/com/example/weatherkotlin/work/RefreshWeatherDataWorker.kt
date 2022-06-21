@@ -8,8 +8,11 @@ import androidx.work.WorkerParameters
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.database.ApplicationRoomDatabase.Companion.getDatabase
+import com.example.weatherkotlin.datastore.WeatherLocationDataStore
 import com.example.weatherkotlin.repository.OpenWeatherRepository
 import com.example.weatherkotlin.util.sendNotificationWithContentIntent
+import kotlinx.coroutines.flow.first
+import kotlin.math.roundToInt
 
 class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
     CoroutineWorker(ctx, params) {
@@ -20,37 +23,53 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         val appContext = applicationContext
+        val weatherLocationDataStore = WeatherLocationDataStore(appContext)
         val openWeatherDb = getDatabase(appContext)
         val openWeatherRepo = OpenWeatherRepository(openWeatherDb)
 
-        try {
-            openWeatherRepo.refreshOpenWeather()
+        return try {
+            weatherLocationDataStore.locationFlow.first {
+                if (it[0] == 0.0 && it[1] == 0.0) {
+                    openWeatherRepo.refreshOpenWeather()
+                } else {
+                    openWeatherRepo.getOpenWeatherByCoord(it[0], it[1])
+                }
+                true
+            }
 
-            val notificationId = 10000
-            val contentTitle = "Thời tiết"
-            val contentText = "Đã cập nhật thông tin thời tiết"
-            val bigText =
-                "Dữ liệu từ OpenWeather API sẽ được tự động cập nhật mỗi 3 giờ với WorkManager!"
+            openWeatherRepo.currentWeather.first {
+                val notificationId = 10000
+                val contentTitle = "Thời tiết ".plus(it.cityName)
+                val contentText = it.forecastInfo.temp.roundToInt().toString().plus("°C - ")
+                    .plus(
+                        it.currentWeatherDescription.description[0].uppercase()
+                            .plus(it.currentWeatherDescription.description.substring(1))
+                    )
+                val bigText =
+                    "Dữ liệu từ OpenWeather API sẽ được tự động cập nhật mỗi 3 giờ với WorkManager!"
 
-            val notificationManager = ContextCompat.getSystemService(
-                appContext,
-                NotificationManager::class.java
-            ) as NotificationManager
+                val notificationManager = ContextCompat.getSystemService(
+                    appContext,
+                    NotificationManager::class.java
+                ) as NotificationManager
 
-            notificationManager.sendNotificationWithContentIntent(
-                notificationId,
-                BaseApplication.CHANNEL_WEATHER_ID,
-                R.drawable.ic_noti,
-                contentTitle,
-                contentText,
-                bigText,
-                appContext
-            )
+                notificationManager.sendNotificationWithContentIntent(
+                    notificationId,
+                    BaseApplication.CHANNEL_WEATHER_ID,
+                    R.drawable.ic_noti,
+                    contentTitle,
+                    contentText,
+                    bigText,
+                    appContext
+                )
 
-            return Result.success()
+                true
+            }
+
+            Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
-            return Result.retry()
+            Result.retry()
         }
     }
 

@@ -9,15 +9,19 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.adapters.OpenWeatherDatesAdapter
 import com.example.weatherkotlin.databinding.FragmentOpenWeatherOverviewBinding
+import com.example.weatherkotlin.datastore.WeatherLocationDataStore
 import com.example.weatherkotlin.viewmodels.OpenWeatherViewModel
 import com.example.weatherkotlin.viewmodels.OpenWeatherViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class FragmentOpenWeatherOverview : Fragment() {
@@ -32,6 +36,8 @@ class FragmentOpenWeatherOverview : Fragment() {
 
     private var _binding: FragmentOpenWeatherOverviewBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var weatherLocationDataStore: WeatherLocationDataStore
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +57,14 @@ class FragmentOpenWeatherOverview : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        weatherLocationDataStore = WeatherLocationDataStore(requireContext())
+        weatherLocationDataStore.locationFlow.asLiveData().observe(viewLifecycleOwner) {
+            if (it[0] == 0.0 && it[1] == 0.0) {
+                viewModel.getOpenWeatherInfo()
+            } else {
+                viewModel.getOpenWeatherInfoByCoord(it[0], it[1])
+            }
+        }
         val adapter = OpenWeatherDatesAdapter {
             viewModel.onWeatherItemClicked(it)
             val action =
@@ -72,7 +86,13 @@ class FragmentOpenWeatherOverview : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.refresh_weather -> {
-                viewModel.getOpenWeatherInfo()
+                weatherLocationDataStore.locationFlow.asLiveData().observe(viewLifecycleOwner) {
+                    if (it[0] == 0.0 && it[1] == 0.0) {
+                        viewModel.getOpenWeatherInfo()
+                    } else {
+                        viewModel.getOpenWeatherInfoByCoord(it[0], it[1])
+                    }
+                }
                 true
             }
             R.id.locate_weather -> {
@@ -100,6 +120,13 @@ class FragmentOpenWeatherOverview : Fragment() {
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     viewModel.getOpenWeatherInfoByCoord(location.latitude, location.longitude)
+                    lifecycleScope.launch {
+                        weatherLocationDataStore.saveWeatherLocationToPreferencesStore(
+                            location.latitude,
+                            location.longitude,
+                            requireContext()
+                        )
+                    }
                     Toast.makeText(
                         requireContext(),
                         "Vị trí của bạn: Latt ${location.latitude.roundToInt()}, Long ${location.longitude.roundToInt()}.",
