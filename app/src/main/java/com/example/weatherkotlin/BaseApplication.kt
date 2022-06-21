@@ -7,6 +7,9 @@ import android.content.Context
 import android.os.Build
 import androidx.work.*
 import com.example.weatherkotlin.database.ApplicationRoomDatabase
+import com.example.weatherkotlin.repository.MetaWeatherRepository
+import com.example.weatherkotlin.repository.OpenWeatherRepository
+import com.example.weatherkotlin.repository.ToDoRepository
 import com.example.weatherkotlin.work.RefreshWeatherDataWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +18,22 @@ import java.util.concurrent.TimeUnit
 
 class BaseApplication : Application() {
 
+    // CoroutineScope with Default Dispatchers to launch delayed Init
     private val applicationScope = CoroutineScope(Dispatchers.Default)
+
+    // Lazy initialization for singletons throughout the app
+    val databaseApplication: ApplicationRoomDatabase by lazy {
+        ApplicationRoomDatabase.getDatabase(this)
+    }
+    val openWeatherRepository: OpenWeatherRepository by lazy {
+        OpenWeatherRepository(databaseApplication)
+    }
+    val toDoRepository: ToDoRepository by lazy {
+        ToDoRepository(databaseApplication)
+    }
+    val metaWeatherRepository: MetaWeatherRepository by lazy {
+        MetaWeatherRepository(databaseApplication)
+    }
 
     companion object {
         const val CHANNEL_WEATHER_ID = "weather_update_id"
@@ -61,10 +79,6 @@ class BaseApplication : Application() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-    }
-
-    val databaseApplication: ApplicationRoomDatabase by lazy {
-        ApplicationRoomDatabase.getDatabase(this)
     }
 
     private fun refreshWeatherData() {

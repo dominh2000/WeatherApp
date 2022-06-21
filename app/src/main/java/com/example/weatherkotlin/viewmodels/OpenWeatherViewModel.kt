@@ -5,7 +5,6 @@ import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.domain.OneDayForecast
 import com.example.weatherkotlin.domain.OpenWeatherCurrentWeather
 import com.example.weatherkotlin.domain.OpenWeatherForecastFiveDays
-import com.example.weatherkotlin.repository.OpenWeatherRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -13,7 +12,7 @@ enum class OpenWeatherApiStatus { LOADING, ERROR, DONE }
 
 class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
 
-    private val openWeatherRepository = OpenWeatherRepository(app.databaseApplication)
+    private val openWeatherRepository = app.openWeatherRepository
 
     private val _status = MutableLiveData<OpenWeatherApiStatus>()
     private val _weatherItem = MutableLiveData<OneDayForecast>()

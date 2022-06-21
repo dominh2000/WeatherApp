@@ -3,13 +3,12 @@ package com.example.weatherkotlin.viewmodels
 import androidx.lifecycle.*
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.domain.Task
-import com.example.weatherkotlin.repository.ToDoRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ToDoViewModel(app: BaseApplication) : ViewModel() {
 
-    private val toDoRepository = ToDoRepository(app.databaseApplication)
+    private val toDoRepository = app.toDoRepository
 
     private val _toDoList = MutableLiveData<List<Task>>()
     private val _selectedTask = MutableLiveData<Task>()
