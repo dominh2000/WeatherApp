@@ -40,7 +40,12 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
             openWeatherRepo.currentWeather.first {
                 val notificationId = 10000
                 val contentTitle = "Thời tiết ".plus(it.cityName)
-                val contentText = it.forecastInfo.temp.roundToInt().toString().plus("°C - ")
+                val contentText = it.forecastInfo.temp.roundToInt().toString().plus("°C | ")
+                    .plus(
+                        "Cảm giác như ".plus(
+                            it.forecastInfo.feelsLike.roundToInt().toString().plus("°C | ")
+                        )
+                    )
                     .plus(
                         it.currentWeatherDescription.description[0].uppercase()
                             .plus(it.currentWeatherDescription.description.substring(1))
