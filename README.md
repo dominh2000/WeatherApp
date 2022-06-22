@@ -1,5 +1,7 @@
 # WeatherApp
-Ứng dụng tổng hợp các kiến thức cơ bản về Android
+Ứng dụng tổng hợp các kiến thức cơ bản về Android.  
+Project của môn *****Phát triển ứng dụng cho các thiết bị di động***** (D18 PTIT).  
+Kết quả đạt được sau khóa học *****[Android Basics in Kotlin](https://developer.android.com/courses/android-basics-kotlin/course)*****, một phần của *****[Advanced Android in Kotlin](https://developer.android.com/courses/kotlin-android-advanced/overview)*****, cùng một số codelab khác. Tất cả cung cấp bởi Google.
 
 ## Thông tin cá nhân
 1. Họ tên: Trần Đỗ Minh
