@@ -28,16 +28,15 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
         val openWeatherRepo = OpenWeatherRepository(openWeatherDb)
 
         return try {
-            weatherLocationDataStore.locationFlow.first {
+            weatherLocationDataStore.locationFlow.first().let {
                 if (it[0] == 0.0 && it[1] == 0.0) {
                     openWeatherRepo.refreshOpenWeather()
                 } else {
                     openWeatherRepo.getOpenWeatherByCoord(it[0], it[1])
                 }
-                true
             }
 
-            openWeatherRepo.currentWeather.first {
+            openWeatherRepo.currentWeather.first().let {
                 val notificationId = 10000
                 val contentTitle = "Thời tiết ".plus(it.cityName)
                 val contentText = it.forecastInfo.temp.roundToInt().toString().plus("°C | ")
@@ -67,8 +66,6 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
                     bigText,
                     appContext
                 )
-
-                true
             }
 
             Result.success()
