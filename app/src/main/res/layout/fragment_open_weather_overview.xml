@@ -14,6 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/status_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:apiOWStatus="@{viewModel.status}"
+            app:context="@{context}"
+            app:indeterminateAnimationType="disjoint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackCornerRadius="10dp"
+            app:trackThickness="6dp"/>
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/location"
             android:layout_width="match_parent"
@@ -24,7 +38,7 @@
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_indicator"
             tools:text="Hà Nội" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -123,18 +137,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/divider_horizontal"
             app:listDataOW="@{viewModel.forecast5Days.fiveDaysForecast}" />
-
-        <ImageView
-            android:id="@+id/status_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:importantForAccessibility="no"
-            app:apiOWStatus="@{viewModel.status}"
-            app:contextImg="@{context}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

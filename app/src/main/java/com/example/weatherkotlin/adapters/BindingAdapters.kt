@@ -15,6 +15,7 @@ import com.example.weatherkotlin.domain.OneDayForecast
 import com.example.weatherkotlin.domain.WeatherOneDay
 import com.example.weatherkotlin.viewmodels.OpenWeatherApiStatus
 import com.example.weatherkotlin.viewmodels.WeatherApiStatus
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 
@@ -92,25 +93,24 @@ fun bindOWWeatherStateImage(imageView: ImageView, imgUri: String?, context: Cont
     }
 }
 
-@BindingAdapter("apiOWStatus", "contextImg")
+@BindingAdapter("apiOWStatus", "context")
 fun bindOWApiStatus(
-    statusImageView: ImageView,
+    progressIndicator: LinearProgressIndicator,
     apiStatus: OpenWeatherApiStatus?,
     context: Context?
 ) {
     when (apiStatus) {
         OpenWeatherApiStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
+            progressIndicator.visibility = View.VISIBLE
         }
         OpenWeatherApiStatus.DONE -> {
-            statusImageView.visibility = View.GONE
+            progressIndicator.visibility = View.GONE
         }
         OpenWeatherApiStatus.ERROR -> {
-            statusImageView.visibility = View.GONE
+            progressIndicator.visibility = View.GONE
             Snackbar.make(
                 context!!,
-                statusImageView,
+                progressIndicator,
                 "Đã xảy ra lỗi kết nối. Hãy kiểm tra kết nối Internet của bạn!",
                 LENGTH_SHORT
             )

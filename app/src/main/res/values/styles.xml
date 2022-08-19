@@ -10,9 +10,9 @@
         </item>
     </style>
 
-    <style name="LoginTheme" parent="FirebaseUI">
-        <item name="colorPrimary">@color/md_theme_light_primary</item>
-        <item name="colorPrimaryDark">@color/md_theme_dark_primary</item>
+    <style name="LoginTheme" parent="Theme.WeatherKotlin">
+        <item name="android:buttonStyle">@style/FirebaseUI.Button</item>
+        <item name="android:textColorLink">?attr/colorPrimary</item>
     </style>
 
     <style name="FirebaseUI.Text.Link">
