@@ -14,7 +14,7 @@
 3. Lấy, cache và hiển thị thông tin thời tiết từ API của OpenWeather `https://openweathermap.org/api`. Tự động cập nhật và gửi thông báo mỗi 3 giờ. Xem thời tiết theo vị trí hiện tại của thiết bị.
 
 ## Các kiến thức sử dụng
-1. Kiến trúc MVVM, Repository pattern, 3-layer: UI - Domain model - Data
+1. Kiến trúc MVVM, Repository pattern, 2-layer: UI - Data
 2. DataBinding & ViewBinding
 3. Navigation component với SafeArgs, DeepLink & BottomNavigationView
 4. ViewModel & LiveData
@@ -23,8 +23,12 @@
 7. RecyclerView với ListAdapter
 8. Coroutines & Flow
 9. BindingAdapter
-10. Room
+10. Room & SQLCipher
 11. Preferences DataStore
 12. WorkManager & Notifications
 13. FirebaseAuthentication với FirebaseUI
 14. Google Play Services Location
+15. R8 & ProGuard rules cho bản release
+
+## Chú ý
+* Để build project, cần thêm file `google-services.json` sinh bởi Firebase.

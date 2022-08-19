@@ -23,7 +23,7 @@ class BaseApplication : Application() {
 
     // Lazy initialization for singletons throughout the app
     val databaseApplication: ApplicationRoomDatabase by lazy {
-        ApplicationRoomDatabase.getDatabase(this)
+        ApplicationRoomDatabase.getDatabase(this, "Hello123!")
     }
     val openWeatherRepository: OpenWeatherRepository by lazy {
         OpenWeatherRepository(databaseApplication)

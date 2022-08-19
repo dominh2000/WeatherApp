@@ -24,7 +24,7 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         val appContext = applicationContext
         val weatherLocationDataStore = WeatherLocationDataStore(appContext)
-        val openWeatherDb = getDatabase(appContext)
+        val openWeatherDb = getDatabase(appContext, "Hello123!")
         val openWeatherRepo = OpenWeatherRepository(openWeatherDb)
 
         return try {

@@ -5,6 +5,8 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 
 @Database(
     entities = [
@@ -15,7 +17,7 @@ import androidx.room.RoomDatabase
         CurrentWeather::class,
         ForecastOneDay::class,
     ],
-    version = 7,
+    version = 8,
     /*
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
@@ -37,14 +39,16 @@ abstract class ApplicationRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ApplicationRoomDatabase? = null
 
-        fun getDatabase(context: Context): ApplicationRoomDatabase {
+        fun getDatabase(context: Context, password: String): ApplicationRoomDatabase {
             return INSTANCE ?: synchronized(this) {
+                val supportFactory = SupportFactory(SQLiteDatabase.getBytes(password.toCharArray()))
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ApplicationRoomDatabase::class.java,
-                    "database"
+                    "encrypted_database"
                 )
                     .fallbackToDestructiveMigration()
+                    .openHelperFactory(supportFactory)
                     .build()
                 INSTANCE = instance
                 return instance
