@@ -11,6 +11,7 @@ import com.example.weatherkotlin.repository.MetaWeatherRepository
 import com.example.weatherkotlin.repository.OpenWeatherRepository
 import com.example.weatherkotlin.repository.ToDoRepository
 import com.example.weatherkotlin.work.RefreshWeatherDataWorker
+import com.google.android.material.color.DynamicColors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,6 +44,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         delayedInit()
+        DynamicColors.applyToActivitiesIfAvailable(this);
     }
 
     private fun delayedInit() {
