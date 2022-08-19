@@ -14,7 +14,7 @@
 3. Lấy, cache và hiển thị thông tin thời tiết từ API của OpenWeather `https://openweathermap.org/api`. Tự động cập nhật và gửi thông báo mỗi 3 giờ. Xem thời tiết theo vị trí hiện tại của thiết bị.
 
 ## Các kiến thức sử dụng
-1. Giao diện Material3
+1. Material Design 3
 2. Kiến trúc MVVM, Repository pattern, 2-layer: UI - Data
 3. DataBinding & ViewBinding
 4. Navigation component với SafeArgs, DeepLink & BottomNavigationView
