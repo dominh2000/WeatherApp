@@ -1,9 +1,7 @@
 package com.example.weatherkotlin.fragments
 
 import android.app.AlarmManager
-import android.app.DatePickerDialog
 import android.app.PendingIntent
-import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -23,13 +21,17 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAddUpdateDeleteToDoBinding
 import com.example.weatherkotlin.receiver.AlarmReceiver
-import com.example.weatherkotlin.util.*
+import com.example.weatherkotlin.util.calculateCurrentTimeMilliseconds
+import com.example.weatherkotlin.util.calculateMillisecondsFromDate
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textview.MaterialTextView
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,10 +59,10 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             buttonSelectDeadlineDate.setOnClickListener {
-                configDateButton(requireContext(), deadlineDate)
+                configDateButton(buttonSelectDeadlineDate.text.toString(), deadlineDate)
             }
             buttonSelectDeadlineHour.setOnClickListener {
-                configTimeButton(requireContext(), deadlineHour)
+                configTimeButton(buttonSelectDeadlineHour.text.toString(), deadlineHour)
             }
             alarmSwitch.setOnCheckedChangeListener { _, isChecked ->
                 performDateCheck(
@@ -355,53 +357,55 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
         }
     }
 
-    private fun configDateButton(ctx: Context, textView: TextView) {
-        val datePickerDialog = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            DatePickerDialog(ctx)
-        } else {
-            TODO("VERSION.SDK_INT < N")
-        }
-        datePickerDialog.setOnDateSetListener { _, i, i2, i3 ->
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, i)
-            calendar.set(Calendar.MONTH, i2)
-            calendar.set(Calendar.DAY_OF_MONTH, i3)
+    private fun configDateButton(title: String, textView: TextView) {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(title)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+        datePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+            calendar.timeInMillis = it
             val selectedDate =
                 SimpleDateFormat(DATE_FORMAT_PATTERN_1, Locale.getDefault()).format(calendar.time)
             textView.text = selectedDate
             performDateCheckWhenChanges()
         }
-        datePickerDialog.show()
+
+        datePicker.show(childFragmentManager, "date_picker")
     }
 
-    private fun configTimeButton(ctx: Context, textView: TextView) {
-        val timePickerDialog = TimePickerDialog(
-            ctx,
-            { _, hourOfDay, minute ->
-                val formattedTime = when {
-                    (hourOfDay < 10) -> {
-                        if (minute > 10) {
-                            "0$hourOfDay:$minute"
-                        } else {
-                            "0$hourOfDay:0$minute"
-                        }
-                    }
-                    else -> {
-                        if (minute > 10) {
-                            "$hourOfDay:$minute"
-                        } else {
-                            "$hourOfDay:0$minute"
-                        }
+    private fun configTimeButton(title: String, textView: TextView) {
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
+            .setMinute(Calendar.getInstance().get(Calendar.MINUTE))
+            .setTitleText(title)
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            val hourOfDay = timePicker.hour
+            val minute = timePicker.minute
+            val formattedTime = when {
+                (hourOfDay < 10) -> {
+                    if (minute > 10) {
+                        "0$hourOfDay:$minute"
+                    } else {
+                        "0$hourOfDay:0$minute"
                     }
                 }
-                textView.text = formattedTime
-                performDateCheckWhenChanges()
-            },
-            Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-            Calendar.getInstance().get(Calendar.MINUTE),
-            true
-        )
-        timePickerDialog.show()
+                else -> {
+                    if (minute > 10) {
+                        "$hourOfDay:$minute"
+                    } else {
+                        "$hourOfDay:0$minute"
+                    }
+                }
+            }
+            textView.text = formattedTime
+            performDateCheckWhenChanges()
+        }
+
+        timePicker.show(childFragmentManager, "time_picker")
     }
 
     private fun performDateCheck(

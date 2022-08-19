@@ -1,8 +1,5 @@
 package com.example.weatherkotlin.fragments
 
-import android.app.DatePickerDialog
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +17,7 @@ import com.example.weatherkotlin.databinding.FragmentAdvancedSearchToDoBinding
 import com.example.weatherkotlin.util.calculateMillisecondsForAdvancedSearch
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -78,10 +76,10 @@ class FragmentAdvancedSearchToDo : Fragment() {
             textEmptySearchResult.visibility = View.GONE
 
             buttonSelectStartDate.setOnClickListener {
-                configDateButton(requireContext(), startDate)
+                configDateButton(buttonSelectStartDate.text.toString(), startDate)
             }
             buttonSelectEndDate.setOnClickListener {
-                configDateButton(requireContext(), endDate)
+                configDateButton(buttonSelectEndDate.text.toString(), endDate)
             }
             advancedSearchAction.setOnClickListener {
                 if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
@@ -134,21 +132,19 @@ class FragmentAdvancedSearchToDo : Fragment() {
         _binding = null
     }
 
-    private fun configDateButton(ctx: Context, textView: TextView) {
-        val datePickerDialog = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            DatePickerDialog(ctx)
-        } else {
-            TODO("VERSION.SDK_INT < N")
-        }
-        datePickerDialog.setOnDateSetListener { _, i, i2, i3 ->
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, i)
-            calendar.set(Calendar.MONTH, i2)
-            calendar.set(Calendar.DAY_OF_MONTH, i3)
+    private fun configDateButton(title: String, textView: TextView) {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(title)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+        datePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+            calendar.timeInMillis = it
             val selectedDate =
                 SimpleDateFormat(DATE_FORMAT_PATTERN_1, Locale.getDefault()).format(calendar.time)
             textView.text = selectedDate
         }
-        datePickerDialog.show()
+
+        datePicker.show(childFragmentManager, "date_picker")
     }
 }

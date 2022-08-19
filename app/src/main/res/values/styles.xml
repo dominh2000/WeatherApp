@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.Inventory.TextInputLayout.OutlinedBox"
-        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="Widget.WeatherKotlin.TextInputLayout.OutlinedBox"
+        parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxStrokeErrorColor">@color/red_700</item>
         <item name="errorIconTint">@color/red_700</item>
         <item name="errorTextColor">@color/red_700</item>
@@ -11,9 +11,8 @@
     </style>
 
     <style name="LoginTheme" parent="FirebaseUI">
-        <item name="colorPrimary">@color/blue_primary</item>
-        <item name="colorPrimaryDark">@color/blue_dark</item>
-        <item name="colorPrimaryVariant">@color/blue_dark</item>
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorPrimaryDark">@color/md_theme_dark_primary</item>
     </style>
 
     <style name="FirebaseUI.Text.Link">
