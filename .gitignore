@@ -7,6 +7,7 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/deploymentTargetDropDown.xml
 .DS_Store
 /build
 /captures
@@ -14,4 +15,4 @@
 .cxx
 local.properties
 app/google-services.json
-app/release
+app/release/app-release.apk
