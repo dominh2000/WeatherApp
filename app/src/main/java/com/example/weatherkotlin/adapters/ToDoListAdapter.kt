@@ -1,8 +1,9 @@
 package com.example.weatherkotlin.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,8 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.util.convertFromPattern1ToFullDate
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
     ListAdapter<Task, ToDoListAdapter.ToDoViewHolder>(DiffCallbackToDoItem) {
@@ -40,12 +43,6 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                 itemDeadline.text =
                     itemToDo.deadlineDate.convertFromPattern1ToFullDate().plus(" - ")
                         .plus(itemToDo.deadlineHour)
-                itemPriority.text = when (itemToDo.priority) {
-                    1 -> "KC - QT"
-                    2 -> "KKC - QT"
-                    3 -> "KC - KQT"
-                    else -> "KKC - KQT"
-                }
                 itemToDo.description.let {
                     if (it.length > 50) {
                         itemDescription.text = it.substring(0, 49).trim().plus("...")
@@ -53,22 +50,97 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                         itemDescription.text = it
                     }
                 }
+                chipGroup.removeAllViews() // Prevent duplicated chips
                 when (itemToDo.isNotified) {
                     true -> {
-                        imageAlarm.visibility = View.VISIBLE
-                        imageAlarm.setImageResource(R.drawable.ic_noti_on)
+                        chipGroup.addView(
+                            createChip(
+                                "Có thông báo",
+                                this.root.context,
+                                "Notification"
+                            )
+                        )
                     }
-                    else -> imageAlarm.visibility = View.GONE
+                    else -> {}
                 }
                 when (itemToDo.completed) {
                     true -> {
-                        imageStateComplete.visibility = View.VISIBLE
-                        imageStateComplete.setImageResource(R.drawable.ic_check)
+                        chipGroup.addView(
+                            createChip(
+                                "Đã hoàn thành",
+                                this.root.context,
+                                "Completion"
+                            )
+                        )
                     }
-                    else -> imageStateComplete.visibility = View.GONE
+                    else -> {}
+                }
+                when (itemToDo.priority) {
+                    1 -> {
+                        chipGroup.addView(createChip("Khẩn cấp", this.root.context, "Priority"))
+                        chipGroup.addView(createChip("Quan trọng", this.root.context, "Priority"))
+                    }
+                    2 -> {
+                        chipGroup.addView(
+                            createChip(
+                                "Không khẩn cấp",
+                                this.root.context,
+                                "Priority"
+                            )
+                        )
+                        chipGroup.addView(createChip("Quan trọng", this.root.context, "Priority"))
+                    }
+                    3 -> {
+                        chipGroup.addView(createChip("Khẩn cấp", this.root.context, "Priority"))
+                        chipGroup.addView(
+                            createChip(
+                                "Không quan trọng",
+                                this.root.context,
+                                "Priority"
+                            )
+                        )
+                    }
+                    else -> {
+                        chipGroup.addView(
+                            createChip(
+                                "Không khẩn cấp",
+                                this.root.context,
+                                "Priority"
+                            )
+                        )
+                        chipGroup.addView(
+                            createChip(
+                                "Không quan trọng",
+                                this.root.context,
+                                "Priority"
+                            )
+                        )
+                    }
                 }
                 executePendingBindings()
             }
+        }
+
+        private fun createChip(chipName: String, ctx: Context, chipType: String): Chip {
+            val chip = Chip(ctx)
+            chip.apply {
+                id = ViewCompat.generateViewId()
+                text = chipName
+                isCloseIconVisible = false
+                shapeAppearanceModel = shapeAppearanceModel.withCornerSize(50.0f)
+                when (chipType) {
+                    "Notification" -> {
+                        isChipIconVisible = true
+                        setChipIconResource(R.drawable.ic_noti_on)
+                    }
+                    "Completion" -> {
+                        isChipIconVisible = true
+                        setChipIconResource(R.drawable.ic_check)
+                    }
+                    else -> {}
+                }
+            }
+            return chip
         }
     }
 

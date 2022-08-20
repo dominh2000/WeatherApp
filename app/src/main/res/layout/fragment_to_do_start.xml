@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:textColor="@color/blue"
                     android:text="@string/to_do_start_title"/>
 
@@ -54,7 +54,7 @@
                     android:layout_marginTop="5dp"
                     android:justificationMode="inter_word"
                     android:text="@string/to_do_start_description"
-                    android:textAppearance="?attr/textAppearanceBody2"/>
+                    android:textAppearance="?attr/textAppearanceBodyMedium"/>
             </LinearLayout>
 
             <ImageView

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
@@ -49,7 +49,7 @@
             android:padding="8dp"
             android:text="@{viewModel.weatherItem.weatherDescription.description}"
             android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/image_state"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nhiệt độ"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -117,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/temperature_OW(viewModel.weatherItem.mainForecastInfo.temp)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="13,3 C" />
                 </TableRow>
@@ -138,7 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Cảm giác như"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -149,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/feels_like_OW(viewModel.weatherItem.mainForecastInfo.feelsLike)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="24,4 C" />
                 </TableRow>
@@ -169,7 +169,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Độ ẩm"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -180,7 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/humidity_OW(viewModel.weatherItem.mainForecastInfo.humidity) + '%'}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="74%" />
                 </TableRow>
@@ -200,7 +200,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Xác suất mưa"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -210,7 +210,7 @@
                         android:id="@+id/precipitation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="37%" />
                 </TableRow>
@@ -231,7 +231,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Áp suất không khí"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -242,7 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/air_pressure_OW(viewModel.weatherItem.mainForecastInfo.defaultPressure)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="1010 hPa" />
                 </TableRow>
@@ -262,7 +262,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tầm nhìn xa"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -274,7 +274,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/visibility_OW(viewModel.weatherItem.visibility)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="10000 m" />
                 </TableRow>
@@ -294,7 +294,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tỷ lệ mây"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -306,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/cloud_percent_OW(viewModel.weatherItem.cloudAmountPercent) + '%'}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="91%" />
                 </TableRow>
@@ -326,7 +326,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tốc độ gió"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -337,7 +337,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/wind_speed_OW(viewModel.weatherItem.wind.speed)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="4,9 m/s" />
                 </TableRow>
@@ -357,7 +357,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hướng gió"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -368,7 +368,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/wind_degree_OW(viewModel.weatherItem.wind.degree)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="117 độ" />
                 </TableRow>
@@ -388,7 +388,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Gió giật"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -399,7 +399,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/wind_gust_OW(viewModel.weatherItem.wind.gust)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="7,1 m/s" />
                 </TableRow>
@@ -419,7 +419,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Lượng mưa 3h gần nhất"
-                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center" />
@@ -430,7 +430,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{@string/rain_volume_3h_OW(viewModel.weatherItem.last3hRainVolume)}"
-                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textStyle="bold"
                         tools:text="2,1 mm" />
                 </TableRow>

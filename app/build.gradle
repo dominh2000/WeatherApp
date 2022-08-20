@@ -21,8 +21,8 @@ android {
         applicationId "com.example.weatherkotlin"
         minSdk 21
         targetSdk 32
-        versionCode 3
-        versionName "1.1.2"
+        versionCode 4
+        versionName "1.1.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -105,4 +105,7 @@ dependencies {
 
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Paris for adding View style dynamically
+    implementation 'com.airbnb.android:paris:2.0.0'
 }

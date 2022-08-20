@@ -12,26 +12,42 @@
         android:title="Lọc"
         app:showAsAction="always">
         <menu>
-            <item android:id="@+id/closest_deadline"
-                android:title="Hạn gần nhất"/>
-            <item android:id="@+id/furthest_deadline"
-                android:title="Hạn xa nhất"/>
-            <item android:id="@+id/by_priority_1"
-                android:title="Khẩn cấp, quan trọng"/>
-            <item android:id="@+id/by_priority_2"
-                android:title="Không khẩn cấp, quan trọng"/>
-            <item android:id="@+id/by_priority_3"
-                android:title="Khẩn cấp, không quan trọng"/>
-            <item android:id="@+id/by_priority_4"
-                android:title="Không khẩn cấp, không quan trọng"/>
-            <item android:id="@+id/completed"
-                android:title="Hoàn thành"/>
-            <item android:id="@+id/not_completed"
-                android:title="Chưa hoàn thành"/>
-            <item android:id="@+id/set_notified"
-                android:title="Có đặt thông báo"/>
-            <item android:id="@+id/not_set_notified"
-                android:title="Không đặt thông báo"/>
+            <item android:title="Hạn thực hiện">
+                <menu>
+                    <item android:id="@+id/closest_deadline"
+                        android:title="Hạn gần nhất"/>
+                    <item android:id="@+id/furthest_deadline"
+                        android:title="Hạn xa nhất"/>
+                </menu>
+            </item>
+            <item android:title="Khẩn cấp và quan trọng">
+                <menu>
+                    <item android:id="@+id/by_priority_1"
+                        android:title="Khẩn cấp, quan trọng"/>
+                    <item android:id="@+id/by_priority_2"
+                        android:title="Không khẩn cấp, quan trọng"/>
+                    <item android:id="@+id/by_priority_3"
+                        android:title="Khẩn cấp, không quan trọng"/>
+                    <item android:id="@+id/by_priority_4"
+                        android:title="Không khẩn cấp, không quan trọng"/>
+                </menu>
+            </item>
+            <item android:title="Hoàn thành">
+                <menu>
+                    <item android:id="@+id/completed"
+                        android:title="Hoàn thành"/>
+                    <item android:id="@+id/not_completed"
+                        android:title="Chưa hoàn thành"/>
+                </menu>
+            </item>
+            <item android:title="Thông báo">
+                <menu>
+                    <item android:id="@+id/set_notified"
+                        android:title="Có đặt thông báo"/>
+                    <item android:id="@+id/not_set_notified"
+                        android:title="Không đặt thông báo"/>
+                </menu>
+            </item>
         </menu>
     </item>
 

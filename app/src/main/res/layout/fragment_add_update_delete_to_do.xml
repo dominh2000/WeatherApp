@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Mức ưu tiên"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,28 +81,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Khẩn cấp và quan trọng"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                 <RadioButton
                     android:id="@+id/priority_not_urgent_important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Không khẩn cấp và quan trọng"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                 <RadioButton
                     android:id="@+id/priority_urgent_not_important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Khẩn cấp và không quan trọng"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                 <RadioButton
                     android:id="@+id/priority_not_urgent_not_important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Không khẩn cấp và không quan trọng"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceBodyLarge" />
             </RadioGroup>
 
             <com.google.android.material.textview.MaterialTextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Hạn thực hiện"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +134,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="@id/button_select_deadline_date"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +159,7 @@
                 android:id="@+id/deadline_hour"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="@id/button_select_deadline_hour"
                 app:layout_constraintEnd_toEndOf="@id/deadline_date"
@@ -174,7 +174,7 @@
                 android:layout_marginTop="16dp"
                 android:checked="false"
                 android:text="Đặt thông báo"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +187,7 @@
                 android:layout_marginTop="16dp"
                 android:checked="false"
                 android:text="Đã hoàn thành?"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -208,7 +208,7 @@
 
         <Button
             android:id="@+id/delete_action"
-            style="@style/Widget.Material3.Button.Icon"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
