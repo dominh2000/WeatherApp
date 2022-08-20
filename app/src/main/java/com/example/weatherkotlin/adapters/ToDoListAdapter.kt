@@ -12,7 +12,6 @@ import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.domain.Task
 import com.example.weatherkotlin.util.convertFromPattern1ToFullDate
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
     ListAdapter<Task, ToDoListAdapter.ToDoViewHolder>(DiffCallbackToDoItem) {
@@ -34,8 +33,8 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
         fun bind(itemToDo: Task) {
             binding.apply {
                 itemToDo.name.let {
-                    if (it.length > 20) {
-                        itemName.text = it.substring(0, 19).trim().plus("...")
+                    if (it.length > 50) {
+                        itemName.text = it.substring(0, 49).trim().plus("...")
                     } else {
                         itemName.text = it
                     }
@@ -44,8 +43,8 @@ class ToDoListAdapter(private val onItemClicked: (Task) -> Unit) :
                     itemToDo.deadlineDate.convertFromPattern1ToFullDate().plus(" - ")
                         .plus(itemToDo.deadlineHour)
                 itemToDo.description.let {
-                    if (it.length > 50) {
-                        itemDescription.text = it.substring(0, 49).trim().plus("...")
+                    if (it.length > 70) {
+                        itemDescription.text = it.substring(0, 69).trim().plus("...")
                     } else {
                         itemDescription.text = it
                     }
