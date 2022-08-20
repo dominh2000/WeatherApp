@@ -38,12 +38,15 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_select_start_date"
-            android:layout_width="120dp"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:text="Từ ngày"
+            app:icon="@drawable/ic_date_range"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/button_select_end_date"
             app:layout_constraintTop_toBottomOf="@id/label_choose_date" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -61,13 +64,15 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_select_end_date"
-            android:layout_width="120dp"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:text="Đến ngày"
+            app:icon="@drawable/ic_date_range"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_select_start_date" />
+            app:layout_constraintTop_toBottomOf="@id/button_select_start_date"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/end_date"
@@ -156,13 +161,15 @@
 
         <Button
             android:id="@+id/advanced_search_action"
-            android:layout_width="0dp"
+            style="@style/Widget.Material3.Button.Icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Tìm kiếm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notified_spinner"/>
+            app:layout_constraintTop_toBottomOf="@+id/notified_spinner"
+            app:icon="@drawable/ic_search"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_advanced_search"

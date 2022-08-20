@@ -84,7 +84,12 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     saveNewTask()
                 }
                 priorityUrgentImportant.isChecked = true
-                deleteAction.visibility = View.GONE
+                deleteAction.apply{
+                    text = "Hủy"
+                    setOnClickListener {
+                        findNavController().popBackStack()
+                    }
+                }
             }
         } else {
             (requireActivity() as AppCompatActivity).supportActionBar?.title =
