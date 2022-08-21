@@ -3,7 +3,7 @@ package com.example.weatherkotlin.util
 import android.content.Context
 import androidx.navigation.NavController
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.fragments.FragmentListToDoDirections
+import com.example.weatherkotlin.ui.fragments.FragmentListToDoDirections
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

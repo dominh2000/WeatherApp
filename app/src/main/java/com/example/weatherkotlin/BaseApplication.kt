@@ -6,12 +6,11 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.work.*
-import com.example.weatherkotlin.database.ApplicationRoomDatabase
-import com.example.weatherkotlin.repository.MetaWeatherRepository
-import com.example.weatherkotlin.repository.OpenWeatherRepository
-import com.example.weatherkotlin.repository.ToDoRepository
-import com.example.weatherkotlin.work.RefreshWeatherDataWorker
-import com.google.android.material.color.DynamicColors
+import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
+import com.example.weatherkotlin.data.repository.MetaWeatherRepository
+import com.example.weatherkotlin.data.repository.OpenWeatherRepository
+import com.example.weatherkotlin.data.repository.ToDoRepository
+import com.example.weatherkotlin.ui.work.RefreshWeatherDataWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

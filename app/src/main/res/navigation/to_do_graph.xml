@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentToDoStart"
-        android:name="com.example.weatherkotlin.fragments.FragmentToDoStart"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentToDoStart"
         android:label="@string/label_fragment_to_do_start"
         tools:layout="@layout/fragment_to_do_start" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentListToDo"
-        android:name="com.example.weatherkotlin.fragments.FragmentListToDo"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentListToDo"
         android:label="@string/label_fragment_list_to_do"
         tools:layout="@layout/fragment_list_to_do" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAddToDo"
-        android:name="com.example.weatherkotlin.fragments.FragmentAddUpdateDeleteToDo"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentAddUpdateDeleteToDo"
         android:label="@string/label_fragment_add_to_do"
         tools:layout="@layout/fragment_add_update_delete_to_do">
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSimpleSearchToDo"
-        android:name="com.example.weatherkotlin.fragments.FragmentSimpleSearchToDo"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentSimpleSearchToDo"
         android:label="@string/label_fragment_simple_search_to_do"
         tools:layout="@layout/fragment_simple_search_to_do">
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAdvancedSearchToDo"
-        android:name="com.example.weatherkotlin.fragments.FragmentAdvancedSearchToDo"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentAdvancedSearchToDo"
         android:label="@string/label_fragment_advanced_search_to_do"
         tools:layout="@layout/fragment_advanced_search_to_do">
         <action
@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAdvancedSearchToDoResult"
-        android:name="com.example.weatherkotlin.fragments.FragmentAdvancedSearchToDoResult"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentAdvancedSearchToDoResult"
         android:label="@string/label_fragment_advanced_search_to_do_result"
         tools:layout="@layout/fragment_advanced_search_to_do_result">
         <action

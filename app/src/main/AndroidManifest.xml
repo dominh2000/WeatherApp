@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".receiver.AlarmReceiver"
+        <receiver android:name="com.example.weatherkotlin.ui.receiver.AlarmReceiver"
             android:exported="false"/>
     </application>
 

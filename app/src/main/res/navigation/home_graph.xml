@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentListDates"
-        android:name="com.example.weatherkotlin.fragments.FragmentListDates"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentListDates"
         android:label="@string/label_fragment_list_dates"
         tools:layout="@layout/fragment_list_dates">
         <action
@@ -20,18 +20,18 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
-        android:name="com.example.weatherkotlin.fragments.FragmentDetail"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentDetail"
         android:label="@string/label_fragment_detail"
         tools:layout="@layout/fragment_detail"/>
 
     <fragment
         android:id="@+id/search_weather"
-        android:name="com.example.weatherkotlin.fragments.FragmentSearchLocation"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentSearchLocation"
         android:label="fragment_search_location"
         tools:layout="@layout/fragment_search_location" />
     <fragment
         android:id="@+id/fragmentOpenWeatherOverview"
-        android:name="com.example.weatherkotlin.fragments.FragmentOpenWeatherOverview"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentOpenWeatherOverview"
         android:label="@string/label_fragment_ow_overview"
         tools:layout="@layout/fragment_open_weather_overview" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentOpenWeatherItemDetails"
-        android:name="com.example.weatherkotlin.fragments.FragmentOpenWeatherItemDetails"
+        android:name="com.example.weatherkotlin.ui.fragments.FragmentOpenWeatherItemDetails"
         android:label="@string/label_fragment_detail"
         tools:layout="@layout/fragment_open_weather_item_details"/>
 

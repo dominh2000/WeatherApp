@@ -19,7 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keep class com.example.weatherkotlin.network.** { *; }
+-keep class com.example.weatherkotlin.data.dataSources.network.** { *; }
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
 -keepattributes Signature

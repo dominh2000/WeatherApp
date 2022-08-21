@@ -1,6 +1,6 @@
 package com.example.weatherkotlin.util
 
-import com.example.weatherkotlin.network.TotalWeather
+import com.example.weatherkotlin.data.dataSources.network.TotalWeather
 
 fun List<TotalWeather>.convert(): List<TotalWeather> {
     return this.map {
