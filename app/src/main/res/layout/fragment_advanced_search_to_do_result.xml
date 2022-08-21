@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.FragmentAdvancedSearchToDoResult">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linear_compat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="2"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_back_to_do_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
+            android:text="Về danh sách"
+            app:icon="@drawable/ic_list"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_advanced_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.Icon"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
+            android:text="Tiếp tục tìm kiếm"
+            app:icon="@drawable/ic_search"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_advanced_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_compat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_to_do"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:scrollbars="vertical"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

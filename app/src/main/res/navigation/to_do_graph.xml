@@ -96,11 +96,33 @@
         android:label="@string/label_fragment_advanced_search_to_do"
         tools:layout="@layout/fragment_advanced_search_to_do">
         <action
-            android:id="@+id/action_fragmentAdvancedSearchToDo_to_fragmentAddToDo"
+            android:id="@+id/action_fragmentAdvancedSearchToDo_to_fragmentAdvancedSearchToDoResult"
+            app:destination="@id/fragmentAdvancedSearchToDoResult"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAdvancedSearchToDoResult"
+        android:name="com.example.weatherkotlin.fragments.FragmentAdvancedSearchToDoResult"
+        android:label="@string/label_fragment_advanced_search_to_do_result"
+        tools:layout="@layout/fragment_advanced_search_to_do_result">
+        <action
+            android:id="@+id/action_fragmentAdvancedSearchToDoResult_to_fragmentAddToDo"
             app:destination="@id/fragmentAddToDo"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fragmentAdvancedSearchToDoResult_to_fragmentListToDo"
+            app:destination="@id/fragmentListToDo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentListToDo"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

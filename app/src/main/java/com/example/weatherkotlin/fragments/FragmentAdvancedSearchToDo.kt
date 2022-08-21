@@ -11,13 +11,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.adapters.ToDoListAdapter
 import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAdvancedSearchToDoBinding
 import com.example.weatherkotlin.util.calculateMillisecondsForAdvancedSearch
+import com.example.weatherkotlin.viewmodels.AdvancedSearchStatus
 import com.example.weatherkotlin.viewmodels.ToDoViewModel
 import com.example.weatherkotlin.viewmodels.ToDoViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,15 +44,6 @@ class FragmentAdvancedSearchToDo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
-            val adapter = ToDoListAdapter {
-                viewModel.onTaskClicked(it)
-                val action =
-                    FragmentAdvancedSearchToDoDirections.actionFragmentAdvancedSearchToDoToFragmentAddToDo(
-                        crudType = 1
-                    )
-                findNavController().navigate(action)
-            }
-
             prioritySpinner.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.spinner_item,
@@ -68,24 +60,43 @@ class FragmentAdvancedSearchToDo : Fragment() {
                 resources.getStringArray(R.array.completed_state)
             )
 
-            recyclerViewAdvancedSearch.adapter = adapter
-            viewModel.toDoList.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
-            }
-            recyclerViewAdvancedSearch.visibility = View.GONE
-            textEmptySearchResult.visibility = View.GONE
-
             buttonSelectStartDate.setOnClickListener {
                 configDateButton(buttonSelectStartDate.text.toString(), startDate)
             }
             buttonSelectEndDate.setOnClickListener {
                 configDateButton(buttonSelectEndDate.text.toString(), endDate)
             }
+
+            viewModel.advancedSearchStatus.observe(viewLifecycleOwner) {
+                if (it == AdvancedSearchStatus.LOADING) {
+                    binding.statusIndicator.visibility = View.VISIBLE
+                } else {
+                    binding.statusIndicator.visibility = View.GONE
+                    if (viewModel.startAdvancedSearch) {
+                        if (viewModel.advancedSearchResultList.value!!.isEmpty()) {
+                            val alertDialogBuilder =
+                                MaterialAlertDialogBuilder(requireContext())
+                                    .setTitle("Thông báo")
+                                    .setMessage("Không có kết quả tìm kiếm")
+                                    .setPositiveButton("OK") { _, _ -> }
+                                    .create()
+                            alertDialogBuilder.show()
+                        } else {
+                            val action =
+                                FragmentAdvancedSearchToDoDirections.actionFragmentAdvancedSearchToDoToFragmentAdvancedSearchToDoResult()
+                            findNavController().navigate(action)
+                        }
+                        viewModel.startAdvancedSearch = false
+                    }
+                }
+            }
+
             advancedSearchAction.setOnClickListener {
                 if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
                     if (calculateMillisecondsForAdvancedSearch(startDate.text.toString())
                         <= calculateMillisecondsForAdvancedSearch(endDate.text.toString())
                     ) {
+                        viewModel.startAdvancedSearch = true
                         viewModel.filterByAdvancedSearch(
                             startDate.text.toString(),
                             endDate.text.toString(),
@@ -93,15 +104,6 @@ class FragmentAdvancedSearchToDo : Fragment() {
                             (completedSpinner.selectedItemId).toInt(),
                             (notifiedSpinner.selectedItemId).toInt()
                         )
-                        viewModel.toDoList.observe(viewLifecycleOwner) {
-                            if (it.isEmpty()) {
-                                textEmptySearchResult.visibility = View.VISIBLE
-                                recyclerViewAdvancedSearch.visibility = View.GONE
-                            } else {
-                                textEmptySearchResult.visibility = View.GONE
-                                recyclerViewAdvancedSearch.visibility = View.VISIBLE
-                            }
-                        }
                     } else {
                         Snackbar.make(
                             requireContext(),
@@ -123,8 +125,11 @@ class FragmentAdvancedSearchToDo : Fragment() {
                         .show()
                 }
             }
-        }
 
+            cancelAction.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     override fun onDestroyView() {

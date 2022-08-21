@@ -10,6 +10,7 @@
     <string name="label_fragment_update_delete_to_do">Sửa nhắc việc</string>
     <string name="label_fragment_simple_search_to_do">Tìm kiếm theo tên</string>
     <string name="label_fragment_advanced_search_to_do">Tìm kiếm nâng cao</string>
+    <string name="label_fragment_advanced_search_to_do_result">Kết quả tìm kiếm</string>
     <string name="label_fragment_ow_overview">Thời tiết OpenWeather</string>
 
     <string name="temperature">%1$.1f&#176;C</string>

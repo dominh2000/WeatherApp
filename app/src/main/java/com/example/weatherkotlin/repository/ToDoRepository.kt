@@ -47,11 +47,9 @@ class ToDoRepository(private val database: ApplicationRoomDatabase) {
         }
     }
 
-    suspend fun getToDoListByName(name: String): Flow<List<Task>> {
+    suspend fun getToDoListByName(name: String): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getTasksByName(name).transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getTasksByName(name).asDomainModel()
         }
     }
 
@@ -61,57 +59,41 @@ class ToDoRepository(private val database: ApplicationRoomDatabase) {
         priority: Int,
         completed: Int,
         notified: Int
-    ): Flow<List<Task>> {
+    ): List<Task> {
         return withContext(Dispatchers.IO) {
             database.taskDao().getTasksByAdvancedSearch(
-                startDate,
-                endDate,
-                priority,
-                completed,
-                notified
-            ).transform {
-                emit(it.asDomainModel())
-            }
+                startDate, endDate, priority, completed, notified
+            ).asDomainModel()
         }
     }
 
-    suspend fun getToDoListByClosestDeadline(): Flow<List<Task>> {
+    suspend fun getToDoListByClosestDeadline(): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getAllTasksByClosestDeadline().transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getAllTasksByClosestDeadline().asDomainModel()
         }
     }
 
-    suspend fun getToDoListByFurthestDeadline(): Flow<List<Task>> {
+    suspend fun getToDoListByFurthestDeadline(): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getAllTasksByFurthestDeadline().transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getAllTasksByFurthestDeadline().asDomainModel()
         }
     }
 
-    suspend fun getToDoListByPriority(priority: Int): Flow<List<Task>> {
+    suspend fun getToDoListByPriority(priority: Int): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getAllTasksByPriority(priority).transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getAllTasksByPriority(priority).asDomainModel()
         }
     }
 
-    suspend fun getToDoListByCompleteState(completeState: Int): Flow<List<Task>> {
+    suspend fun getToDoListByCompleteState(completeState: Int): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getAllTasksByCompleteState(completeState).transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getAllTasksByCompleteState(completeState).asDomainModel()
         }
     }
 
-    suspend fun getToDoListByNotificationState(notificationState: Int): Flow<List<Task>> {
+    suspend fun getToDoListByNotificationState(notificationState: Int): List<Task> {
         return withContext(Dispatchers.IO) {
-            database.taskDao().getAllTasksByNotificationState(notificationState).transform {
-                emit(it.asDomainModel())
-            }
+            database.taskDao().getAllTasksByNotificationState(notificationState).asDomainModel()
         }
     }
 }

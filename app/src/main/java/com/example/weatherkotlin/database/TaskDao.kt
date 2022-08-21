@@ -19,7 +19,7 @@ interface TaskDao {
     suspend fun deleteTask(task: DatabaseTask)
 
     @Query("SELECT * FROM task WHERE name LIKE '%' || :searchName || '%' ")
-    fun getTasksByName(searchName: String): Flow<List<DatabaseTask>>
+    suspend fun getTasksByName(searchName: String): List<DatabaseTask>
 
     @Query(
         "SELECT * FROM task " +
@@ -29,26 +29,26 @@ interface TaskDao {
                 "AND is_notified = :notified " +
                 "ORDER BY deadline_date ASC"
     )
-    fun getTasksByAdvancedSearch(
+    suspend fun getTasksByAdvancedSearch(
         startDate: String,
         endDate: String,
         priority: Int,
         completed: Int,
         notified: Int
-    ): Flow<List<DatabaseTask>>
+    ): List<DatabaseTask>
 
     @Query("SELECT * FROM task ORDER BY deadline_date ASC")
-    fun getAllTasksByClosestDeadline(): Flow<List<DatabaseTask>>
+    suspend fun getAllTasksByClosestDeadline(): List<DatabaseTask>
 
     @Query("SELECT * FROM task ORDER BY deadline_date DESC")
-    fun getAllTasksByFurthestDeadline(): Flow<List<DatabaseTask>>
+    suspend fun getAllTasksByFurthestDeadline(): List<DatabaseTask>
 
     @Query("SELECT * FROM task WHERE priority = :priorityLevel")
-    fun getAllTasksByPriority(priorityLevel: Int): Flow<List<DatabaseTask>>
+    suspend fun getAllTasksByPriority(priorityLevel: Int): List<DatabaseTask>
 
     @Query("SELECT * FROM task WHERE completed = :completeState")
-    fun getAllTasksByCompleteState(completeState: Int): Flow<List<DatabaseTask>>
+    suspend fun getAllTasksByCompleteState(completeState: Int): List<DatabaseTask>
 
     @Query("SELECT * FROM task WHERE is_notified = :notificationState")
-    fun getAllTasksByNotificationState(notificationState: Int): Flow<List<DatabaseTask>>
+    suspend fun getAllTasksByNotificationState(notificationState: Int): List<DatabaseTask>
 }

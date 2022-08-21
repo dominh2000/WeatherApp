@@ -6,17 +6,24 @@ import com.example.weatherkotlin.domain.Task
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
+enum class AdvancedSearchStatus { LOADING, DONE }
+
 class ToDoViewModel(app: BaseApplication) : ViewModel() {
 
     private val toDoRepository = app.toDoRepository
 
     private val _toDoList = MutableLiveData<List<Task>>()
+    private val _advancedSearchResultList = MutableLiveData<List<Task>>(listOf())
     private val _selectedTask = MutableLiveData<Task>()
     private val _insertedId = MutableLiveData<Int>()
+    private val _advancedSearchStatus = MutableLiveData<AdvancedSearchStatus>()
 
     val toDoList: LiveData<List<Task>> = _toDoList
     val selectedTask: LiveData<Task> = _selectedTask
     val insertedId: LiveData<Int> = _insertedId
+    val advancedSearchResultList: LiveData<List<Task>> = _advancedSearchResultList
+    val advancedSearchStatus: LiveData<AdvancedSearchStatus> = _advancedSearchStatus
+    var startAdvancedSearch: Boolean = false
 
     fun getAllToDosDsc() {
         viewModelScope.launch {
@@ -130,9 +137,7 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
 
     fun filterByName(name: String) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByName(name).collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByName(name)
         }
     }
 
@@ -143,56 +148,47 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
         completed: Int,
         notified: Int
     ) {
+        _advancedSearchResultList.value = listOf()
         viewModelScope.launch {
-            toDoRepository.getToDoListByAdvancedSearch(
+            _advancedSearchStatus.value = AdvancedSearchStatus.LOADING
+            _advancedSearchResultList.value = toDoRepository.getToDoListByAdvancedSearch(
                 startDate,
                 endDate,
                 priority,
                 completed,
                 notified
-            ).collect {
-                _toDoList.postValue(it)
-            }
+            )
+            _advancedSearchStatus.value = AdvancedSearchStatus.DONE
         }
     }
 
     fun filterByClosestDeadline() {
         viewModelScope.launch {
-            toDoRepository.getToDoListByClosestDeadline().collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByClosestDeadline()
         }
     }
 
     fun filterByFurthestDeadline() {
         viewModelScope.launch {
-            toDoRepository.getToDoListByFurthestDeadline().collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByFurthestDeadline()
         }
     }
 
     fun filterByPriority(priority: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByPriority(priority).collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByPriority(priority)
         }
     }
 
     fun filterByCompleteState(completeState: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByCompleteState(completeState).collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByCompleteState(completeState)
         }
     }
 
     fun filterByNotificationState(notificationState: Int) {
         viewModelScope.launch {
-            toDoRepository.getToDoListByNotificationState(notificationState).collect {
-                _toDoList.postValue(it)
-            }
+            _toDoList.value = toDoRepository.getToDoListByNotificationState(notificationState)
         }
     }
 }
