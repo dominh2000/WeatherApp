@@ -1,18 +1,21 @@
 package com.example.weatherkotlin.ui.viewModel
 
 import androidx.lifecycle.*
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.data.domainModel.OneDayForecast
 import com.example.weatherkotlin.data.domainModel.OpenWeatherCurrentWeather
 import com.example.weatherkotlin.data.domainModel.OpenWeatherForecastFiveDays
+import com.example.weatherkotlin.data.repository.OpenWeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 enum class OpenWeatherApiStatus { LOADING, ERROR, DONE }
 
-class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
-
-    private val openWeatherRepository = app.openWeatherRepository
+@HiltViewModel
+class OpenWeatherViewModel @Inject constructor(
+    val openWeatherRepository: OpenWeatherRepository
+) : ViewModel() {
 
     private val _status = MutableLiveData<OpenWeatherApiStatus>()
     private val _weatherItem = MutableLiveData<OneDayForecast>()
@@ -75,15 +78,4 @@ class OpenWeatherViewModel(app: BaseApplication) : ViewModel() {
             }
         }
     }
-}
-
-class OpenWeatherViewModelFactory(val app: BaseApplication) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(OpenWeatherViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return OpenWeatherViewModel(app) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-
 }

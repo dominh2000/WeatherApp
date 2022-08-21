@@ -2,62 +2,74 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/simple_search"
+    <item
+        android:id="@+id/simple_search"
         android:icon="@drawable/ic_search"
         android:title="Tìm kiếm theo tên"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
-    <item android:id="@+id/filter_to_do"
+    <item
+        android:id="@+id/filter_to_do"
         android:icon="@drawable/ic_filter"
         android:title="Lọc"
         app:showAsAction="always">
         <menu>
             <item android:title="Hạn thực hiện">
                 <menu>
-                    <item android:id="@+id/closest_deadline"
-                        android:title="Hạn gần nhất"/>
-                    <item android:id="@+id/furthest_deadline"
-                        android:title="Hạn xa nhất"/>
+                    <item
+                        android:id="@+id/closest_deadline"
+                        android:title="Hạn gần nhất" />
+                    <item
+                        android:id="@+id/furthest_deadline"
+                        android:title="Hạn xa nhất" />
                 </menu>
             </item>
             <item android:title="Khẩn cấp và quan trọng">
                 <menu>
-                    <item android:id="@+id/by_priority_1"
-                        android:title="Khẩn cấp, quan trọng"/>
-                    <item android:id="@+id/by_priority_2"
-                        android:title="Không khẩn cấp, quan trọng"/>
-                    <item android:id="@+id/by_priority_3"
-                        android:title="Khẩn cấp, không quan trọng"/>
-                    <item android:id="@+id/by_priority_4"
-                        android:title="Không khẩn cấp, không quan trọng"/>
+                    <item
+                        android:id="@+id/by_priority_1"
+                        android:title="Khẩn cấp, quan trọng" />
+                    <item
+                        android:id="@+id/by_priority_2"
+                        android:title="Không khẩn cấp, quan trọng" />
+                    <item
+                        android:id="@+id/by_priority_3"
+                        android:title="Khẩn cấp, không quan trọng" />
+                    <item
+                        android:id="@+id/by_priority_4"
+                        android:title="Không khẩn cấp, không quan trọng" />
                 </menu>
             </item>
             <item android:title="Hoàn thành">
                 <menu>
-                    <item android:id="@+id/completed"
-                        android:title="Hoàn thành"/>
-                    <item android:id="@+id/not_completed"
-                        android:title="Chưa hoàn thành"/>
+                    <item
+                        android:id="@+id/completed"
+                        android:title="Hoàn thành" />
+                    <item
+                        android:id="@+id/not_completed"
+                        android:title="Chưa hoàn thành" />
                 </menu>
             </item>
             <item android:title="Thông báo">
                 <menu>
-                    <item android:id="@+id/set_notified"
-                        android:title="Có đặt thông báo"/>
-                    <item android:id="@+id/not_set_notified"
-                        android:title="Không đặt thông báo"/>
+                    <item
+                        android:id="@+id/set_notified"
+                        android:title="Có đặt thông báo" />
+                    <item
+                        android:id="@+id/not_set_notified"
+                        android:title="Không đặt thông báo" />
                 </menu>
             </item>
         </menu>
     </item>
 
-    <item android:id="@+id/advanced_search"
-        android:title="Tìm kiếm nâng cao"
-        />
+    <item
+        android:id="@+id/advanced_search"
+        android:title="Tìm kiếm nâng cao" />
 
-    <item android:id="@+id/logout"
+    <item
+        android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
         android:title="Đăng xuất"
-        app:showAsAction="collapseActionView"
-        />
+        app:showAsAction="collapseActionView" />
 </menu>

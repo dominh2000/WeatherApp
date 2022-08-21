@@ -9,27 +9,23 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
 import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAdvancedSearchToDoBinding
-import com.example.weatherkotlin.util.calculateMillisecondsForAdvancedSearch
 import com.example.weatherkotlin.ui.viewModel.AdvancedSearchStatus
 import com.example.weatherkotlin.ui.viewModel.ToDoViewModel
-import com.example.weatherkotlin.ui.viewModel.ToDoViewModelFactory
+import com.example.weatherkotlin.util.calculateMillisecondsForAdvancedSearch
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class FragmentAdvancedSearchToDo : Fragment() {
 
-    private val viewModel: ToDoViewModel by activityViewModels {
-        ToDoViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: ToDoViewModel by activityViewModels()
 
     private var _binding: FragmentAdvancedSearchToDoBinding? = null
     private val binding get() = _binding!!

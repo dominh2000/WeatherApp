@@ -21,10 +21,9 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.const.DATE_FORMAT_PATTERN_1
 import com.example.weatherkotlin.databinding.FragmentAddUpdateDeleteToDoBinding
 import com.example.weatherkotlin.ui.receiver.AlarmReceiver
+import com.example.weatherkotlin.ui.viewModel.ToDoViewModel
 import com.example.weatherkotlin.util.calculateCurrentTimeMilliseconds
 import com.example.weatherkotlin.util.calculateMillisecondsFromDate
-import com.example.weatherkotlin.ui.viewModel.ToDoViewModel
-import com.example.weatherkotlin.ui.viewModel.ToDoViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -32,18 +31,16 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textview.MaterialTextView
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class FragmentAddUpdateDeleteToDo : Fragment() {
 
     private val navigationArgs: FragmentAddUpdateDeleteToDoArgs by navArgs()
 
-    private val viewModel: ToDoViewModel by activityViewModels {
-        ToDoViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: ToDoViewModel by activityViewModels()
 
     private var _binding: FragmentAddUpdateDeleteToDoBinding? = null
     private val binding get() = _binding!!
@@ -84,7 +81,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
                     saveNewTask()
                 }
                 priorityUrgentImportant.isChecked = true
-                deleteAction.apply{
+                deleteAction.apply {
                     text = "Hủy"
                     setOnClickListener {
                         findNavController().popBackStack()

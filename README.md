@@ -27,9 +27,10 @@
 11. Room & SQLCipher
 12. Preferences DataStore
 13. WorkManager & Notifications
-14. FirebaseAuthentication với FirebaseUI
-15. Google Play Services Location
-16. R8 & ProGuard rules cho bản release
+14. DI với Hilt
+15. FirebaseAuthentication với FirebaseUI
+16. Google Play Services Location
+17. R8 & ProGuard rules cho bản release
 
 ## Chú ý
 * Để build project, cần thêm file `google-services.json` sinh bởi Firebase.

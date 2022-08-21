@@ -89,15 +89,14 @@
                 android:divider="?android:attr/dividerHorizontal"
                 android:showDividers="middle">
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/min_temp"/>
+                            android:src="@drawable/min_temp" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -120,15 +119,14 @@
                         tools:text="13,3 C" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/max_temp"/>
+                            android:src="@drawable/max_temp" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -151,14 +149,14 @@
                         tools:text="24,4 C" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/humidity"/>
+                            android:src="@drawable/humidity" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -181,15 +179,14 @@
                         tools:text="74%" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
+                <TableRow android:gravity="center">
 
-                    <LinearLayout
-                        android:orientation="horizontal">
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/air_pressure"/>
+                            android:src="@drawable/air_pressure" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -212,14 +209,14 @@
                         tools:text="1010,0 millibar" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/visibility"/>
+                            android:src="@drawable/visibility" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -243,14 +240,14 @@
                         tools:text="13,6 dặm" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/wind_direction"/>
+                            android:src="@drawable/wind_direction" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -273,14 +270,14 @@
                         tools:text="SSE" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/wind_speed"/>
+                            android:src="@drawable/wind_speed" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -303,14 +300,14 @@
                         tools:text="4,9 dặm/giờ" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <LinearLayout
-                        android:orientation="horizontal">
+                <TableRow android:gravity="center">
+
+                    <LinearLayout android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/percent"/>
+                            android:src="@drawable/percent" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"

@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.data.domainModel.Task
+import com.example.weatherkotlin.databinding.ItemToDoBinding
 import com.example.weatherkotlin.util.convertFromPattern1ToFullDate
 import com.google.android.material.chip.Chip
 

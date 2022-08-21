@@ -9,22 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.weatherkotlin.BaseApplication
-import com.example.weatherkotlin.ui.adapters.ToDoListAdapter
 import com.example.weatherkotlin.databinding.FragmentSimpleSearchToDoBinding
+import com.example.weatherkotlin.ui.adapters.ToDoListAdapter
 import com.example.weatherkotlin.ui.viewModel.ToDoViewModel
-import com.example.weatherkotlin.ui.viewModel.ToDoViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class FragmentSimpleSearchToDo : Fragment() {
 
-    private val viewModel: ToDoViewModel by activityViewModels {
-        ToDoViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: ToDoViewModel by activityViewModels()
 
     private var _binding: FragmentSimpleSearchToDoBinding? = null
     private val binding get() = _binding!!

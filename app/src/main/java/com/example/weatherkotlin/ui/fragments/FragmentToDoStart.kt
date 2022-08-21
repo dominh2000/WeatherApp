@@ -12,18 +12,17 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.databinding.FragmentToDoStartBinding
 import com.example.weatherkotlin.ui.viewModel.AuthenticationState
 import com.example.weatherkotlin.ui.viewModel.LoginViewModel
-import com.example.weatherkotlin.ui.viewModel.LoginViewModelFactory
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentToDoStart : Fragment() {
 
-    private val viewModel: LoginViewModel by activityViewModels {
-        LoginViewModelFactory()
-    }
+    private val viewModel: LoginViewModel by activityViewModels()
 
     private var _binding: FragmentToDoStartBinding? = null
     private val binding get() = _binding!!

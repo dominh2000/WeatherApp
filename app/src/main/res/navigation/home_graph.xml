@@ -22,7 +22,7 @@
         android:id="@+id/fragmentDetail"
         android:name="com.example.weatherkotlin.ui.fragments.FragmentDetail"
         android:label="@string/label_fragment_detail"
-        tools:layout="@layout/fragment_detail"/>
+        tools:layout="@layout/fragment_detail" />
 
     <fragment
         android:id="@+id/search_weather"
@@ -33,7 +33,7 @@
         android:id="@+id/fragmentOpenWeatherOverview"
         android:name="com.example.weatherkotlin.ui.fragments.FragmentOpenWeatherOverview"
         android:label="@string/label_fragment_ow_overview"
-        tools:layout="@layout/fragment_open_weather_overview" >
+        tools:layout="@layout/fragment_open_weather_overview">
         <action
             android:id="@+id/action_fragmentOpenWeatherOverview_to_fragmentOpenWeatherItemDetails"
             app:destination="@id/fragmentOpenWeatherItemDetails"
@@ -46,6 +46,6 @@
         android:id="@+id/fragmentOpenWeatherItemDetails"
         android:name="com.example.weatherkotlin.ui.fragments.FragmentOpenWeatherItemDetails"
         android:label="@string/label_fragment_detail"
-        tools:layout="@layout/fragment_open_weather_item_details"/>
+        tools:layout="@layout/fragment_open_weather_item_details" />
 
 </navigation>

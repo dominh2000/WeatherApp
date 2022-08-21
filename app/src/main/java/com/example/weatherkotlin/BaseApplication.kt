@@ -5,35 +5,24 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
-import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
-import com.example.weatherkotlin.data.repository.MetaWeatherRepository
-import com.example.weatherkotlin.data.repository.OpenWeatherRepository
-import com.example.weatherkotlin.data.repository.ToDoRepository
 import com.example.weatherkotlin.ui.work.RefreshWeatherDataWorker
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class BaseApplication : Application() {
+@HiltAndroidApp
+class BaseApplication : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
 
     // CoroutineScope with Default Dispatchers to launch delayed Init
     private val applicationScope = CoroutineScope(Dispatchers.Default)
-
-    // Lazy initialization for singletons throughout the app
-    val databaseApplication: ApplicationRoomDatabase by lazy {
-        ApplicationRoomDatabase.getDatabase(this, "Hello123!")
-    }
-    val openWeatherRepository: OpenWeatherRepository by lazy {
-        OpenWeatherRepository(databaseApplication)
-    }
-    val toDoRepository: ToDoRepository by lazy {
-        ToDoRepository(databaseApplication)
-    }
-    val metaWeatherRepository: MetaWeatherRepository by lazy {
-        MetaWeatherRepository(databaseApplication)
-    }
 
     companion object {
         const val CHANNEL_WEATHER_ID = "weather_update_id"
@@ -98,5 +87,11 @@ class BaseApplication : Application() {
             ExistingPeriodicWorkPolicy.KEEP,
             weatherWorkRequest
         )
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
     }
 }

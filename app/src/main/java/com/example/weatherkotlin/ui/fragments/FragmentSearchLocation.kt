@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.weatherkotlin.databinding.FragmentSearchLocationBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentSearchLocation : Fragment() {
 
     private var _binding: FragmentSearchLocationBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(

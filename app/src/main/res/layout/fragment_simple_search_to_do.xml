@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
-        app:iconifiedByDefault="false"/>
+        app:iconifiedByDefault="false" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_simple_search"
@@ -28,7 +28,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:padding="7dp"
         android:scrollbars="vertical"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_empty_search_result"
@@ -39,5 +39,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

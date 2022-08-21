@@ -6,24 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.FragmentListToDo">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_to_do_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top|start"
-            android:padding="5dp"
-            android:clipToPadding="false"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/item_to_do"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_to_do_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|start"
+        android:padding="5dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_to_do" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:importantForAccessibility="no"
-            android:layout_gravity="bottom|end"
-            app:icon="@drawable/ic_add"
-            android:text="Thêm"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:importantForAccessibility="no"
+        android:layout_gravity="bottom|end"
+        app:icon="@drawable/ic_add"
+        android:text="Thêm" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

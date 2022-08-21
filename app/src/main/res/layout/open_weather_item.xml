@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="weatherState"
             type="String" />
@@ -41,7 +42,7 @@
                 app:imageUriOW="@{weatherState}"
                 app:layout_constraintEnd_toStartOf="@+id/temperature_item"
                 app:layout_constraintTop_toTopOf="@id/date_item"
-                app:layout_constraintBottom_toBottomOf="@id/date_item"/>
+                app:layout_constraintBottom_toBottomOf="@id/date_item" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/temperature_item"

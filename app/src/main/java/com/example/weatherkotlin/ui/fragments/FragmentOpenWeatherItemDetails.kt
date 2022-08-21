@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.databinding.FragmentOpenWeatherItemDetailsBinding
-import com.example.weatherkotlin.util.convertDateFromPattern5ToPattern4
 import com.example.weatherkotlin.ui.viewModel.OpenWeatherViewModel
-import com.example.weatherkotlin.ui.viewModel.OpenWeatherViewModelFactory
+import com.example.weatherkotlin.util.convertDateFromPattern5ToPattern4
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentOpenWeatherItemDetails : Fragment() {
 
-    private val viewModel: OpenWeatherViewModel by activityViewModels {
-        OpenWeatherViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: OpenWeatherViewModel by activityViewModels()
 
     private var _binding: FragmentOpenWeatherItemDetailsBinding? = null
     private val binding get() = _binding!!

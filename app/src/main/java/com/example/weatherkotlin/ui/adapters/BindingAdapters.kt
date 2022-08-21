@@ -63,7 +63,7 @@ fun bindApiStatus(statusImageView: ImageView, apiStatus: WeatherApiStatus?, cont
                 LENGTH_SHORT
             ).show()
         }
-        else -> { }
+        else -> {}
     }
 }
 
@@ -117,6 +117,6 @@ fun bindOWApiStatus(
                 .setAnchorView(R.id.bottom_nav)
                 .show()
         }
-        else -> { }
+        else -> {}
     }
 }

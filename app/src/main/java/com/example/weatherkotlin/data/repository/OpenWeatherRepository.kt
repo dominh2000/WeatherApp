@@ -2,16 +2,20 @@ package com.example.weatherkotlin.data.repository
 
 import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
 import com.example.weatherkotlin.data.dataSources.database.asDomainModel
+import com.example.weatherkotlin.data.dataSources.network.OpenWeatherApiServices
+import com.example.weatherkotlin.data.dataSources.network.asDatabaseModel
 import com.example.weatherkotlin.data.domainModel.OpenWeatherCurrentWeather
 import com.example.weatherkotlin.data.domainModel.OpenWeatherForecastFiveDays
-import com.example.weatherkotlin.data.dataSources.network.OpenWeatherApi
-import com.example.weatherkotlin.data.dataSources.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class OpenWeatherRepository(private val database: ApplicationRoomDatabase) {
+class OpenWeatherRepository @Inject constructor(
+    val database: ApplicationRoomDatabase,
+    val apiServices: OpenWeatherApiServices
+) {
 
     val currentWeather: Flow<OpenWeatherCurrentWeather> =
         database.openWeatherDao().getCurrentWeather().transform {
@@ -29,8 +33,8 @@ class OpenWeatherRepository(private val database: ApplicationRoomDatabase) {
 
     suspend fun refreshOpenWeather() {
         withContext(Dispatchers.IO) {
-            val fiveDaysForecast = OpenWeatherApi.retrofitServices.getOpenWeatherForecast()
-            val currentWeather = OpenWeatherApi.retrofitServices.getOpenWeatherCurrentWeather()
+            val fiveDaysForecast = apiServices.getOpenWeatherForecast()
+            val currentWeather = apiServices.getOpenWeatherCurrentWeather()
             database.openWeatherDao().insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
             database.openWeatherDao()
                 .insertForecast5Days(fiveDaysForecast.listForecast.asDatabaseModel())
@@ -41,9 +45,9 @@ class OpenWeatherRepository(private val database: ApplicationRoomDatabase) {
     suspend fun getOpenWeatherByCoord(latt: Double, long: Double) {
         withContext(Dispatchers.IO) {
             val currentWeather =
-                OpenWeatherApi.retrofitServices.getOpenWeatherCurrentWeatherByCoord(latt, long)
+                apiServices.getOpenWeatherCurrentWeatherByCoord(latt, long)
             val fiveDaysForecast =
-                OpenWeatherApi.retrofitServices.getOpenWeatherForecastByCoord(latt, long)
+                apiServices.getOpenWeatherForecastByCoord(latt, long)
             database.openWeatherDao().insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
             database.openWeatherDao()
                 .insertForecast5Days(fiveDaysForecast.listForecast.asDatabaseModel())

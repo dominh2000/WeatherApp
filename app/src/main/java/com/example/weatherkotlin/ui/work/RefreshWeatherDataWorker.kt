@@ -3,18 +3,25 @@ package com.example.weatherkotlin.ui.work
 import android.app.NotificationManager
 import android.content.Context
 import androidx.core.content.ContextCompat
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase.Companion.getDatabase
 import com.example.weatherkotlin.data.dataSources.datastore.WeatherLocationDataStore
 import com.example.weatherkotlin.data.repository.OpenWeatherRepository
 import com.example.weatherkotlin.util.sendNotificationWithContentIntent
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.first
 import kotlin.math.roundToInt
 
-class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
+@HiltWorker
+class RefreshWeatherDataWorker @AssistedInject constructor(
+    @Assisted val ctx: Context,
+    @Assisted val params: WorkerParameters,
+    val repository: OpenWeatherRepository
+) :
     CoroutineWorker(ctx, params) {
 
     companion object {
@@ -24,19 +31,17 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         val appContext = applicationContext
         val weatherLocationDataStore = WeatherLocationDataStore(appContext)
-        val openWeatherDb = getDatabase(appContext, "Hello123!")
-        val openWeatherRepo = OpenWeatherRepository(openWeatherDb)
 
         return try {
             weatherLocationDataStore.locationFlow.first().let {
                 if (it[0] == 0.0 && it[1] == 0.0) {
-                    openWeatherRepo.refreshOpenWeather()
+                    repository.refreshOpenWeather()
                 } else {
-                    openWeatherRepo.getOpenWeatherByCoord(it[0], it[1])
+                    repository.getOpenWeatherByCoord(it[0], it[1])
                 }
             }
 
-            openWeatherRepo.currentWeather.first().let {
+            repository.currentWeather.first().let {
                 val notificationId = 10000
                 val contentTitle = "Thời tiết ".plus(it.cityName)
                 val contentText = it.forecastInfo.temp.roundToInt().toString().plus("°C | ")
@@ -75,5 +80,4 @@ class RefreshWeatherDataWorker(ctx: Context, params: WorkerParameters) :
             Result.retry()
         }
     }
-
 }

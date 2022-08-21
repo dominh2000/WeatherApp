@@ -8,8 +8,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ToDoRepository(private val database: ApplicationRoomDatabase) {
+class ToDoRepository @Inject constructor(
+    val database: ApplicationRoomDatabase
+) {
 
     val toDoList: Flow<List<Task>> = database.taskDao().getAllTasksDesc().transform {
         emit(it.asDomainModel())

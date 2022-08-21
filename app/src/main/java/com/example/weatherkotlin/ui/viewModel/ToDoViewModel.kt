@@ -1,16 +1,22 @@
 package com.example.weatherkotlin.ui.viewModel
 
-import androidx.lifecycle.*
-import com.example.weatherkotlin.BaseApplication
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.weatherkotlin.data.domainModel.Task
+import com.example.weatherkotlin.data.repository.ToDoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 enum class AdvancedSearchStatus { LOADING, DONE }
 
-class ToDoViewModel(app: BaseApplication) : ViewModel() {
-
-    private val toDoRepository = app.toDoRepository
+@HiltViewModel
+class ToDoViewModel @Inject constructor(
+    val toDoRepository: ToDoRepository
+) : ViewModel() {
 
     private val _toDoList = MutableLiveData<List<Task>>()
     private val _advancedSearchResultList = MutableLiveData<List<Task>>(listOf())
@@ -190,15 +196,5 @@ class ToDoViewModel(app: BaseApplication) : ViewModel() {
         viewModelScope.launch {
             _toDoList.value = toDoRepository.getToDoListByNotificationState(notificationState)
         }
-    }
-}
-
-class ToDoViewModelFactory(val app: BaseApplication) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ToDoViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ToDoViewModel(app) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

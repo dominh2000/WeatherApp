@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.gms.google-services'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -22,7 +23,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 4
-        versionName "1.1.4"
+        versionName "1.1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -93,8 +94,10 @@ dependencies {
     // SQLCipher
     implementation 'net.zetetic:android-database-sqlcipher:4.5.2'
 
-    // WorkManager
+    // WorkManager + Hilt
     implementation "androidx.work:work-runtime-ktx:2.7.1"
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
     // Firebase Authentication + Support Android 12+
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
@@ -107,5 +110,9 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // Paris for adding View style dynamically
-    implementation 'com.airbnb.android:paris:2.0.0'
+    implementation 'com.airbnb.android:paris:2.0.1'
+
+    // Dagger-Hilt
+    implementation 'com.google.dagger:hilt-android:2.43.2'
+    kapt 'com.google.dagger:hilt-compiler:2.43.2'
 }

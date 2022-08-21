@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -29,7 +28,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/to_do_list"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3"/>
+                android:layout_weight="3" />
 
             <LinearLayout
                 android:id="@+id/linear_to_do"
@@ -46,7 +45,7 @@
                     android:textAllCaps="true"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:textColor="@color/blue"
-                    android:text="@string/to_do_start_title"/>
+                    android:text="@string/to_do_start_title" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -54,7 +53,7 @@
                     android:layout_marginTop="5dp"
                     android:justificationMode="inter_word"
                     android:text="@string/to_do_start_description"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"/>
+                    android:textAppearance="?attr/textAppearanceBodyMedium" />
             </LinearLayout>
 
             <ImageView
@@ -65,7 +64,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
                 android:layout_weight="2"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.google.android.material.card.MaterialCardView>

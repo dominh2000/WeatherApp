@@ -8,22 +8,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.ui.adapters.ToDoListAdapter
 import com.example.weatherkotlin.databinding.FragmentListToDoBinding
-import com.example.weatherkotlin.util.launchLogoutAlertDialog
+import com.example.weatherkotlin.ui.adapters.ToDoListAdapter
 import com.example.weatherkotlin.ui.viewModel.ToDoViewModel
-import com.example.weatherkotlin.ui.viewModel.ToDoViewModelFactory
+import com.example.weatherkotlin.util.launchLogoutAlertDialog
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentListToDo : Fragment() {
 
-    private val viewModel: ToDoViewModel by activityViewModels {
-        ToDoViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: ToDoViewModel by activityViewModels()
 
     private var _binding: FragmentListToDoBinding? = null
     private val binding get() = _binding!!

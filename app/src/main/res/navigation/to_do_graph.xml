@@ -9,7 +9,7 @@
         android:id="@+id/fragmentToDoStart"
         android:name="com.example.weatherkotlin.ui.fragments.FragmentToDoStart"
         android:label="@string/label_fragment_to_do_start"
-        tools:layout="@layout/fragment_to_do_start" >
+        tools:layout="@layout/fragment_to_do_start">
         <action
             android:id="@+id/action_fragmentToDoStart_to_fragmentListToDo"
             app:destination="@id/fragmentListToDo"
@@ -26,7 +26,7 @@
         android:id="@+id/fragmentListToDo"
         android:name="com.example.weatherkotlin.ui.fragments.FragmentListToDo"
         android:label="@string/label_fragment_list_to_do"
-        tools:layout="@layout/fragment_list_to_do" >
+        tools:layout="@layout/fragment_list_to_do">
         <action
             android:id="@+id/action_fragmentListToDo_to_fragmentAddToDo"
             app:destination="@id/fragmentAddToDo"

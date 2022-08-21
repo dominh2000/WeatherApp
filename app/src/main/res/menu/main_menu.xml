@@ -2,16 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/refresh_weather"
+    <item
+        android:id="@+id/refresh_weather"
         android:icon="@drawable/ic_refresh"
         android:title="Cập nhật thời tiết"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/locate_weather"
+    <item
+        android:id="@+id/locate_weather"
         android:icon="@drawable/ic_locate"
         android:title="Thời tiết của vị trí hiện tại"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 
     <!--
     <item android:id="@+id/search_weather"

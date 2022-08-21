@@ -1,15 +1,17 @@
 package com.example.weatherkotlin.ui.viewModel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import com.example.weatherkotlin.ui.livedata.FirebaseUserLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 enum class AuthenticationState {
     AUTHENTICATED, UNAUTHENTICATED
 }
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor() : ViewModel() {
 
     val authenticationState = FirebaseUserLiveData().map {
         if (it != null) {
@@ -18,15 +20,4 @@ class LoginViewModel : ViewModel() {
             AuthenticationState.UNAUTHENTICATED
         }
     }
-}
-
-class LoginViewModelFactory: ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return LoginViewModel() as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel Class")
-    }
-
 }

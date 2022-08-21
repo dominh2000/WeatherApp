@@ -1,16 +1,19 @@
 package com.example.weatherkotlin.ui.viewModel
 
 import androidx.lifecycle.*
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.data.domainModel.LocationInfo
 import com.example.weatherkotlin.data.domainModel.WeatherOneDay
+import com.example.weatherkotlin.data.repository.MetaWeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
-class WeatherViewModel(app: BaseApplication) : ViewModel() {
-
-    private val weatherRepository = app.metaWeatherRepository
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
+    val weatherRepository: MetaWeatherRepository
+) : ViewModel() {
 
     private val _status = MutableLiveData<WeatherApiStatus>()
     private val _oneWeather = MutableLiveData<WeatherOneDay>()
@@ -41,15 +44,4 @@ class WeatherViewModel(app: BaseApplication) : ViewModel() {
     fun onWeatherItemClicked(weatherOneDay: WeatherOneDay) {
         _oneWeather.value = weatherOneDay
     }
-}
-
-class WeatherViewModelFactory(val app: BaseApplication) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WeatherViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return WeatherViewModel(app) as T
-        }
-        throw IllegalArgumentException("Unknown View Model class")
-    }
-
 }

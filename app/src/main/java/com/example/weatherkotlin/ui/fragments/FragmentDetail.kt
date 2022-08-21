@@ -6,21 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.databinding.FragmentDetailBinding
 import com.example.weatherkotlin.ui.viewModel.WeatherViewModel
-import com.example.weatherkotlin.ui.viewModel.WeatherViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentDetail : Fragment() {
 
-    private val viewModel: WeatherViewModel by activityViewModels {
-        WeatherViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: WeatherViewModel by activityViewModels()
 
     private var _binding: FragmentDetailBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(

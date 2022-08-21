@@ -15,7 +15,7 @@ data class DatabaseTask(
     @ColumnInfo(name = "deadline_hour") val deadlineHour: String,
     @ColumnInfo(name = "is_notified", defaultValue = "0") val isNotified: Boolean,
     @ColumnInfo val completed: Boolean
-    )
+)
 
 // Extension functions
 fun List<DatabaseTask>.asDomainModel(): List<Task> {

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherkotlin.databinding.ListItemBinding
 import com.example.weatherkotlin.data.domainModel.WeatherOneDay
+import com.example.weatherkotlin.databinding.ListItemBinding
 import com.example.weatherkotlin.util.showTemperature
 
 class WeatherDatesAdapter(private val onItemClicked: (WeatherOneDay) -> Unit) :

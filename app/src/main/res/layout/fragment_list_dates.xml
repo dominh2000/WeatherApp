@@ -51,7 +51,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date"/>
+            app:layout_constraintTop_toBottomOf="@id/date" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/current_temp"
@@ -118,7 +118,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:importantForAccessibility="no"/>
+            android:importantForAccessibility="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

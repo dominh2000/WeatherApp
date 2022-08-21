@@ -7,23 +7,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.ui.adapters.WeatherDatesAdapter
 import com.example.weatherkotlin.databinding.FragmentListDatesBinding
+import com.example.weatherkotlin.ui.adapters.WeatherDatesAdapter
 import com.example.weatherkotlin.ui.viewModel.WeatherViewModel
-import com.example.weatherkotlin.ui.viewModel.WeatherViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentListDates : Fragment() {
 
-    private val viewModel: WeatherViewModel by activityViewModels {
-        WeatherViewModelFactory(
-            (activity?.application as BaseApplication)
-        )
-    }
+    private val viewModel: WeatherViewModel by activityViewModels()
 
     private var _binding: FragmentListDatesBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(

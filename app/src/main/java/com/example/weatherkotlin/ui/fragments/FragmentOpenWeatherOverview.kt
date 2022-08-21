@@ -12,27 +12,23 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.weatherkotlin.BaseApplication
 import com.example.weatherkotlin.R
-import com.example.weatherkotlin.ui.adapters.OpenWeatherDatesAdapter
-import com.example.weatherkotlin.databinding.FragmentOpenWeatherOverviewBinding
 import com.example.weatherkotlin.data.dataSources.datastore.WeatherLocationDataStore
+import com.example.weatherkotlin.databinding.FragmentOpenWeatherOverviewBinding
+import com.example.weatherkotlin.ui.adapters.OpenWeatherDatesAdapter
 import com.example.weatherkotlin.ui.viewModel.OpenWeatherViewModel
-import com.example.weatherkotlin.ui.viewModel.OpenWeatherViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class FragmentOpenWeatherOverview : Fragment() {
 
     private val LOCATION_PERMISSION_REQ_CODE = 1000
 
-    private val viewModel: OpenWeatherViewModel by activityViewModels {
-        OpenWeatherViewModelFactory(
-            activity?.application as BaseApplication
-        )
-    }
+    private val viewModel: OpenWeatherViewModel by activityViewModels()
 
     private var _binding: FragmentOpenWeatherOverviewBinding? = null
     private val binding get() = _binding!!

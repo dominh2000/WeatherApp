@@ -63,7 +63,7 @@ data class FullForecastFiveDays(
 )
 
 // Extension functions
-fun FullForecastFiveDays.asDomainModel(): OpenWeatherForecastFiveDays{
+fun FullForecastFiveDays.asDomainModel(): OpenWeatherForecastFiveDays {
     return this.let {
         OpenWeatherForecastFiveDays(
             it.city.id,
@@ -73,7 +73,7 @@ fun FullForecastFiveDays.asDomainModel(): OpenWeatherForecastFiveDays{
     }
 }
 
-fun CurrentWeather.asDomainModel(): OpenWeatherCurrentWeather{
+fun CurrentWeather.asDomainModel(): OpenWeatherCurrentWeather {
     return this.let {
         OpenWeatherCurrentWeather(
             it.cityId,
@@ -103,7 +103,7 @@ fun CurrentWeather.asDomainModel(): OpenWeatherCurrentWeather{
     }
 }
 
-fun List<ForecastOneDay>.asDomainModel(): List<OneDayForecast>{
+fun List<ForecastOneDay>.asDomainModel(): List<OneDayForecast> {
     return this.map {
         OneDayForecast(
             it.id,

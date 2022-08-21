@@ -26,6 +26,7 @@
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/drawable/ic_warning.xml" value="0.192" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/drawable/loading_img.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/activity_search_weather_by_location.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_add_to_do.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_add_update_delete_to_do.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/layout/fragment_advanced_search_to_do.xml" value="0.2" />
@@ -55,6 +56,7 @@
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/menu/to_do_menu.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2555" />
         <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2555" />
+        <entry key="..\:/AndroidStudioProjects/WeatherKotlin/app/src/main/res/xml/searchable.xml" value="0.1" />
       </map>
     </option>
   </component>

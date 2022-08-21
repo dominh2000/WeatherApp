@@ -8,6 +8,8 @@ const val DATE_FORMAT_PATTERN_4 = "HH:mm, E, d MMM, yyyy"
 const val DATE_FORMAT_PATTERN_5 = "yyyy-MM-dd HH:mm"
 const val DOUBLE_NUMBER_FORM = "%.2f"
 const val WEATHER_LOCATION_PREFERENCES = "weather_location_preferences"
+const val BASE_OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/"
+const val BASE_META_WEATHER_URL = "https://www.metaweather.com/api/location/"
 
 val weatherStates = mapOf(
     "sn" to "Tuyết rơi",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.WeatherKotlin.TextInputLayout.OutlinedBox"
-        parent="Widget.Material3.TextInputLayout.OutlinedBox">
+
+    <style name="Widget.WeatherKotlin.TextInputLayout.OutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxStrokeErrorColor">@color/red_700</item>
         <item name="errorIconTint">@color/red_700</item>
         <item name="errorTextColor">@color/red_700</item>
