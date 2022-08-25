@@ -6,6 +6,7 @@ import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -26,8 +27,6 @@ import kotlin.math.roundToInt
 @AndroidEntryPoint
 class FragmentOpenWeatherOverview : Fragment() {
 
-    private val LOCATION_PERMISSION_REQ_CODE = 1000
-
     private val viewModel: OpenWeatherViewModel by activityViewModels()
 
     private var _binding: FragmentOpenWeatherOverviewBinding? = null
@@ -35,6 +34,15 @@ class FragmentOpenWeatherOverview : Fragment() {
 
     private lateinit var weatherLocationDataStore: WeatherLocationDataStore
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                getLocation()
+            } else {
+                showToastAskingForPermission()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,48 +108,59 @@ class FragmentOpenWeatherOverview : Fragment() {
     }
 
     private fun getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(
+        when (PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                LOCATION_PERMISSION_REQ_CODE
-            )
+            ) -> {
+                getLocation()
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            }
         }
+    }
 
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    viewModel.getOpenWeatherInfoByCoord(location.latitude, location.longitude)
-                    lifecycleScope.launch {
-                        weatherLocationDataStore.saveWeatherLocationToPreferencesStore(
-                            location.latitude,
-                            location.longitude,
-                            requireContext()
-                        )
+    private fun getLocation() {
+        try {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        viewModel.getOpenWeatherInfoByCoord(location.latitude, location.longitude)
+                        lifecycleScope.launch {
+                            weatherLocationDataStore.saveWeatherLocationToPreferencesStore(
+                                location.latitude,
+                                location.longitude,
+                                requireContext()
+                            )
+                        }
+                        Toast.makeText(
+                            requireContext(),
+                            "Vị trí của bạn: Latt ${location.latitude.roundToInt()}, Long ${location.longitude.roundToInt()}.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Không thể lấy vị trí. Hãy bật cài đặt vị trí trên thiết bị của bạn!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    Toast.makeText(
-                        requireContext(),
-                        "Vị trí của bạn: Latt ${location.latitude.roundToInt()}, Long ${location.longitude.roundToInt()}.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Không thể lấy vị trí. Hãy bật cài đặt vị trí trên thiết bị của bạn!",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Hãy cho phép quyền truy cập vị trí để sử dụng chức năng này!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+            showToastAskingForPermission()
+        }
+    }
+
+    private fun showToastAskingForPermission() {
+        Toast.makeText(
+            requireContext(),
+            "Hãy cho phép quyền truy cập vị trí để sử dụng chức năng này!",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

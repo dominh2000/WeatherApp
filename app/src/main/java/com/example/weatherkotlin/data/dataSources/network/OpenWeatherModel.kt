@@ -109,7 +109,7 @@ data class Clouds(
 data class Wind(
     @Json(name = "speed") val speed: Double,
     @Json(name = "deg") val degree: Int,
-    @Json(name = "gust") val gust: Double
+    @Json(name = "gust") val gust: Double = 0.0
 )
 
 data class Rain(
