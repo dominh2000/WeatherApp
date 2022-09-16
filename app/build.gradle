@@ -7,6 +7,11 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def properties = new Properties()
+if (rootProject.file("local.properties").exists()) {
+    properties.load(rootProject.file("local.properties").newDataInputStream())
+}
+
 android {
     signingConfigs {
         release {
@@ -16,14 +21,14 @@ android {
             keyPassword 'Hello123!'
         }
     }
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.weatherkotlin"
         minSdk 21
-        targetSdk 32
-        versionCode 4
-        versionName "1.1.6"
+        targetSdk 33
+        versionCode 5
+        versionName "1.1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -34,6 +39,9 @@ android {
                 }
             }
         }
+
+        resValue "string", "sqlite_password", properties.getProperty("sqlite.password", "")
+        resValue "string", "open_weather_api_key", properties.getProperty("openweather.api.key", "")
     }
 
     buildTypes {
@@ -59,8 +67,8 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -72,19 +80,19 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.2"
 
     // Moshi
-    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     // Retrofit with Moshi Converter
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
 
     // Coil with SVG
-    implementation 'io.coil-kt:coil:2.2.0'
-    implementation 'io.coil-kt:coil-svg:2.2.0'
+    implementation 'io.coil-kt:coil:2.2.1'
+    implementation 'io.coil-kt:coil-svg:2.2.1'
 
     // Room
     implementation "androidx.room:room-runtime:2.4.3"
@@ -101,7 +109,7 @@ dependencies {
 
     // Firebase Authentication + Support Android 12+
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
-    implementation "com.google.android.gms:play-services-auth:20.2.0"
+    implementation "com.google.android.gms:play-services-auth:20.3.0"
 
     // Google Play Service location
     implementation 'com.google.android.gms:play-services-location:20.0.0'

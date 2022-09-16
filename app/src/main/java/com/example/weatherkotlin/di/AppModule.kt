@@ -2,6 +2,7 @@ package com.example.weatherkotlin.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.weatherkotlin.R
 import com.example.weatherkotlin.const.BASE_META_WEATHER_URL
 import com.example.weatherkotlin.const.BASE_OPEN_WEATHER_URL
 import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
@@ -14,6 +15,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -23,14 +25,49 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    val password = "Hello123"
+    @SQLCipherPasswordString
+    @Provides
+    @Singleton
+    fun provideSQLCipherPassword(
+        @ApplicationContext ctx: Context
+    ): String =
+        ctx.resources.getString(R.string.sqlite_password)
+
+    @OpenWeatherApiKeyString
+    @Provides
+    @Singleton
+    fun provideOpenWeatherApiKey(
+        @ApplicationContext ctx: Context
+    ): String =
+        ctx.resources.getString(R.string.open_weather_api_key)
+
+    @Provides
+    @Singleton
+    fun provideInterceptor(
+        @OpenWeatherApiKeyString apiKey: String
+    ): Interceptor =
+        Interceptor { chain ->
+            val newUrl = chain.request().url
+                .newBuilder()
+                .addQueryParameter("appid", apiKey)
+                .build()
+
+            val newRequest = chain.request()
+                .newBuilder()
+                .url(newUrl)
+                .build()
+
+            chain.proceed(newRequest)
+        }
 
     @Provides
     @Singleton
     fun provideHttpClient(
-        @ApplicationContext ctx: Context
+        @ApplicationContext ctx: Context,
+        interceptor: Interceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(interceptor)
             .addInterceptor(ChuckerInterceptor.Builder(ctx).build())
             .build()
 
@@ -38,10 +75,11 @@ class AppModule {
     @Singleton
     fun getDatabase(
         @ApplicationContext ctx: Context,
+        @SQLCipherPasswordString sqlCipherPassword: String
     ): ApplicationRoomDatabase =
         ApplicationRoomDatabase.getDatabase(
             ctx,
-            password
+            sqlCipherPassword
         )
 
     @Provides

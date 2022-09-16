@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.example.weatherkotlin.ui.work.RefreshWeatherDataWorker
+import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +33,7 @@ class BaseApplication : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         delayedInit()
-//        DynamicColors.applyToActivitiesIfAvailable(this);
+        DynamicColors.applyToActivitiesIfAvailable(this);
     }
 
     private fun delayedInit() {
