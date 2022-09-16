@@ -8,8 +8,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -53,7 +56,6 @@ class FragmentOpenWeatherOverview : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         _binding = FragmentOpenWeatherOverviewBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -61,6 +63,36 @@ class FragmentOpenWeatherOverview : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // addMenuProvider API to replace deprecated APIs
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.refresh_weather -> {
+                        weatherLocationDataStore.locationFlow.asLiveData()
+                            .observe(viewLifecycleOwner) {
+                                if (it[0] == 0.0 && it[1] == 0.0) {
+                                    viewModel.getOpenWeatherInfo()
+                                } else {
+                                    viewModel.getOpenWeatherInfoByCoord(it[0], it[1])
+                                }
+                            }
+                        true
+                    }
+                    R.id.locate_weather -> {
+                        getCurrentLocation()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         weatherLocationDataStore = WeatherLocationDataStore(requireContext())
         weatherLocationDataStore.locationFlow.asLiveData().observe(viewLifecycleOwner) {
             if (it[0] == 0.0 && it[1] == 0.0) {
@@ -81,30 +113,6 @@ class FragmentOpenWeatherOverview : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.refresh_weather -> {
-                weatherLocationDataStore.locationFlow.asLiveData().observe(viewLifecycleOwner) {
-                    if (it[0] == 0.0 && it[1] == 0.0) {
-                        viewModel.getOpenWeatherInfo()
-                    } else {
-                        viewModel.getOpenWeatherInfoByCoord(it[0], it[1])
-                    }
-                }
-                true
-            }
-            R.id.locate_weather -> {
-                getCurrentLocation()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun getCurrentLocation() {

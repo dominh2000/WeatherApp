@@ -3,8 +3,11 @@ package com.example.weatherkotlin.ui.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,12 +31,82 @@ class FragmentListToDo : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         _binding = FragmentListToDoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // addMenuProvider API to replace deprecated APIs
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.to_do_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.logout -> {
+                        launchLogoutAlertDialog(requireContext(), findNavController())
+                        true
+                    }
+                    R.id.closest_deadline -> {
+                        viewModel.filterByClosestDeadline()
+                        true
+                    }
+                    R.id.furthest_deadline -> {
+                        viewModel.filterByFurthestDeadline()
+                        true
+                    }
+                    R.id.by_priority_1 -> {
+                        viewModel.filterByPriority(1)
+                        true
+                    }
+                    R.id.by_priority_2 -> {
+                        viewModel.filterByPriority(2)
+                        true
+                    }
+                    R.id.by_priority_3 -> {
+                        viewModel.filterByPriority(3)
+                        true
+                    }
+                    R.id.by_priority_4 -> {
+                        viewModel.filterByPriority(4)
+                        true
+                    }
+                    R.id.not_completed -> {
+                        viewModel.filterByCompleteState(0)
+                        true
+                    }
+                    R.id.completed -> {
+                        viewModel.filterByCompleteState(1)
+                        true
+                    }
+                    R.id.not_set_notified -> {
+                        viewModel.filterByNotificationState(0)
+                        true
+                    }
+                    R.id.set_notified -> {
+                        viewModel.filterByNotificationState(1)
+                        true
+                    }
+                    R.id.simple_search -> {
+                        val action =
+                            FragmentListToDoDirections.actionFragmentListToDoToFragmentSimpleSearchToDo()
+                        findNavController().navigate(action)
+                        true
+                    }
+                    R.id.advanced_search -> {
+                        val action =
+                            FragmentListToDoDirections.actionFragmentListToDoToFragmentAdvancedSearchToDo()
+                        findNavController().navigate(action)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         val snackBarType = FragmentListToDoArgs.fromBundle(requireArguments()).snackBarType
         val userDisplayName = FragmentListToDoArgs.fromBundle(requireArguments()).userDisplayName
 
@@ -99,69 +172,4 @@ class FragmentListToDo : Fragment() {
         _binding = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.to_do_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.logout -> {
-                launchLogoutAlertDialog(requireContext(), findNavController())
-                true
-            }
-            R.id.closest_deadline -> {
-                viewModel.filterByClosestDeadline()
-                true
-            }
-            R.id.furthest_deadline -> {
-                viewModel.filterByFurthestDeadline()
-                true
-            }
-            R.id.by_priority_1 -> {
-                viewModel.filterByPriority(1)
-                true
-            }
-            R.id.by_priority_2 -> {
-                viewModel.filterByPriority(2)
-                true
-            }
-            R.id.by_priority_3 -> {
-                viewModel.filterByPriority(3)
-                true
-            }
-            R.id.by_priority_4 -> {
-                viewModel.filterByPriority(4)
-                true
-            }
-            R.id.not_completed -> {
-                viewModel.filterByCompleteState(0)
-                true
-            }
-            R.id.completed -> {
-                viewModel.filterByCompleteState(1)
-                true
-            }
-            R.id.not_set_notified -> {
-                viewModel.filterByNotificationState(0)
-                true
-            }
-            R.id.set_notified -> {
-                viewModel.filterByNotificationState(1)
-                true
-            }
-            R.id.simple_search -> {
-                val action =
-                    FragmentListToDoDirections.actionFragmentListToDoToFragmentSimpleSearchToDo()
-                findNavController().navigate(action)
-                true
-            }
-            R.id.advanced_search -> {
-                val action =
-                    FragmentListToDoDirections.actionFragmentListToDoToFragmentAdvancedSearchToDo()
-                findNavController().navigate(action)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

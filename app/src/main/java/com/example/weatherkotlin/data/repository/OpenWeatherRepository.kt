@@ -1,6 +1,6 @@
 package com.example.weatherkotlin.data.repository
 
-import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
+import com.example.weatherkotlin.data.dataSources.database.OpenWeatherDao
 import com.example.weatherkotlin.data.dataSources.database.asDomainModel
 import com.example.weatherkotlin.data.dataSources.network.OpenWeatherApiServices
 import com.example.weatherkotlin.data.dataSources.network.asDatabaseModel
@@ -13,19 +13,19 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class OpenWeatherRepository @Inject constructor(
-    val database: ApplicationRoomDatabase,
+    val openWeatherDao: OpenWeatherDao,
     val apiServices: OpenWeatherApiServices
 ) {
 
     val currentWeather: Flow<OpenWeatherCurrentWeather> =
-        database.openWeatherDao().getCurrentWeather().transform {
+        openWeatherDao.getCurrentWeather().transform {
             if (it != null) {
                 emit(it.asDomainModel())
             }
         }
 
     val fiveDaysForecast: Flow<OpenWeatherForecastFiveDays> =
-        database.openWeatherDao().getFullForecast5Days().transform {
+        openWeatherDao.getFullForecast5Days().transform {
             if (it != null) {
                 emit(it.asDomainModel())
             }
@@ -35,10 +35,10 @@ class OpenWeatherRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             val fiveDaysForecast = apiServices.getOpenWeatherForecast()
             val currentWeather = apiServices.getOpenWeatherCurrentWeather()
-            database.openWeatherDao().insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
-            database.openWeatherDao()
+            openWeatherDao.insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
+            openWeatherDao
                 .insertForecast5Days(fiveDaysForecast.listForecast.asDatabaseModel())
-            database.openWeatherDao().insertCurrentWeather(currentWeather.asDatabaseModel())
+            openWeatherDao.insertCurrentWeather(currentWeather.asDatabaseModel())
         }
     }
 
@@ -48,10 +48,10 @@ class OpenWeatherRepository @Inject constructor(
                 apiServices.getOpenWeatherCurrentWeatherByCoord(latt, long)
             val fiveDaysForecast =
                 apiServices.getOpenWeatherForecastByCoord(latt, long)
-            database.openWeatherDao().insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
-            database.openWeatherDao()
+            openWeatherDao.insertCityForForecast5Days(fiveDaysForecast.asDatabaseModel())
+            openWeatherDao
                 .insertForecast5Days(fiveDaysForecast.listForecast.asDatabaseModel())
-            database.openWeatherDao().insertCurrentWeather(currentWeather.asDatabaseModel())
+            openWeatherDao.insertCurrentWeather(currentWeather.asDatabaseModel())
         }
     }
 }

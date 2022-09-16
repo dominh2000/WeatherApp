@@ -1,6 +1,6 @@
 package com.example.weatherkotlin.data.repository
 
-import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
+import com.example.weatherkotlin.data.dataSources.database.WeatherDao
 import com.example.weatherkotlin.data.dataSources.database.asDomainModel
 import com.example.weatherkotlin.data.dataSources.network.WeatherApiServices
 import com.example.weatherkotlin.data.dataSources.network.asDatabaseModel
@@ -15,16 +15,17 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MetaWeatherRepository @Inject constructor(
-    val database: ApplicationRoomDatabase,
+    val metaWeatherDao: WeatherDao,
     val apiServices: WeatherApiServices
 ) {
 
     val weatherByLocation: Flow<LocationInfo> =
-        database.weatherDao().getFullWeatherSixDays().transform {
+        metaWeatherDao.getFullWeatherSixDays().transform {
             if (it != null) {
                 emit(it.asDomainModel())
             }
         }
+
     val weatherToday: Flow<WeatherOneDay> = weatherByLocation.map {
         it.weatherSixDays.get(0)
     }
@@ -33,8 +34,8 @@ class MetaWeatherRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             val response = apiServices.getWeatherByLocation()
             val weatherSixDays = response.totalWeather.convert()
-            database.weatherDao().insertLocation(response.asDatabaseModel())
-            database.weatherDao().insertWeatherOneDay(weatherSixDays.asDatabaseModel(response))
+            metaWeatherDao.insertLocation(response.asDatabaseModel())
+            metaWeatherDao.insertWeatherOneDay(weatherSixDays.asDatabaseModel(response))
         }
     }
 }

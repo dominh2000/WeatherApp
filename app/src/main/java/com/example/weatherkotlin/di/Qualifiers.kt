@@ -4,7 +4,7 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class SQLCipherPasswordString
+annotation class SqlCipherPasswordString
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.weatherkotlin.ui.viewModel.OpenWeatherViewModel" />
@@ -111,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/weather_state"
-            tools:text="Cập nhật lúc 11:40, 22 Th5, 2022" />
+            tools:text="Cập nhật lúc 11:40, 22 Th5, 2022 bởi OpenWeather" />
 
         <View
             android:id="@+id/divider_horizontal"

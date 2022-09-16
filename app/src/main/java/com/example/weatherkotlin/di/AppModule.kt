@@ -6,6 +6,9 @@ import com.example.weatherkotlin.R
 import com.example.weatherkotlin.const.BASE_META_WEATHER_URL
 import com.example.weatherkotlin.const.BASE_OPEN_WEATHER_URL
 import com.example.weatherkotlin.data.dataSources.database.ApplicationRoomDatabase
+import com.example.weatherkotlin.data.dataSources.database.OpenWeatherDao
+import com.example.weatherkotlin.data.dataSources.database.TaskDao
+import com.example.weatherkotlin.data.dataSources.database.WeatherDao
 import com.example.weatherkotlin.data.dataSources.network.OpenWeatherApiServices
 import com.example.weatherkotlin.data.dataSources.network.WeatherApiServices
 import com.squareup.moshi.Moshi
@@ -25,7 +28,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    @SQLCipherPasswordString
+    @SqlCipherPasswordString
     @Provides
     @Singleton
     fun provideSQLCipherPassword(
@@ -40,6 +43,38 @@ class AppModule {
         @ApplicationContext ctx: Context
     ): String =
         ctx.resources.getString(R.string.open_weather_api_key)
+
+    @Provides
+    @Singleton
+    fun getDatabase(
+        @ApplicationContext ctx: Context,
+        @SqlCipherPasswordString sqlCipherPassword: String
+    ): ApplicationRoomDatabase =
+        ApplicationRoomDatabase.getDatabase(
+            ctx,
+            sqlCipherPassword
+        )
+
+    @Provides
+    @Singleton
+    fun provideMetaWeatherDao(
+        database: ApplicationRoomDatabase
+    ): WeatherDao =
+        database.weatherDao()
+
+    @Provides
+    @Singleton
+    fun provideOpenWeatherDao(
+        database: ApplicationRoomDatabase
+    ): OpenWeatherDao =
+        database.openWeatherDao()
+
+    @Provides
+    @Singleton
+    fun provideTaskDao(
+        database: ApplicationRoomDatabase
+    ): TaskDao =
+        database.taskDao()
 
     @Provides
     @Singleton
@@ -70,17 +105,6 @@ class AppModule {
             .addInterceptor(interceptor)
             .addInterceptor(ChuckerInterceptor.Builder(ctx).build())
             .build()
-
-    @Provides
-    @Singleton
-    fun getDatabase(
-        @ApplicationContext ctx: Context,
-        @SQLCipherPasswordString sqlCipherPassword: String
-    ): ApplicationRoomDatabase =
-        ApplicationRoomDatabase.getDatabase(
-            ctx,
-            sqlCipherPassword
-        )
 
     @Provides
     @Singleton
