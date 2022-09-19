@@ -17,7 +17,7 @@
 1. Material Design 3
 2. Kiến trúc MVVM, Repository pattern, 2-layer: UI - Data
 3. DataBinding & ViewBinding
-4. Navigation component với SafeArgs, DeepLink & BottomNavigationView
+4. Navigation component với SafeArgs, explicit DeepLink & BottomNavigationView
 5. ViewModel & LiveData
 6. Retrofit & Moshi
 7. Coil
