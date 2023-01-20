@@ -11,7 +11,7 @@ fun launchLogoutAlertDialog(ctx: Context, navController: NavController) {
     val alertDialogBuilder = MaterialAlertDialogBuilder(ctx)
         .setIcon(R.drawable.ic_warning)
         .setTitle("Thông báo")
-        .setMessage("Bạn có chắc chắc muốn đăng xuất?")
+        .setMessage("Bạn có chắc chắn muốn đăng xuất?")
         .setPositiveButton("Có") { _, _ ->
             AuthUI.getInstance().signOut(ctx)
             val action = FragmentListToDoDirections.actionFragmentListToDoToFragmentToDoStart(

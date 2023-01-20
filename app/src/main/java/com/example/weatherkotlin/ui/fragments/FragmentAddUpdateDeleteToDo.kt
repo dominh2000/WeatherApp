@@ -26,8 +26,8 @@ import com.example.weatherkotlin.util.calculateCurrentTimeMilliseconds
 import com.example.weatherkotlin.util.calculateMillisecondsFromDate
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textview.MaterialTextView
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -413,7 +413,7 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
     private fun performDateCheck(
         ctx: Context,
         view: View,
-        switch: SwitchMaterial,
+        switch: MaterialSwitch,
         date: MaterialTextView,
         hour: MaterialTextView,
         isChecked: Boolean
