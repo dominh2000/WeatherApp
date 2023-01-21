@@ -74,7 +74,6 @@ class BaseApplication : Application(), Configuration.Provider {
 
     private fun refreshWeatherData() {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiresBatteryNotLow(true)
             .build()
 

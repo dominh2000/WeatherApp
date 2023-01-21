@@ -54,6 +54,7 @@ class RefreshWeatherDataWorker @AssistedInject constructor(
                         it.currentWeatherDescription.description[0].uppercase()
                             .plus(it.currentWeatherDescription.description.substring(1))
                     )
+                    .plus(".")
                 val bigText = contentText.plus("\n").plus(
                     "Dữ liệu từ OpenWeather API sẽ được tự động cập nhật mỗi 3 giờ với WorkManager!"
                 )
