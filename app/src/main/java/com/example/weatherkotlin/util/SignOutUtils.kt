@@ -2,14 +2,12 @@ package com.example.weatherkotlin.util
 
 import android.content.Context
 import androidx.navigation.NavController
-import com.example.weatherkotlin.R
 import com.example.weatherkotlin.ui.fragments.FragmentListToDoDirections
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun launchLogoutAlertDialog(ctx: Context, navController: NavController) {
     val alertDialogBuilder = MaterialAlertDialogBuilder(ctx)
-        .setIcon(R.drawable.ic_warning)
         .setTitle("Thông báo")
         .setMessage("Bạn có chắc chắn muốn đăng xuất?")
         .setPositiveButton("Có") { _, _ ->

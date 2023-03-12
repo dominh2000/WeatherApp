@@ -22,14 +22,15 @@ android {
             keyPassword 'Hello123!'
         }
     }
+    namespace 'com.example.weatherkotlin'
     compileSdk 33
 
     defaultConfig {
         applicationId "com.example.weatherkotlin"
         minSdk 21
         targetSdk 33
-        versionCode 7
-        versionName "1.1.9"
+        versionCode 8
+        versionName "1.1.10"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -60,29 +61,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    kapt {
-        correctErrorTypes true
-    }
     buildFeatures {
         viewBinding = true
         dataBinding = true
     }
-    namespace 'com.example.weatherkotlin'
 }
 
 dependencies {
 
     implementation "androidx.core:core-ktx:1.9.0"
-    implementation "androidx.appcompat:appcompat:1.6.0"
-    implementation "com.google.android.material:material:1.7.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "com.google.android.material:material:1.8.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 
     // ViewModel LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
@@ -105,19 +102,19 @@ dependencies {
     implementation "androidx.room:room-ktx:2.5.0"
 
     // SQLCipher
-    implementation "net.zetetic:android-database-sqlcipher:4.5.2"
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.3'
 
     // WorkManager + Hilt
-    implementation "androidx.work:work-runtime-ktx:2.7.1"
+    implementation "androidx.work:work-runtime-ktx:2.8.0"
     implementation "androidx.hilt:hilt-work:1.0.0"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     // Firebase BOM
     // Crashlytics, Google Play Services, Authentication UI + Support Android 12+
-    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation "com.google.firebase:firebase-crashlytics-ktx"
     implementation "com.google.firebase:firebase-analytics-ktx"
-    implementation "com.firebaseui:firebase-ui-auth:8.0.1"
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     implementation "com.google.android.gms:play-services-auth:20.4.1"
     implementation "com.google.android.gms:play-services-location:21.0.1"
 
@@ -128,8 +125,8 @@ dependencies {
     implementation "com.airbnb.android:paris:2.0.1"
 
     // Dagger-Hilt
-    implementation "com.google.dagger:hilt-android:2.44.2"
-    kapt "com.google.dagger:hilt-compiler:2.44.2"
+    implementation "com.google.dagger:hilt-android:2.45"
+    kapt "com.google.dagger:hilt-compiler:2.45"
 
     // Chucker
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
@@ -137,4 +134,12 @@ dependencies {
 
     // LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:2.10"
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+hilt {
+    enableAggregatingTask = true
 }

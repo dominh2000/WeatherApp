@@ -222,7 +222,6 @@ class FragmentAddUpdateDeleteToDo : Fragment() {
     private fun deleteTask() {
         val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
             .setTitle("Thông báo")
-            .setIcon(R.drawable.ic_warning)
             .setMessage("Bạn có chắc chắn muốn xóa nhắc việc này?")
             .setPositiveButton("Có") { _, _ ->
                 cancelAlarm(viewModel.selectedTask.value!!.id)
