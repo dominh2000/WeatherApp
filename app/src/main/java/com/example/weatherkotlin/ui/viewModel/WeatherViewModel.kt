@@ -12,7 +12,7 @@ enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    val weatherRepository: MetaWeatherRepository
+    private val weatherRepository: MetaWeatherRepository
 ) : ViewModel() {
 
     private val _status = MutableLiveData<WeatherApiStatus>()

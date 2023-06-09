@@ -15,7 +15,7 @@ enum class AdvancedSearchStatus { LOADING, DONE }
 
 @HiltViewModel
 class ToDoViewModel @Inject constructor(
-    val toDoRepository: ToDoRepository
+    private val toDoRepository: ToDoRepository
 ) : ViewModel() {
 
     private val _toDoList = MutableLiveData<List<Task>>()
