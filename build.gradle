@@ -16,17 +16,17 @@ buildscript {
         work_ver = "2.9.0-alpha01"
         hilt_work_ver = "1.0.0"
         hilt_compiler_ver = "1.0.0"
-        firebase_bom_ver = "32.1.1"
+        firebase_bom_ver = "32.2.0"
         auth_ui_ver = "8.0.2"
         play_auth_ver = '20.6.0'
         play_location_ver = "21.0.1"
-        datastore_ver = "1.1.0-alpha04"
+        datastore_ver = "1.1.0-alpha01"
         paris_ver = "2.0.2"
-        hilt_ver = "2.46.1"
+        hilt_ver = '2.47'
         chucker_ver = '4.0.0'
         leakcanary_ver = '2.12'
         google_services_ver = "4.3.15"
-        crashlytics_plugin_ver = "2.9.6"
+        crashlytics_plugin_ver = "2.9.7"
         kotlin_ver = "1.9.0"
         ksp_ver = "1.9.0-1.0.11"
     }
