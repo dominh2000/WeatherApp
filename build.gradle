@@ -3,17 +3,17 @@ buildscript {
     ext {
         activity_ver = "1.8.0-alpha06"
         core_ktx_ver = "1.12.0-alpha05"
-        appcompat_ver = "1.7.0-alpha02"
+        appcompat_ver = "1.7.0-alpha03"
         material_ver = '1.11.0-alpha01'
-        constraint_layout_ver = "2.2.0-alpha10"
-        lifecycle_ver = "2.6.1"
-        navigation_ver = '2.7.0-beta02'
+        constraint_layout_ver = "2.2.0-alpha11"
+        lifecycle_ver = "2.7.0-alpha01"
+        navigation_ver = '2.7.0-rc01'
         moshi_kotlin_ver = "1.15.0"
         retrofit_ver = "2.9.0"
         coil_ver = "2.4.0"
         room_ver = "2.6.0-alpha02"
         sqlcipher_ver = "4.5.4"
-        work_ver = "2.9.0-alpha01"
+        work_ver = "2.9.0-alpha02"
         hilt_work_ver = "1.0.0"
         hilt_compiler_ver = "1.0.0"
         firebase_bom_ver = "32.2.0"
@@ -28,7 +28,7 @@ buildscript {
         google_services_ver = "4.3.15"
         crashlytics_plugin_ver = "2.9.7"
         kotlin_ver = "1.9.0"
-        ksp_ver = "1.9.0-1.0.11"
+        ksp_ver = "1.9.0-1.0.12"
     }
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_ver"
