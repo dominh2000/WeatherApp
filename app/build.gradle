@@ -145,9 +145,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_ver"
 }
 
-//kapt {
-//    correctErrorTypes true
-//}
+kapt {
+    correctErrorTypes true
+}
 
 hilt {
     enableAggregatingTask = true
