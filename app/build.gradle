@@ -65,7 +65,8 @@ android {
     }
     kotlin {
         jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of("18"))
+            languageVersion = JavaLanguageVersion.of(20)
+            vendor = JvmVendorSpec.ORACLE
         }
     }
     buildFeatures {
@@ -115,7 +116,7 @@ dependencies {
     // WorkManager + Hilt
     implementation "androidx.work:work-runtime-ktx:$work_ver"
     implementation "androidx.hilt:hilt-work:$hilt_work_ver"
-    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_ver"
+    ksp "androidx.hilt:hilt-compiler:$hilt_compiler_ver"
 
     // Firebase BOM
     // Crashlytics, Google Play Services, Authentication UI + Support Android 12+
@@ -134,7 +135,7 @@ dependencies {
 
     // Dagger-Hilt
     implementation "com.google.dagger:hilt-android:$hilt_ver"
-    kapt "com.google.dagger:hilt-compiler:$hilt_ver"
+    ksp "com.google.dagger:hilt-compiler:$hilt_ver"
 
     // Chucker
     debugImplementation "com.github.chuckerteam.chucker:library:$chucker_ver"
@@ -144,9 +145,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_ver"
 }
 
-kapt {
-    correctErrorTypes true
-}
+//kapt {
+//    correctErrorTypes true
+//}
 
 hilt {
     enableAggregatingTask = true
